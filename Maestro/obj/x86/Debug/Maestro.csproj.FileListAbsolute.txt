@@ -1,0 +1,13 @@
+D:\Travaux\KAIST\CS408\Test\Maestro\Maestro\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Travaux\KAIST\CS408\Test\Maestro\Maestro\obj\x86\Debug\MainWindow.baml
+D:\Travaux\KAIST\CS408\Test\Maestro\Maestro\obj\x86\Debug\MainWindow.g.cs
+D:\Travaux\KAIST\CS408\Test\Maestro\Maestro\obj\x86\Debug\App.g.cs
+D:\Travaux\KAIST\CS408\Test\Maestro\Maestro\obj\x86\Debug\Maestro_MarkupCompile.cache
+D:\Travaux\KAIST\CS408\Test\Maestro\Maestro\obj\x86\Debug\Maestro.g.resources
+D:\Travaux\KAIST\CS408\Test\Maestro\Maestro\obj\x86\Debug\Maestro.Properties.Resources.resources
+D:\Travaux\KAIST\CS408\Test\Maestro\Maestro\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\Travaux\KAIST\CS408\Test\Maestro\Maestro\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\Travaux\KAIST\CS408\Test\Maestro\Maestro\bin\Debug\Maestro.exe
+D:\Travaux\KAIST\CS408\Test\Maestro\Maestro\bin\Debug\Maestro.pdb
+D:\Travaux\KAIST\CS408\Test\Maestro\Maestro\obj\x86\Debug\Maestro.exe
+D:\Travaux\KAIST\CS408\Test\Maestro\Maestro\obj\x86\Debug\Maestro.pdb
