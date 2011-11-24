@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Maestro" Height="768" Width="1024" Loaded="Window_Loaded" ResizeMode="NoResize">
     <Grid>
-        <Canvas Margin="25,24,0,0" Name="GameScreen" HorizontalAlignment="Left" Width="965" Height="693" VerticalAlignment="Top" Background="{x:Null}">
-            <Image Canvas.Left="12" Canvas.Top="10" Height="480" Name="video" Stretch="Uniform" Width="640" />
-        </Canvas>
+        <Canvas Margin="25,24,0,0" Name="GameScreen" HorizontalAlignment="Left" Width="965" Height="693" VerticalAlignment="Top" Background="{x:Null}"></Canvas>
+        <Image Height="694" HorizontalAlignment="Left" Margin="25,24,0,0" Name="video" Stretch="Fill" VerticalAlignment="Top" Width="965" Opacity="0.2" />
     </Grid>
 </Window>

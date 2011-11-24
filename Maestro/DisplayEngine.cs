@@ -125,6 +125,7 @@ namespace Maestro
             CurrentScreen = screen;
             active = false;
             count.Start();
+
         }
 
         //Update the screen

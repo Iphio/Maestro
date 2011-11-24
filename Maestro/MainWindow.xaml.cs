@@ -241,23 +241,26 @@ namespace Maestro
                if (SkeletonTrackingState.Tracked == data.TrackingState)
                {
                    // Draw bones
-                   Brush brush = brushes[iSkeleton % brushes.Length];
+                  /* Brush brush = brushes[iSkeleton % brushes.Length];
                    GameScreen.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.Spine, JointID.ShoulderCenter, JointID.Head));
                    GameScreen.Children.Add(getBodySegment(data.Joints, brush, JointID.ShoulderCenter, JointID.ShoulderLeft, JointID.ElbowLeft, JointID.WristLeft, JointID.HandLeft));
                    GameScreen.Children.Add(getBodySegment(data.Joints, brush, JointID.ShoulderCenter, JointID.ShoulderRight, JointID.ElbowRight, JointID.WristRight, JointID.HandRight));
                    GameScreen.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.HipLeft, JointID.KneeLeft, JointID.AnkleLeft, JointID.FootLeft));
                    GameScreen.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.HipRight, JointID.KneeRight, JointID.AnkleRight, JointID.FootRight));
                    
-
+                   */
                    //Get hand position
-                   GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandLeft));
+                   /*GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandLeft));
                   GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.Tomato, JointID.HandRight));
                   GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.SteelBlue, JointID.FootLeft));
-                  GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.PaleGreen, JointID.FootRight));
-
+                  GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.PaleGreen, JointID.FootRight));*/
+                   getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandLeft);
+                   getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandRight);
+                   getBodyPoint(data.Joints, Brushes.Yellow, JointID.FootLeft);
+                   getBodyPoint(data.Joints, Brushes.Yellow, JointID.FootRight);
                    
                    // Draw joints
-                   foreach (Joint joint in data.Joints)
+                  /* foreach (Joint joint in data.Joints)
                    {
                        Point jointPos = getDisplayPosition(joint);
                        Line jointLine = new Line();
@@ -267,7 +270,7 @@ namespace Maestro
                        jointLine.Stroke = jointColors[joint.ID];
                        jointLine.StrokeThickness = 6;
                        GameScreen.Children.Add(jointLine);
-                   }
+                   }*/
 
 
                }
