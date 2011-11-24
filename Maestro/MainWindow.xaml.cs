@@ -142,7 +142,7 @@ namespace Maestro
             //Set up the bachground
             ImageBrush main = new ImageBrush();
             main.ImageSource = new BitmapImage(
-                    new Uri("images\\Main\\main.jpg", UriKind.Relative));
+                    new Uri("images\\screen_main.png", UriKind.Relative));
 
             GameScreen.Background = main;
             

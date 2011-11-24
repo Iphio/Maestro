@@ -109,40 +109,110 @@ namespace Maestro
             grid[right].Opacity = 0.7;
             grid[right].Fill = Brushes.Gold;
 
-            switch (CurrentScreen) {
-                case Screen.Main :
-                    if (left == 3 || right == 3)
-                {
-                    //go to profile
-                    CurrentScreen = Screen.Profile;
-
-                }
+            switch (CurrentScreen)
+            {
+                case Screen.Main:
+                    if (right == 4)
+                    {
+                        //go to profile
+                        CurrentScreen = Screen.Profile;
+                    }
                     break;
-
-                case Screen.Profile :
-
-                    if (left == 7 || right == 7)
+                case Screen.Profile:
+                    if (left == 3)
+                    {
+                        //move profile left
+                    }
+                    if (right == 4)
+                    {
+                        CurrentScreen = Screen.Leaderboards;
+                    }
+                    if (right == 5)
+                    {
+                        //move profile right
+                    }
+                    if (right == 7)
+                    {
+                        CurrentScreen = Screen.SelectSong;
+                    }
+                    if (right == 8)
                     {
                         CurrentScreen = Screen.Main;
                     }
-
                     break;
-
+                case Screen.Leaderboards:
+                    if (right == 8)
+                    {
+                        CurrentScreen = Screen.Profile;
+                    }
+                    break;
+                case Screen.SelectSong:
+                    if (left == 3)
+                    {
+                        //move song left
+                    }
+                    if (right == 4)
+                    {
+                        //change difficulty;
+                    }
+                    if (right == 5)
+                    {
+                        //move song right
+                    }
+                    if (right == 7)
+                    {
+                        CurrentScreen = Screen.Game;
+                    }
+                    if (right == 8)
+                    {
+                        CurrentScreen = Screen.Profile;
+                    }
+                    break;
+                case Screen.Game:
+                    if (right == 8)
+                    {
+                        CurrentScreen = Screen.Score;
+                    }
+                    break;
+                case Screen.Score:
+                    if (right == 8)
+                    {
+                        CurrentScreen = Screen.SelectSong;
+                    }
+                    break;
+                default:
+                    break;
             }
-
             Display();
-        }        
+        }
 
         //Update the display
         public void Display()
         {
+
             ImageBrush main = new ImageBrush();
             main.ImageSource = new BitmapImage(
-                    new Uri("images\\Main\\main.jpg", UriKind.Relative));
+                    new Uri("images\\screen_main.png", UriKind.Relative));
 
             ImageBrush profile = new ImageBrush();
             profile.ImageSource = new BitmapImage(
-                    new Uri("images\\Profile\\profile.jpg", UriKind.Relative));
+                    new Uri("images\\screen_profile.png", UriKind.Relative));
+
+            ImageBrush leaderboards = new ImageBrush();
+            leaderboards.ImageSource = new BitmapImage(
+                    new Uri("images\\screen_leaderboards.png", UriKind.Relative));
+
+            ImageBrush selectsong = new ImageBrush();
+            selectsong.ImageSource = new BitmapImage(
+                    new Uri("images\\screen_selectsong.png", UriKind.Relative));
+
+            ImageBrush game = new ImageBrush();
+            game.ImageSource = new BitmapImage(
+                    new Uri("images\\screen_game.png", UriKind.Relative));
+
+            ImageBrush score = new ImageBrush();
+            score.ImageSource = new BitmapImage(
+                    new Uri("images\\screen_score.png", UriKind.Relative));
 
             if (CurrentScreen == Screen.Main)
             {
@@ -152,26 +222,26 @@ namespace Maestro
             {
                 GameScreen.Background = profile;
             }
-           /* else if (CurrentScreen == Screen.Leaderboards)
+            else if (CurrentScreen == Screen.Leaderboards)
             {
-                Gamescreen.Background = "";
+                GameScreen.Background = leaderboards;
             }
             else if (CurrentScreen == Screen.Game)
             {
-                Gamescreen.Background = "";
+                GameScreen.Background = game;
             }
             else if (CurrentScreen == Screen.Score)
             {
-                Gamescreen.Background = "";
+                GameScreen.Background = score;
             }
             else if (CurrentScreen == Screen.SelectSong)
             {
-                Gamescreen.Background = "";
+                GameScreen.Background = selectsong;
             }
             else
             {
                 //this isn't good
-            }*/
+            }
         }
 
 
