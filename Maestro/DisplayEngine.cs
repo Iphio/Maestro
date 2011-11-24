@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Timers;
 
 namespace Maestro
 {
@@ -23,6 +24,10 @@ namespace Maestro
         //Current displayed screen
         public Screen CurrentScreen { get; private set; }
 
+        //Active for command
+        private bool active;
+        private static Timer count;
+
         //Constructor
         public DisplayEngine(Canvas mainScreen)
         {
@@ -34,13 +39,23 @@ namespace Maestro
             columnSpace = GameScreen.Width / 3.0;
             rowSpace = GameScreen.Height / 3.0;
 
+            active = true;
+            count = new Timer(2000);
+            count.Elapsed += delegate
+            {
+
+                active = true;
+            
+            };
+            
         }
 
         //!Calculate grid position
         public void GenerateGrid()
         {
+            /*
             //Add columns
-            /*for (double i = columnSpace; i < GameScreen.Width; i += columnSpace)
+            for (double i = columnSpace; i < GameScreen.Width; i += columnSpace)
             {
                 Line currentColumn = new Line();
                 currentColumn.Stroke = System.Windows.Media.Brushes.DarkSlateBlue;
@@ -71,7 +86,8 @@ namespace Maestro
 
 
             }
-            GameScreen.Children.Add(new Line());*/
+            GameScreen.Children.Add(new Line());
+             */
 
             int x = 0, y = 0;
 
@@ -99,90 +115,107 @@ namespace Maestro
             }
         }
 
+        public void clap(int hand, int leftFoot, int rightFoot)
+        {
+            updateScreen(hand, hand, leftFoot, rightFoot);
+        }
+
+        private void changeScreen(Screen screen)
+        {
+            CurrentScreen = screen;
+            active = false;
+            count.Start();
+        }
 
         //Update the screen
-        public void updateScreen(int left, int right)
+        public void updateScreen(int leftHand, int rightHand, int leftFoot, int rightFoot)
         {
 
-            grid[left].Opacity = 0.7;
-            grid[left].Fill = Brushes.Green;
-            grid[right].Opacity = 0.7;
-            grid[right].Fill = Brushes.Gold;
-
-            switch (CurrentScreen)
+            //grid[leftHand].Opacity = 0.7;
+            //grid[leftHand].Fill = Brushes.Green;
+            //grid[rightHand].Opacity = 0.7;
+            //grid[rightHand].Fill = Brushes.Gold;
+            
+            if (active)
             {
-                case Screen.Main:
-                    if (right == 4)
-                    {
-                        //go to profile
-                        CurrentScreen = Screen.Profile;
-                    }
-                    break;
-                case Screen.Profile:
-                    if (left == 3)
-                    {
-                        //move profile left
-                    }
-                    if (right == 4)
-                    {
-                        CurrentScreen = Screen.Leaderboards;
-                    }
-                    if (right == 5)
-                    {
-                        //move profile right
-                    }
-                    if (right == 7)
-                    {
-                        CurrentScreen = Screen.SelectSong;
-                    }
-                    if (right == 8)
-                    {
-                        CurrentScreen = Screen.Main;
-                    }
-                    break;
-                case Screen.Leaderboards:
-                    if (right == 8)
-                    {
-                        CurrentScreen = Screen.Profile;
-                    }
-                    break;
-                case Screen.SelectSong:
-                    if (left == 3)
-                    {
-                        //move song left
-                    }
-                    if (right == 4)
-                    {
-                        //change difficulty;
-                    }
-                    if (right == 5)
-                    {
-                        //move song right
-                    }
-                    if (right == 7)
-                    {
-                        CurrentScreen = Screen.Game;
-                    }
-                    if (right == 8)
-                    {
-                        CurrentScreen = Screen.Profile;
-                    }
-                    break;
-                case Screen.Game:
-                    if (right == 8)
-                    {
-                        CurrentScreen = Screen.Score;
-                    }
-                    break;
-                case Screen.Score:
-                    if (right == 8)
-                    {
-                        CurrentScreen = Screen.SelectSong;
-                    }
-                    break;
-                default:
-                    break;
+
+                switch (CurrentScreen)
+                {
+                    case Screen.Main:
+                        if (leftHand == 4)
+                        {
+                            //go to profile
+                            changeScreen(Screen.Profile);
+                        }
+                        break;
+                    case Screen.Profile:
+                        if (leftHand == 3)
+                        {
+                            //move profile left
+                        }
+                        if (leftHand == 4)
+                        {
+                            changeScreen(Screen.Leaderboards);
+                        }
+                        if (rightHand == 5)
+                        {
+                            //move profile right
+                        }
+                        if (leftHand == 7)
+                        {
+                            changeScreen(Screen.SelectSong);
+                        }
+                        if (leftHand == 8)
+                        {
+                            changeScreen(Screen.Main);
+                        }
+                        break;
+                    case Screen.Leaderboards:
+                        if (leftHand == 8)
+                        {
+                            changeScreen(Screen.Profile);
+                        }
+                        break;
+                    case Screen.SelectSong:
+                        if (leftHand == 3)
+                        {
+                            //move song left
+                        }
+                        if (leftHand == 4)
+                        {
+                            //change difficulty;
+                        }
+                        if (rightHand == 5)
+                        {
+                            //move song right
+                        }
+                        if (leftHand == 7)
+                        {
+                            changeScreen(Screen.Game);
+                        }
+                        if (leftHand == 8)
+                        {
+                            changeScreen(Screen.Profile);
+                        }
+                        break;
+                    case Screen.Game:
+                        if (leftHand == 8)
+                        {
+                            changeScreen(Screen.Score);
+                        }
+                        break;
+                    case Screen.Score:
+                        if (leftHand == 8)
+                        {
+                            changeScreen(Screen.SelectSong);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
             }
+
             Display();
         }
 

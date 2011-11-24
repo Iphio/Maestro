@@ -127,12 +127,7 @@ namespace Maestro
 
         //!Run the game engine
         public void run()
-        {
-
-            
-            
-            int i = 0, j = 0;              
-
+        { 
             hudDisplay = new DisplayEngine(GameScreen);
 
             _difficulty = Difficulty.Easy;
@@ -169,8 +164,12 @@ namespace Maestro
 
 
             //Update the HUD display
-            hudDisplay.updateScreen(leftHandPosition, rightHandPosition);
-                        
+            //hudDisplay.updateScreen(leftHandPosition, rightHandPosition, leftFootPosition, rightFootPosition);
+           
+            if (leftHandPosition != 0 && rightHandPosition != 0 && Math.Sqrt(Math.Pow((leftHandPoint.X - rightHandPoint.X), 2) + Math.Pow((leftHandPoint.Y - rightHandPoint.Y), 2)) < 30)
+            {
+                hudDisplay.clap(leftHandPosition, leftFootPosition, rightFootPosition);
+            }
         }
 
         //!Exit current song
