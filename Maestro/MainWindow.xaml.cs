@@ -158,14 +158,15 @@ namespace Maestro
         //!Update display data
         public void refresh()
         {
+            
+
             //Check the points and calculate the score
 
             //Update the action display
 
 
             //Update the HUD display
-            //hudDisplay.updateScreen(leftHandPosition, rightHandPosition, leftFootPosition, rightFootPosition);
-           
+            //hudDisplay.updateScreen(leftHandPosition, rightHandPosition, leftFootPosition, rightFootPosition);           
             if (leftHandPosition != 0 && rightHandPosition != 0 && Math.Sqrt(Math.Pow((leftHandPoint.X - rightHandPoint.X), 2) + Math.Pow((leftHandPoint.Y - rightHandPoint.Y), 2)) < 30)
             {
                 hudDisplay.clap(leftHandPosition, leftFootPosition, rightFootPosition);
@@ -234,52 +235,62 @@ namespace Maestro
            brushes[4] = new SolidColorBrush(Color.FromRgb(255, 64, 255));
            brushes[5] = new SolidColorBrush(Color.FromRgb(128, 128, 255));
 
-           GameScreen.Children.Clear();
+           //GameScreen.Children.Clear();
 
+           //For each skeletton
            foreach (SkeletonData data in skeletonFrame.Skeletons)
            {
                if (SkeletonTrackingState.Tracked == data.TrackingState)
                {
-                   // Draw bones
-                  /* Brush brush = brushes[iSkeleton % brushes.Length];
-                   GameScreen.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.Spine, JointID.ShoulderCenter, JointID.Head));
-                   GameScreen.Children.Add(getBodySegment(data.Joints, brush, JointID.ShoulderCenter, JointID.ShoulderLeft, JointID.ElbowLeft, JointID.WristLeft, JointID.HandLeft));
-                   GameScreen.Children.Add(getBodySegment(data.Joints, brush, JointID.ShoulderCenter, JointID.ShoulderRight, JointID.ElbowRight, JointID.WristRight, JointID.HandRight));
-                   GameScreen.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.HipLeft, JointID.KneeLeft, JointID.AnkleLeft, JointID.FootLeft));
-                   GameScreen.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.HipRight, JointID.KneeRight, JointID.AnkleRight, JointID.FootRight));
-                   
-                   */
-                   //Get hand position
-                   /*GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandLeft));
-                  GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.Tomato, JointID.HandRight));
-                  GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.SteelBlue, JointID.FootLeft));
-                  GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.PaleGreen, JointID.FootRight));*/
+                   drawSkeleton(iSkeleton, brushes, data);
+
+                   //Get the points
                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandLeft);
                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandRight);
                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.FootLeft);
                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.FootRight);
-                   
-                   // Draw joints
-                  /* foreach (Joint joint in data.Joints)
-                   {
-                       Point jointPos = getDisplayPosition(joint);
-                       Line jointLine = new Line();
-                       jointLine.X1 = jointPos.X - 3;
-                       jointLine.X2 = jointLine.X1 + 6;
-                       jointLine.Y1 = jointLine.Y2 = jointPos.Y;
-                       jointLine.Stroke = jointColors[joint.ID];
-                       jointLine.StrokeThickness = 6;
-                       GameScreen.Children.Add(jointLine);
-                   }*/
-
 
                }
                iSkeleton++;
-           } // for each skeleton
+           } 
 
+           //Generate the grid
            hudDisplay.GenerateGrid();
            refresh();
 
+       }
+
+       private void drawSkeleton(int iSkeleton, Brush[] brushes, SkeletonData data)
+       {
+           SkeletonCanvas.Children.Clear();
+
+           // Draw bones
+           Brush brush = brushes[iSkeleton % brushes.Length];
+           SkeletonCanvas.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.Spine, JointID.ShoulderCenter, JointID.Head));
+           SkeletonCanvas.Children.Add(getBodySegment(data.Joints, brush, JointID.ShoulderCenter, JointID.ShoulderLeft, JointID.ElbowLeft, JointID.WristLeft, JointID.HandLeft));
+           SkeletonCanvas.Children.Add(getBodySegment(data.Joints, brush, JointID.ShoulderCenter, JointID.ShoulderRight, JointID.ElbowRight, JointID.WristRight, JointID.HandRight));
+           SkeletonCanvas.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.HipLeft, JointID.KneeLeft, JointID.AnkleLeft, JointID.FootLeft));
+           SkeletonCanvas.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.HipRight, JointID.KneeRight, JointID.AnkleRight, JointID.FootRight));
+
+
+           //Get hand position
+           SkeletonCanvas.Children.Add(getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandLeft));
+           SkeletonCanvas.Children.Add(getBodyPoint(data.Joints, Brushes.Tomato, JointID.HandRight));
+           SkeletonCanvas.Children.Add(getBodyPoint(data.Joints, Brushes.SteelBlue, JointID.FootLeft));
+           SkeletonCanvas.Children.Add(getBodyPoint(data.Joints, Brushes.PaleGreen, JointID.FootRight));
+
+           // Draw joints
+           foreach (Joint joint in data.Joints)
+           {
+               Point jointPos = getDisplayPosition(joint);
+               Line jointLine = new Line();
+               jointLine.X1 = jointPos.X - 3;
+               jointLine.X2 = jointLine.X1 + 6;
+               jointLine.Y1 = jointLine.Y2 = jointPos.Y;
+               jointLine.Stroke = jointColors[joint.ID];
+               jointLine.StrokeThickness = 6;
+               SkeletonCanvas.Children.Add(jointLine);
+           }
        }
         
         //Get the position of an element
