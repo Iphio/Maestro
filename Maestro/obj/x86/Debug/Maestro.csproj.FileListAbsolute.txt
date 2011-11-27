@@ -37,3 +37,5 @@ D:\Travaux\KAIST\CS408\Maestro\Maestro\obj\x86\Debug\Maestro.g.resources
 D:\Travaux\KAIST\CS408\Maestro\Maestro\obj\x86\Debug\Maestro.Properties.Resources.resources
 D:\Travaux\KAIST\CS408\Maestro\Maestro\obj\x86\Debug\GenerateResource.read.1.tlog
 D:\Travaux\KAIST\CS408\Maestro\Maestro\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\kh\Desktop\Classes\2011 Fall\CS Project\Maestro\Maestro\Maestro\obj\x86\Debug\Maestro.exe
+C:\Users\kh\Desktop\Classes\2011 Fall\CS Project\Maestro\Maestro\Maestro\obj\x86\Debug\Maestro.pdb

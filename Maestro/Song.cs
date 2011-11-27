@@ -7,7 +7,15 @@ namespace Maestro
 {
     class Song
     {
-        private List<Step> _listOfSteps { get; set; }
 
+        public Song()
+        {
+            String Title;
+            int Length;
+            String Artist;
+            String Filepath;
+            List<Step> _listOfSteps;
+        }
+        public List<Step> _listOfSteps{get;set;}
     }
 }
