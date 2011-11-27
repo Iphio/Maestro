@@ -127,28 +127,10 @@ namespace Maestro
                 //texts[c].Width = columnSpace;
                 texts[c].Background = null;
                 texts[c].BorderBrush = null;
-                texts[c].Foreground = Brushes.MediumVioletRed;
+                texts[c].Foreground = Brushes.Red;
 
-                GameScreen.Children.Add(texts[c]);
+                //GameScreen.Children.Add(texts[c]);
             }
-
-            /*
-            texts[0].AppendText("Minho");
-            texts[1].AppendText("Kihwan");
-            texts[2].AppendText("Heri");
-            texts[3].AppendText("Player");
-
-            texts[0].FontSize = 72;
-            texts[1].FontSize = 40;
-            texts[2].FontSize = 40;
-            texts[3].FontSize = 32;
-
-            texts[0].RenderTransform = new TranslateTransform(columnSpace, 150);
-            texts[1].RenderTransform = new TranslateTransform(0, 130);
-            texts[2].RenderTransform = new TranslateTransform(columnSpace * 2, 130);
-            texts[3].RenderTransform = new TranslateTransform(columnSpace, 110);
-             * */
-            
         }
 
         public Screen clap(int hand, int leftFoot, int rightFoot)
@@ -157,12 +139,13 @@ namespace Maestro
             return CurrentScreen;
         }
 
-        private void changeScreen(Screen screen)
+        private void changeScreen(Screen screen, int shift)
         {
+            //GameScreen.Children.Clear();
+            GameScreen.Children.Clear();
             CurrentScreen = screen;
             active = false;
             count.Start();
-                       
 
             if (screen == Screen.Profile)
             {
@@ -173,20 +156,40 @@ namespace Maestro
                     texts[c].Width = columnSpace;
                 }
 
-                texts[0].FontSize = 72;
-                texts[1].FontSize = 40;
-                texts[2].FontSize = 40;
-                texts[3].FontSize = 32;
+                texts[0].FontSize = 96;
+                texts[1].FontSize = 48;
+                texts[2].FontSize = 48;
+                texts[3].FontSize = 36;
 
                 texts[0].RenderTransform = new TranslateTransform(columnSpace, 150);
                 texts[1].RenderTransform = new TranslateTransform(0, 130);
                 texts[2].RenderTransform = new TranslateTransform(columnSpace * 2, 130);
                 texts[3].RenderTransform = new TranslateTransform(columnSpace, 110);
 
-                texts[0].Text = "Minho";
-                texts[1].Text = "Kihwan";
-                texts[2].Text = "Heri";
-                texts[3].Text = "";
+                if (shift == 0)
+                {
+                    texts[0].Text = "Minho";
+                    texts[1].Text = "Kihwan";
+                    texts[2].Text = "Heri";
+                    
+                }
+                else if (shift == 1)
+                {
+                    texts[0].Text = "Kihwan";
+                    texts[1].Text = "Heri";
+                    texts[2].Text = "Minho";
+                }
+                else if (shift == 2)
+                {
+                    texts[0].Text = "Heri";
+                    texts[1].Text = "MInho";
+                    texts[2].Text = "Kihwan";
+                }
+                texts[3].Text = "Player";
+                
+
+                for (int c = 0; c < 4; c++)
+                    GameScreen.Children.Add(texts[c]);
             }
             else if (screen == Screen.SelectSong)
             {
@@ -197,20 +200,61 @@ namespace Maestro
                     texts[c].Width = columnSpace;
                 }
 
+                /*
                 texts[0].FontSize = 72;
                 texts[1].FontSize = 40;
                 texts[2].FontSize = 40;
                 texts[3].FontSize = 32;
+                 * */
+                texts[0].FontSize = 96;
+                texts[1].FontSize = 48;
+                texts[2].FontSize = 48;
+                texts[3].FontSize = 36;
 
                 texts[0].RenderTransform = new TranslateTransform(columnSpace, 150);
                 texts[1].RenderTransform = new TranslateTransform(0, 130);
                 texts[2].RenderTransform = new TranslateTransform(columnSpace * 2, 130);
                 texts[3].RenderTransform = new TranslateTransform(columnSpace, 110);
 
-                texts[0].Text = "Song A";
-                texts[1].Text = "Song B";
-                texts[2].Text = "Song C";
-                texts[3].Text = "Easy";
+                if (shift == 0 || shift == 3)
+                {
+                    texts[0].Text = "Song A";
+                    texts[1].Text = "Song B";
+                    texts[2].Text = "Song C";
+                }
+                else if (shift == 1)
+                {
+                    texts[0].Text = "Song B";
+                    texts[1].Text = "Song C";
+                    texts[2].Text = "Song A";
+                }
+                else if (shift == 2)
+                {
+                    texts[0].Text = "Song C";
+                    texts[1].Text = "Song A";
+                    texts[2].Text = "Song B";
+                }
+
+                if (shift == 0 || shift == 1 || shift == 2)
+                {
+                    texts[3].Text = "Easy";
+                }
+
+                if (shift == 3)
+                {
+                    texts[3].Text = "Medium";
+                    /*
+                    if (_difficulty == Difficulty.Easy)
+                        texts[3].Text = "Medium";
+                    if (_difficulty == Difficulty.Medium)
+                        texts[3].Text = "Hard";
+                    if (_difficulty == Difficulty.Hard)
+                        texts[3].Text = "Easy";
+                     * */
+                }
+
+                for (int c = 0; c < 4; c++)
+                    GameScreen.Children.Add(texts[c]);
             }
             else if (screen == Screen.Leaderboards)
             {
@@ -230,6 +274,9 @@ namespace Maestro
                 texts[1].Text = "2 Kihwan   \tSong B  \t201";
                 texts[2].Text = "3 Minho   \tSong C  \t195";
                 texts[3].Text = "";
+
+                for (int c = 0; c < 4; c++)
+                    GameScreen.Children.Add(texts[c]);
             }
             else if (screen == Screen.Score)
             {
@@ -238,10 +285,10 @@ namespace Maestro
                     texts[c].FontFamily = new FontFamily("MV Boli");
                     texts[c].TextAlignment = System.Windows.TextAlignment.Center;
                     texts[c].Width = columnSpace;
-                    texts[c].FontSize = 48;
+                    texts[c].FontSize = 60;
                 }
                 texts[0].FontFamily = new FontFamily("Jokerman");
-                texts[0].FontSize = 192;
+                texts[0].FontSize = 216;
 
                 texts[0].RenderTransform = new TranslateTransform(60, 180);
                 texts[1].RenderTransform = new TranslateTransform(columnSpace, 260);
@@ -251,11 +298,19 @@ namespace Maestro
                 texts[1].Text = "Minho\nSong A";
                 texts[2].Text = "Score\n195";
                 texts[3].Text = "";
+
+                for (int c = 0; c < 4; c++)
+                    GameScreen.Children.Add(texts[c]);
             }
             else
             {
+                /*
                 for (int c = 0; c < 4; c++)
                     texts[c].Text = "";
+
+                for (int c = 0; c < 4; c++)
+                    GameScreen.Children.Add(texts[c]);
+                 * */
             }
         }
 
@@ -282,92 +337,74 @@ namespace Maestro
                         if (leftHand == 4)
                         {
                             //go to profile
-                            changeScreen(Screen.Profile);
+                            changeScreen(Screen.Profile, 0);
                         }
                         break;
                     case Screen.Profile:
                         if (leftHand == 3)
                         {
                             //move profile left
-                            TextBox[] temp = texts;
-                            texts[0].Text = temp[2].Text;
-                            texts[1].Text = temp[0].Text;
-                            texts[2].Text = temp[1].Text;
+                            changeScreen(Screen.Profile, 1);
                         }
                         if (leftHand == 4)
                         {
-                            changeScreen(Screen.Leaderboards);
+                            changeScreen(Screen.Leaderboards, 0);
                         }
                         if (rightHand == 5)
                         {
                             //move profile right
-                            TextBox[] temp = texts;
-                            texts[0].Text = temp[1].Text;
-                            texts[1].Text = temp[2].Text;
-                            texts[2].Text = temp[0].Text;
+                            changeScreen(Screen.Profile, 2);
                         }
                         if (leftHand == 7)
                         {
-                            changeScreen(Screen.SelectSong);
+                            changeScreen(Screen.SelectSong, 0);
                         }
                         if (leftHand == 8)
                         {
-                            changeScreen(Screen.Main);
+                            changeScreen(Screen.Main, 0);
                         }
                         break;
                     case Screen.Leaderboards:
                         if (leftHand == 8)
                         {
-                            changeScreen(Screen.Profile);
+                            changeScreen(Screen.Profile, 0);
                         }
                         break;
                     case Screen.SelectSong:
                         if (leftHand == 3)
                         {
                             //move song left
-
-                            TextBox[] temp = texts;
-                            texts[0].Text = temp[2].Text;
-                            texts[1].Text = temp[0].Text;
-                            texts[2].Text = temp[1].Text;
+                            changeScreen(Screen.SelectSong, 1);
                         }
                         if (leftHand == 4)
                         {
                             //change difficulty
-                            if (texts[3].Text == "Easy")
-                                texts[3].Text = "Medium";
-                            if (texts[3].Text == "Medium")
-                                texts[3].Text = "Hard";
-                            if (texts[3].Text == "Hard")
-                                texts[3].Text = "Easy";
+                            changeScreen(Screen.SelectSong, 3);
                         }
                         if (rightHand == 5)
                         {
                             //move song right
-                            TextBox[] temp = texts;
-                            texts[0].Text = temp[1].Text;
-                            texts[1].Text = temp[2].Text;
-                            texts[2].Text = temp[0].Text;
+                            changeScreen(Screen.SelectSong, 2);
                         }
                         if (leftHand == 7)
                         {
-                            changeScreen(Screen.Game);
+                            changeScreen(Screen.Game, 0);
                         }
                         if (leftHand == 8)
                         {
-                            changeScreen(Screen.Profile);
+                            changeScreen(Screen.Profile, 0);
                         }
                         break;
                     case Screen.Game:
                         if (leftHand == 8)
                         {
-                            changeScreen(Screen.Score);
+                            changeScreen(Screen.Score, 0);
                         }
                         break;
                     case Screen.Score:
                         if (leftHand == 8)
                         {
-                            changeScreen(Screen.SelectSong);
+                            changeScreen(Screen.SelectSong, 0);
                         }
                         break;
                     default:

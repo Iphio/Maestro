@@ -9,7 +9,7 @@ namespace Maestro
     {
 
         private List<Step> stepList { get; set; }
-        private int lastIndex;
+        
         private Difficulty selectedDifficulty;
 
         #region constants
@@ -25,7 +25,6 @@ namespace Maestro
 
         public Judge()
         {
-            lastIndex = 0;
         }
 
         //Difficulty selection
