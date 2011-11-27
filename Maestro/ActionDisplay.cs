@@ -7,5 +7,12 @@ namespace Maestro
 {
     class ActionDisplay
     {
+
+
+        public ActionDisplay()
+        {
+
+        }
+
     }
 }

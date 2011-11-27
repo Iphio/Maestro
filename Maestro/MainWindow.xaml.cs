@@ -250,14 +250,49 @@ namespace Maestro
            {
                if (SkeletonTrackingState.Tracked == data.TrackingState)
                {
+<<<<<<< HEAD
+                   // Draw bones
+                  /* Brush brush = brushes[iSkeleton % brushes.Length];
+                   GameScreen.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.Spine, JointID.ShoulderCenter, JointID.Head));
+                   GameScreen.Children.Add(getBodySegment(data.Joints, brush, JointID.ShoulderCenter, JointID.ShoulderLeft, JointID.ElbowLeft, JointID.WristLeft, JointID.HandLeft));
+                   GameScreen.Children.Add(getBodySegment(data.Joints, brush, JointID.ShoulderCenter, JointID.ShoulderRight, JointID.ElbowRight, JointID.WristRight, JointID.HandRight));
+                   GameScreen.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.HipLeft, JointID.KneeLeft, JointID.AnkleLeft, JointID.FootLeft));
+                   GameScreen.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.HipRight, JointID.KneeRight, JointID.AnkleRight, JointID.FootRight));
+                   
+                   */
+                   //Get hand position
+                   GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandLeft));
+                  GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.Tomato, JointID.HandRight));
+                  GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.SteelBlue, JointID.FootLeft));
+                  GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.PaleGreen, JointID.FootRight));
+                   /*
+=======
                    //Draw the Skeleton
                    drawSkeleton(iSkeleton, brushes, data);
 
                    //Get the points
+>>>>>>> 19140972b05dfb2e1f054add101b3374e52af207
                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandLeft);
                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandRight);
                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.FootLeft);
                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.FootRight);
+<<<<<<< HEAD
+                   */
+                   // Draw joints
+                  /* foreach (Joint joint in data.Joints)
+                   {
+                       Point jointPos = getDisplayPosition(joint);
+                       Line jointLine = new Line();
+                       jointLine.X1 = jointPos.X - 3;
+                       jointLine.X2 = jointLine.X1 + 6;
+                       jointLine.Y1 = jointLine.Y2 = jointPos.Y;
+                       jointLine.Stroke = jointColors[joint.ID];
+                       jointLine.StrokeThickness = 6;
+                       GameScreen.Children.Add(jointLine);
+                   }*/
+
+=======
+>>>>>>> 19140972b05dfb2e1f054add101b3374e52af207
 
                }
                iSkeleton++;
