@@ -250,8 +250,6 @@ namespace Maestro
            {
                if (SkeletonTrackingState.Tracked == data.TrackingState)
                {
-
-                  
                    //Draw the Skeleton
                    //drawSkeleton(iSkeleton, brushes, data);
 
@@ -260,7 +258,6 @@ namespace Maestro
                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandRight);
                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.FootLeft);
                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.FootRight);
-
 
                }
                iSkeleton++;
