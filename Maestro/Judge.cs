@@ -36,9 +36,6 @@ namespace Maestro
         //Returns the score of the current frame
         public int getScore(int lHand, int rHand, int lFoot, int rFoot, int currentTime)
         {
-            //Get all the actions at the current time
-            List<Step> steps = currentTimeSteps(currentTime);
-
             Step currentStep;
 
             int score = 0;
@@ -46,7 +43,7 @@ namespace Maestro
             //Foreach step
             for (int i = 0; i < stepList.Count; ++i)
             {
-                currentStep = steps.ElementAt(i);
+                currentStep = stepList.ElementAt(i);
 
                 //If the step is valid
                 if (currentStep.timing - ERRORMARGIN < currentStep.timing && currentStep.timing < currentStep.timing + ERRORMARGIN)
@@ -82,8 +79,8 @@ namespace Maestro
 
                         }
                     }
-                    else //If touch hand
-                        if (currentStep.action == ActionType.TouchFeet && (lFoot == currentStep.area || lFoot == currentStep.area))
+                    else //If touch foot
+                        if (currentStep.action == ActionType.TouchFeet && (lFoot == currentStep.area || rFoot == currentStep.area))
                         {
                             //Check the timing
                             if (currentStep.timing - BADMARGIN < currentTime && currentTime < currentStep.timing + BADMARGIN)
@@ -119,12 +116,5 @@ namespace Maestro
 
             return score;
         }
-
-        //Get the steps at the current time
-        private List<Step> currentTimeSteps(int currentTime)
-        {
-            return null;
-        }
-
     }
 }
