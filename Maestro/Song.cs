@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 
 namespace Maestro
 {
-    class Song
+    public class Song
     {
         [DllImport("winmm.dll")]
-        private extern int mciSendString(string command, StringBuilder str, int iReturnLength, IntPtr hwndcallback);
+        private static extern int mciSendString(string command, StringBuilder str, int iReturnLength, IntPtr hwndcallback);
 
         private String Title;
         private int Length;

@@ -7,6 +7,7 @@ namespace Maestro
 {
     public class Parser
     {
+
         public static List<Step> loadStep()
         {
             return null;
@@ -14,6 +15,15 @@ namespace Maestro
         public void PrepareSongForGame()
         {
             //create a song object here (Title, path)
+        }
+        public List<Step> loadStep(String songFile)
+        {
+            return null;
+        }
+
+        public Profile loadProfile(String profileName)
+        {
+            return null;
         }
     }
 }

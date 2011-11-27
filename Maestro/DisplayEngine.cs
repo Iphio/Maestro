@@ -21,6 +21,9 @@ namespace Maestro
         //Grid
         private Rectangle[] grid;
 
+        //Textbox
+        private TextBox[] texts;
+
         //Current displayed screen
         public Screen CurrentScreen { get; private set; }
 
@@ -34,6 +37,8 @@ namespace Maestro
             GameScreen = mainScreen;
             CurrentScreen = Screen.Main;
             grid = new Rectangle[9];
+
+            texts = new TextBox[4];
 
             //Divide the screen into 3 parts
             columnSpace = GameScreen.Width / 3.0;
@@ -113,6 +118,37 @@ namespace Maestro
                     y = y % 3;
                 }
             }
+
+            for (int c = 0; c < 4; c++)
+            {
+                texts[c] = new TextBox();
+                //texts[c].FontFamily = new FontFamily("Jokerman");
+                //texts[c].TextAlignment = System.Windows.TextAlignment.Center;
+                //texts[c].Width = columnSpace;
+                texts[c].Background = null;
+                texts[c].BorderBrush = null;
+                texts[c].Foreground = Brushes.MediumVioletRed;
+
+                GameScreen.Children.Add(texts[c]);
+            }
+
+            /*
+            texts[0].AppendText("Minho");
+            texts[1].AppendText("Kihwan");
+            texts[2].AppendText("Heri");
+            texts[3].AppendText("Player");
+
+            texts[0].FontSize = 72;
+            texts[1].FontSize = 40;
+            texts[2].FontSize = 40;
+            texts[3].FontSize = 32;
+
+            texts[0].RenderTransform = new TranslateTransform(columnSpace, 150);
+            texts[1].RenderTransform = new TranslateTransform(0, 130);
+            texts[2].RenderTransform = new TranslateTransform(columnSpace * 2, 130);
+            texts[3].RenderTransform = new TranslateTransform(columnSpace, 110);
+             * */
+            
         }
 
         public Screen clap(int hand, int leftFoot, int rightFoot)
@@ -128,6 +164,99 @@ namespace Maestro
             count.Start();
                        
 
+            if (screen == Screen.Profile)
+            {
+                for (int c = 0; c < 4; c++)
+                {
+                    texts[c].FontFamily = new FontFamily("Jokerman");
+                    texts[c].TextAlignment = System.Windows.TextAlignment.Center;
+                    texts[c].Width = columnSpace;
+                }
+
+                texts[0].FontSize = 72;
+                texts[1].FontSize = 40;
+                texts[2].FontSize = 40;
+                texts[3].FontSize = 32;
+
+                texts[0].RenderTransform = new TranslateTransform(columnSpace, 150);
+                texts[1].RenderTransform = new TranslateTransform(0, 130);
+                texts[2].RenderTransform = new TranslateTransform(columnSpace * 2, 130);
+                texts[3].RenderTransform = new TranslateTransform(columnSpace, 110);
+
+                texts[0].Text = "Minho";
+                texts[1].Text = "Kihwan";
+                texts[2].Text = "Heri";
+                texts[3].Text = "";
+            }
+            else if (screen == Screen.SelectSong)
+            {
+                for (int c = 0; c < 4; c++)
+                {
+                    texts[c].FontFamily = new FontFamily("Jokerman");
+                    texts[c].TextAlignment = System.Windows.TextAlignment.Center;
+                    texts[c].Width = columnSpace;
+                }
+
+                texts[0].FontSize = 72;
+                texts[1].FontSize = 40;
+                texts[2].FontSize = 40;
+                texts[3].FontSize = 32;
+
+                texts[0].RenderTransform = new TranslateTransform(columnSpace, 150);
+                texts[1].RenderTransform = new TranslateTransform(0, 130);
+                texts[2].RenderTransform = new TranslateTransform(columnSpace * 2, 130);
+                texts[3].RenderTransform = new TranslateTransform(columnSpace, 110);
+
+                texts[0].Text = "Song A";
+                texts[1].Text = "Song B";
+                texts[2].Text = "Song C";
+                texts[3].Text = "Easy";
+            }
+            else if (screen == Screen.Leaderboards)
+            {
+                for (int c = 0; c < 4; c++)
+                {
+                    texts[c].FontFamily = new FontFamily("MV Boli");
+                    texts[c].TextAlignment = System.Windows.TextAlignment.Left;
+                    texts[c].Width = 3 * columnSpace;
+                    texts[c].FontSize = 40;
+                }
+
+                texts[0].RenderTransform = new TranslateTransform(140, 240);
+                texts[1].RenderTransform = new TranslateTransform(140, 300);
+                texts[2].RenderTransform = new TranslateTransform(140, 360);
+
+                texts[0].Text = "1 Heri   \tSong A  \t298";
+                texts[1].Text = "2 Kihwan   \tSong B  \t201";
+                texts[2].Text = "3 Minho   \tSong C  \t195";
+                texts[3].Text = "";
+            }
+            else if (screen == Screen.Score)
+            {
+                for (int c = 0; c < 4; c++)
+                {
+                    texts[c].FontFamily = new FontFamily("MV Boli");
+                    texts[c].TextAlignment = System.Windows.TextAlignment.Center;
+                    texts[c].Width = columnSpace;
+                    texts[c].FontSize = 48;
+                }
+                texts[0].FontFamily = new FontFamily("Jokerman");
+                texts[0].FontSize = 192;
+
+                texts[0].RenderTransform = new TranslateTransform(60, 180);
+                texts[1].RenderTransform = new TranslateTransform(columnSpace, 260);
+                texts[2].RenderTransform = new TranslateTransform(2 * columnSpace, 260);
+
+                texts[0].Text = "B";
+                texts[1].Text = "Minho\nSong A";
+                texts[2].Text = "Score\n195";
+                texts[3].Text = "";
+            }
+            else
+            {
+                for (int c = 0; c < 4; c++)
+                    texts[c].Text = "";
+            }
         }
 
         //Update the screen
@@ -160,6 +289,10 @@ namespace Maestro
                         if (leftHand == 3)
                         {
                             //move profile left
+                            TextBox[] temp = texts;
+                            texts[0].Text = temp[2].Text;
+                            texts[1].Text = temp[0].Text;
+                            texts[2].Text = temp[1].Text;
                         }
                         if (leftHand == 4)
                         {
@@ -168,6 +301,10 @@ namespace Maestro
                         if (rightHand == 5)
                         {
                             //move profile right
+                            TextBox[] temp = texts;
+                            texts[0].Text = temp[1].Text;
+                            texts[1].Text = temp[2].Text;
+                            texts[2].Text = temp[0].Text;
                         }
                         if (leftHand == 7)
                         {
@@ -188,14 +325,29 @@ namespace Maestro
                         if (leftHand == 3)
                         {
                             //move song left
+
+                            TextBox[] temp = texts;
+                            texts[0].Text = temp[2].Text;
+                            texts[1].Text = temp[0].Text;
+                            texts[2].Text = temp[1].Text;
                         }
                         if (leftHand == 4)
                         {
-                            //change difficulty;
+                            //change difficulty
+                            if (texts[3].Text == "Easy")
+                                texts[3].Text = "Medium";
+                            if (texts[3].Text == "Medium")
+                                texts[3].Text = "Hard";
+                            if (texts[3].Text == "Hard")
+                                texts[3].Text = "Easy";
                         }
                         if (rightHand == 5)
                         {
                             //move song right
+                            TextBox[] temp = texts;
+                            texts[0].Text = temp[1].Text;
+                            texts[1].Text = temp[2].Text;
+                            texts[2].Text = temp[0].Text;
                         }
                         if (leftHand == 7)
                         {
@@ -285,6 +437,31 @@ namespace Maestro
             }
         }
 
+        public void updateSelect(int leftHand, int rightHand, int leftFoot, int rightFoot)
+        {
+
+            if (active)
+            {
+
+                switch (CurrentScreen)
+                {
+                    case Screen.Profile:
+                        if (leftHand == 3)
+                        {
+
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+
+        public void generateMarker(int gridNum, int actionType)
+        {
+            grid[gridNum].Fill = Brushes.Gold;
+        }
 
     }
 }

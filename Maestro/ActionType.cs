@@ -5,7 +5,5 @@ using System.Text;
 
 namespace Maestro
 {
-    public class Profile
-    {
-    }
+    public enum ActionType   {TouchHand, TouchFeet, Push, Drag}
 }

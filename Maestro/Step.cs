@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Maestro
 {
-    class Step
+    public class Step
     {
 	
 	//This is a test for Step.cs
@@ -13,6 +13,7 @@ namespace Maestro
         public Difficulty stepDifficulty {get; set;}
         public int area { get; set; }
         public ActionType action { get; set; }
+        public bool done { get; set; }
 
         public Step()
         {
@@ -20,6 +21,7 @@ namespace Maestro
             stepDifficulty = Difficulty.Easy;
             area = 0;
             action = ActionType.TouchHand;
+            done = false;
         }
 
 

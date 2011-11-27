@@ -162,7 +162,7 @@ namespace Maestro
             if (currentScreen == Screen.Game)
             {
                 
-                //Check the points and calculate the score TODO CHECK THE CURRENT TIME
+                //Check the points and calculate the score TODO : CHECK THE CURRENT TIME
                 //_score = _judge.getScore(leftHandPosition,rightHandPoint,leftFootPosition,rightFootPosition,
 
                 //Update the action display
@@ -251,7 +251,7 @@ namespace Maestro
                if (SkeletonTrackingState.Tracked == data.TrackingState)
                {
                    //Draw the Skeleton
-                   drawSkeleton(iSkeleton, brushes, data);
+                   //drawSkeleton(iSkeleton, brushes, data);
 
                    //Get the points
                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandLeft);
