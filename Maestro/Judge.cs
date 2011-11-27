@@ -42,6 +42,8 @@ namespace Maestro
 
             Step currentStep;
 
+            int score = 0;
+
             //Foreach step
             for (int i = 0; i < stepList.Count; ++i)
             {
@@ -63,20 +65,20 @@ namespace Maestro
                                 if (currentStep.timing - EXCELLENTMARGIN < currentTime && currentTime < currentStep.timing + EXCELLENTMARGIN)
                                 {
 
-                                    return EXCELLENTMARK;
+                                    score += EXCELLENTMARK;
 
                                 }
                                 //GOOD MARK
                                 else
                                 {
-                                    return GOODMARK;
+                                    score += GOODMARK;
                                 }
 
                             }
                             //BAD MARK
                             else
                             {
-                                return BADMARK;
+                                score += BADMARK;
                             }
 
                         }
@@ -94,20 +96,20 @@ namespace Maestro
                                     if (currentStep.timing - EXCELLENTMARGIN < currentTime && currentTime < currentStep.timing + EXCELLENTMARGIN)
                                     {
 
-                                        return EXCELLENTMARK;
+                                        score += EXCELLENTMARK;
 
                                     }
                                     //GOOD MARK
                                     else
                                     {
-                                        return GOODMARK;
+                                        score += GOODMARK;
                                     }
 
                                 }
                                 //BAD MARK
                                 else
                                 {
-                                    return BADMARK;
+                                    score += BADMARK;
                                 }
 
                             }
@@ -116,7 +118,7 @@ namespace Maestro
 
             }
 
-            return 0;
+            return score;
         }
 
         //Get the steps at the current time

@@ -66,6 +66,9 @@ namespace Maestro
 
         #region Game Attributes
         
+        //Current combo
+        public int combos { get; set; }
+
         //!Current difficulty
         public Difficulty _difficulty{get;set;}
 
@@ -130,12 +133,14 @@ namespace Maestro
 
             _difficulty = Difficulty.Easy;
             //_profile = new Profile();
-           // _judge = new Judge();
+            _judge = new Judge();
 
             //Set up the bachground
             ImageBrush main = new ImageBrush();
             main.ImageSource = new BitmapImage(
                     new Uri("images\\screen_main.png", UriKind.Relative));
+
+            combos = 0;
 
             GameScreen.Background = main;
             
@@ -166,6 +171,7 @@ namespace Maestro
                 //_score = _judge.getScore(leftHandPosition,rightHandPoint,leftFootPosition,rightFootPosition,
 
                 //Update the action display
+                //Combo system
 
             }
 
@@ -178,7 +184,7 @@ namespace Maestro
                     currentScreen = hudDisplay.clap(leftHandPosition, leftFootPosition, rightFootPosition);
                 }
 
-                //CHANGER LA DIFFICULTE DU JUGE
+                //CHANGE JUDGE DIFFICULTY
             }
         }
 
