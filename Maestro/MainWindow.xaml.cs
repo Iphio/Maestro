@@ -65,11 +65,7 @@ namespace Maestro
         #endregion
 
         #region Game Attributes
-
         
-
-       
-
         //!Current difficulty
         public Difficulty _difficulty{get;set;}
 
@@ -80,7 +76,7 @@ namespace Maestro
         //public Profile _profile { get; set; }
         
         //!Game Judge
-       // public Judge _judge { get; set; }
+        public Judge _judge { get; set; }
 
         //!Text list of songs
         public List<String> _listOfSongs { get; set; }
@@ -89,11 +85,13 @@ namespace Maestro
         //public SongPlayer _songPlayer { get; set; }
 
         //!Score
-        public int Score {get;set;}
+        public int _score {get;set;}
 
         //!Current screen
         public Screen currentScreen { get; set; }
 
+
+        #region Positions
         //!Hands positions
         public int rightHandPosition { get; set; }
         public Point rightHandPoint { get; set; }
@@ -108,10 +106,10 @@ namespace Maestro
         public Point rightFootPoint { get; set; }
         public int leftFootPosition { get; set; }
         public Point leftFootPoint { get; set; }
-
+        #endregion
         #endregion
 
-                #region Display Attributes
+        #region Display Attributes
         private DisplayEngine displayHUD { get; set; }
         private ActionDisplay displaySteps { get; set; }
         #endregion
@@ -160,16 +158,27 @@ namespace Maestro
         {
             
 
-            //Check the points and calculate the score
-
-            //Update the action display
-
-
-            //Update the HUD display
-            //hudDisplay.updateScreen(leftHandPosition, rightHandPosition, leftFootPosition, rightFootPosition);           
-            if (leftHandPosition != 0 && rightHandPosition != 0 && Math.Sqrt(Math.Pow((leftHandPoint.X - rightHandPoint.X), 2) + Math.Pow((leftHandPoint.Y - rightHandPoint.Y), 2)) < 30)
+            //If actually playing
+            if (currentScreen == Screen.Game)
             {
-                hudDisplay.clap(leftHandPosition, leftFootPosition, rightFootPosition);
+                
+                //Check the points and calculate the score TODO CHECK THE CURRENT TIME
+                //_score = _judge.getScore(leftHandPosition,rightHandPoint,leftFootPosition,rightFootPosition,
+
+                //Update the action display
+
+            }
+
+
+            else
+            {
+                //Update the HUD display       
+                if (leftHandPosition != 0 && rightHandPosition != 0 && Math.Sqrt(Math.Pow((leftHandPoint.X - rightHandPoint.X), 2) + Math.Pow((leftHandPoint.Y - rightHandPoint.Y), 2)) < 30)
+                {
+                    currentScreen = hudDisplay.clap(leftHandPosition, leftFootPosition, rightFootPosition);
+                }
+
+                //CHANGER LA DIFFICULTE DU JUGE
             }
         }
 
@@ -182,8 +191,6 @@ namespace Maestro
         //!Windows loading complete
        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
-
            //Run the Kinect UI
             nui = new Runtime();
         
@@ -209,11 +216,14 @@ namespace Maestro
                 return;
             }
 
+
+           //When the frames are ready
             nui.DepthFrameReady += new EventHandler<ImageFrameReadyEventArgs>(nui_DepthFrameReady);
             nui.SkeletonFrameReady += new EventHandler<SkeletonFrameReadyEventArgs>(nui_SkeletonFrameReady);
             nui.VideoFrameReady += new EventHandler<ImageFrameReadyEventArgs>(nui_ColorFrameReady);
         }
 
+        //Background image ready
        void nui_ColorFrameReady(object sender, ImageFrameReadyEventArgs e)
        {
            // 32-bit per pixel, RGBA image
@@ -234,14 +244,13 @@ namespace Maestro
            brushes[3] = new SolidColorBrush(Color.FromRgb(255, 255, 64));
            brushes[4] = new SolidColorBrush(Color.FromRgb(255, 64, 255));
            brushes[5] = new SolidColorBrush(Color.FromRgb(128, 128, 255));
-
-           //GameScreen.Children.Clear();
-
+           
            //For each skeletton
            foreach (SkeletonData data in skeletonFrame.Skeletons)
            {
                if (SkeletonTrackingState.Tracked == data.TrackingState)
                {
+                   //Draw the Skeleton
                    drawSkeleton(iSkeleton, brushes, data);
 
                    //Get the points
@@ -260,6 +269,7 @@ namespace Maestro
 
        }
 
+        //Draw the skeleton
        private void drawSkeleton(int iSkeleton, Brush[] brushes, SkeletonData data)
        {
            SkeletonCanvas.Children.Clear();

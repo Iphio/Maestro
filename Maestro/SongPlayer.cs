@@ -7,9 +7,14 @@ namespace Maestro
 {
     class SongPlayer
     {
-        private List<Song> _songList { get; set; }
-
-
+        private List<String> _songList { get; set; }
+        private String currSong;
+        private Song song;
+        public void Start_Song(String toPlay)
+        {
+            this.song = new Song(toPlay);
+            this.song.PlaySong();
+        }
 
     }
 }
