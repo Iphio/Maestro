@@ -5,7 +5,12 @@ using System.Text;
 
 namespace Maestro
 {
-    class Parser
+    public class Parser
     {
+        public List<Step> loadStep()
+        {
+            return null;
+        }
+
     }
 }
