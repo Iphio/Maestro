@@ -151,9 +151,10 @@ namespace Maestro
             
         }
 
-        public void clap(int hand, int leftFoot, int rightFoot)
+        public Screen clap(int hand, int leftFoot, int rightFoot)
         {
             updateScreen(hand, hand, leftFoot, rightFoot);
+            return CurrentScreen;
         }
 
         private void changeScreen(Screen screen)
@@ -161,6 +162,7 @@ namespace Maestro
             CurrentScreen = screen;
             active = false;
             count.Start();
+                       
 
             if (screen == Screen.Profile)
             {
@@ -260,11 +262,16 @@ namespace Maestro
         //Update the screen
         public void updateScreen(int leftHand, int rightHand, int leftFoot, int rightFoot)
         {
+            //Clear everything
+            /*grid[0].Opacity = grid[1].Opacity = grid[2].Opacity = grid[3].Opacity = grid[4].Opacity = grid[5].Opacity = grid[6].Opacity = grid[7].Opacity = grid[8].Opacity = 0.0;
 
-            //grid[leftHand].Opacity = 0.7;
-            //grid[leftHand].Fill = Brushes.Green;
-            //grid[rightHand].Opacity = 0.7;
-            //grid[rightHand].Fill = Brushes.Gold;
+
+            grid[leftHand].Opacity = 0.7;
+            grid[leftHand].Fill = Brushes.Green;
+            grid[rightHand].Opacity = 0.7;
+            grid[rightHand].Fill = Brushes.Gold;*/
+
+            
             
             if (active)
             {

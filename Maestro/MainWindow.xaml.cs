@@ -65,11 +65,7 @@ namespace Maestro
         #endregion
 
         #region Game Attributes
-
         
-
-       
-
         //!Current difficulty
         public Difficulty _difficulty{get;set;}
 
@@ -80,7 +76,7 @@ namespace Maestro
         //public Profile _profile { get; set; }
         
         //!Game Judge
-       // public Judge _judge { get; set; }
+        public Judge _judge { get; set; }
 
         //!Text list of songs
         public List<String> _listOfSongs { get; set; }
@@ -89,11 +85,13 @@ namespace Maestro
         //public SongPlayer _songPlayer { get; set; }
 
         //!Score
-        public int Score {get;set;}
+        public int _score {get;set;}
 
         //!Current screen
         public Screen currentScreen { get; set; }
 
+
+        #region Positions
         //!Hands positions
         public int rightHandPosition { get; set; }
         public Point rightHandPoint { get; set; }
@@ -108,10 +106,10 @@ namespace Maestro
         public Point rightFootPoint { get; set; }
         public int leftFootPosition { get; set; }
         public Point leftFootPoint { get; set; }
-
+        #endregion
         #endregion
 
-                #region Display Attributes
+        #region Display Attributes
         private DisplayEngine displayHUD { get; set; }
         private ActionDisplay displaySteps { get; set; }
         #endregion
@@ -158,17 +156,29 @@ namespace Maestro
         //!Update display data
         public void refresh()
         {
-            //Check the points and calculate the score
+            
 
-            //Update the action display
-
-
-            //Update the HUD display
-            //hudDisplay.updateScreen(leftHandPosition, rightHandPosition, leftFootPosition, rightFootPosition);
-           
-            if (leftHandPosition != 0 && rightHandPosition != 0 && Math.Sqrt(Math.Pow((leftHandPoint.X - rightHandPoint.X), 2) + Math.Pow((leftHandPoint.Y - rightHandPoint.Y), 2)) < 30)
+            //If actually playing
+            if (currentScreen == Screen.Game)
             {
-                hudDisplay.clap(leftHandPosition, leftFootPosition, rightFootPosition);
+                
+                //Check the points and calculate the score TODO CHECK THE CURRENT TIME
+                //_score = _judge.getScore(leftHandPosition,rightHandPoint,leftFootPosition,rightFootPosition,
+
+                //Update the action display
+
+            }
+
+
+            else
+            {
+                //Update the HUD display       
+                if (leftHandPosition != 0 && rightHandPosition != 0 && Math.Sqrt(Math.Pow((leftHandPoint.X - rightHandPoint.X), 2) + Math.Pow((leftHandPoint.Y - rightHandPoint.Y), 2)) < 30)
+                {
+                    currentScreen = hudDisplay.clap(leftHandPosition, leftFootPosition, rightFootPosition);
+                }
+
+                //CHANGER LA DIFFICULTE DU JUGE
             }
         }
 
@@ -181,8 +191,6 @@ namespace Maestro
         //!Windows loading complete
        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
-
            //Run the Kinect UI
             nui = new Runtime();
         
@@ -208,11 +216,14 @@ namespace Maestro
                 return;
             }
 
+
+           //When the frames are ready
             nui.DepthFrameReady += new EventHandler<ImageFrameReadyEventArgs>(nui_DepthFrameReady);
             nui.SkeletonFrameReady += new EventHandler<SkeletonFrameReadyEventArgs>(nui_SkeletonFrameReady);
             nui.VideoFrameReady += new EventHandler<ImageFrameReadyEventArgs>(nui_ColorFrameReady);
         }
 
+        //Background image ready
        void nui_ColorFrameReady(object sender, ImageFrameReadyEventArgs e)
        {
            // 32-bit per pixel, RGBA image
@@ -233,13 +244,13 @@ namespace Maestro
            brushes[3] = new SolidColorBrush(Color.FromRgb(255, 255, 64));
            brushes[4] = new SolidColorBrush(Color.FromRgb(255, 64, 255));
            brushes[5] = new SolidColorBrush(Color.FromRgb(128, 128, 255));
-
-           GameScreen.Children.Clear();
-
+           
+           //For each skeletton
            foreach (SkeletonData data in skeletonFrame.Skeletons)
            {
                if (SkeletonTrackingState.Tracked == data.TrackingState)
                {
+<<<<<<< HEAD
                    // Draw bones
                   /* Brush brush = brushes[iSkeleton % brushes.Length];
                    GameScreen.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.Spine, JointID.ShoulderCenter, JointID.Head));
@@ -255,10 +266,17 @@ namespace Maestro
                   GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.SteelBlue, JointID.FootLeft));
                   GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.PaleGreen, JointID.FootRight));
                    /*
+=======
+                   //Draw the Skeleton
+                   drawSkeleton(iSkeleton, brushes, data);
+
+                   //Get the points
+>>>>>>> 19140972b05dfb2e1f054add101b3374e52af207
                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandLeft);
                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandRight);
                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.FootLeft);
                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.FootRight);
+<<<<<<< HEAD
                    */
                    // Draw joints
                   /* foreach (Joint joint in data.Joints)
@@ -273,14 +291,51 @@ namespace Maestro
                        GameScreen.Children.Add(jointLine);
                    }*/
 
+=======
+>>>>>>> 19140972b05dfb2e1f054add101b3374e52af207
 
                }
                iSkeleton++;
-           } // for each skeleton
+           } 
 
+           //Generate the grid
            hudDisplay.GenerateGrid();
            refresh();
 
+       }
+
+        //Draw the skeleton
+       private void drawSkeleton(int iSkeleton, Brush[] brushes, SkeletonData data)
+       {
+           SkeletonCanvas.Children.Clear();
+
+           // Draw bones
+           Brush brush = brushes[iSkeleton % brushes.Length];
+           SkeletonCanvas.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.Spine, JointID.ShoulderCenter, JointID.Head));
+           SkeletonCanvas.Children.Add(getBodySegment(data.Joints, brush, JointID.ShoulderCenter, JointID.ShoulderLeft, JointID.ElbowLeft, JointID.WristLeft, JointID.HandLeft));
+           SkeletonCanvas.Children.Add(getBodySegment(data.Joints, brush, JointID.ShoulderCenter, JointID.ShoulderRight, JointID.ElbowRight, JointID.WristRight, JointID.HandRight));
+           SkeletonCanvas.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.HipLeft, JointID.KneeLeft, JointID.AnkleLeft, JointID.FootLeft));
+           SkeletonCanvas.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.HipRight, JointID.KneeRight, JointID.AnkleRight, JointID.FootRight));
+
+
+           //Get hand position
+           SkeletonCanvas.Children.Add(getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandLeft));
+           SkeletonCanvas.Children.Add(getBodyPoint(data.Joints, Brushes.Tomato, JointID.HandRight));
+           SkeletonCanvas.Children.Add(getBodyPoint(data.Joints, Brushes.SteelBlue, JointID.FootLeft));
+           SkeletonCanvas.Children.Add(getBodyPoint(data.Joints, Brushes.PaleGreen, JointID.FootRight));
+
+           // Draw joints
+           foreach (Joint joint in data.Joints)
+           {
+               Point jointPos = getDisplayPosition(joint);
+               Line jointLine = new Line();
+               jointLine.X1 = jointPos.X - 3;
+               jointLine.X2 = jointLine.X1 + 6;
+               jointLine.Y1 = jointLine.Y2 = jointPos.Y;
+               jointLine.Stroke = jointColors[joint.ID];
+               jointLine.StrokeThickness = 6;
+               SkeletonCanvas.Children.Add(jointLine);
+           }
        }
         
         //Get the position of an element

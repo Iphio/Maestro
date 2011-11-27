@@ -57,6 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ActionDisplay.cs" />
+    <Compile Include="ActionType.cs" />
     <Compile Include="DisplayEngine.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Screen.cs" />
