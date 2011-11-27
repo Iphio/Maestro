@@ -162,7 +162,7 @@ namespace Maestro
             if (currentScreen == Screen.Game)
             {
                 
-                //Check the points and calculate the score TODO CHECK THE CURRENT TIME
+                //Check the points and calculate the score TODO : CHECK THE CURRENT TIME
                 //_score = _judge.getScore(leftHandPosition,rightHandPoint,leftFootPosition,rightFootPosition,
 
                 //Update the action display

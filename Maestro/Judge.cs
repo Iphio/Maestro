@@ -12,6 +12,7 @@ namespace Maestro
         private int lastIndex;
         private Difficulty selectedDifficulty;
 
+        #region constants
         const int ERRORMARGIN = 1001;
         const int BADMARGIN = 600;
         const int GOODMARGIN = 400;
@@ -20,18 +21,20 @@ namespace Maestro
         const int BADMARK = 1;
         const int GOODMARK = 2;
         const int EXCELLENTMARK = 3;
+        #endregion
 
         public Judge()
         {
             lastIndex = 0;
         }
 
+        //Difficulty selection
         public void selectDifficulty(Difficulty dif)
         {
             selectedDifficulty = dif;
         }
 
-        //Returns the score of the 
+        //Returns the score of the current frame
         public int getScore(int lHand,int rHand, int lFoot, int rFoot, int currentTime)
         {
             //Get all the actions at the current time

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Maestro
 {
-    class Profile
+    public class Profile
     {
     }
 }
