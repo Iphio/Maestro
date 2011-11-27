@@ -250,15 +250,16 @@ namespace Maestro
                    
                    */
                    //Get hand position
-                   /*GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandLeft));
+                   GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandLeft));
                   GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.Tomato, JointID.HandRight));
                   GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.SteelBlue, JointID.FootLeft));
-                  GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.PaleGreen, JointID.FootRight));*/
+                  GameScreen.Children.Add(getBodyPoint(data.Joints, Brushes.PaleGreen, JointID.FootRight));
+                   /*
                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandLeft);
                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandRight);
                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.FootLeft);
                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.FootRight);
-                   
+                   */
                    // Draw joints
                   /* foreach (Joint joint in data.Joints)
                    {
