@@ -123,6 +123,7 @@ namespace Maestro
         //music attribute
         private Song bgm;
         private Song menu;
+        private Song selectedSong;
 
         private Parser dataParser { get; set; }
 
@@ -145,14 +146,21 @@ namespace Maestro
             menu = new Song("Menu_selectS.wav");
 
 
+            Profile test = new Profile();
+
             //start music
             bgm.PlaySong(150);
 
-
+            #region IO TESTS
             parserUnit.saveSong(bgm, null);
+            //parserUnit.saveProfile(test);
+            test = parserUnit.loadProfile("Kihwan");
+
+            Console.WriteLine(test.name);
+            #endregion
+
 
             _difficulty = Difficulty.Easy;
-            //_profile = new Profile();
             _judge = new Judge();
 
             //Set up the bachground
@@ -174,15 +182,15 @@ namespace Maestro
         public void start_game()
         {
             //Run the song
+            selectedSong.PlaySong(200);
+            
 
-            //Load the steps
+
         }
 
         //!Update display data
         public void refresh()
         {
-            
-
             //If actually playing
             if (currentScreen == Screen.Game)
             {
@@ -191,6 +199,8 @@ namespace Maestro
                 //_score = _judge.getScore(leftHandPosition,rightHandPoint,leftFootPosition,rightFootPosition,
 
                 //Update the action display
+
+
                 //Combo system
 
             }

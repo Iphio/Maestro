@@ -56,5 +56,10 @@ namespace Maestro
             int time = int.Parse(str.ToString());
             return time;
         }
+
+        public void Pause()
+        {
+
+        }
     }
 }

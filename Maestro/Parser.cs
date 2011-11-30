@@ -53,7 +53,51 @@ namespace Maestro
 
         public Profile loadProfile(String profileName)
         {
+            //create a song object here (Title, path)
+
+            String path = "profiles\\"+profileName+".XML";
+
+            try
+            {
+
+                //Deserialiser le fichier
+                XmlSerializer mySerializer = new XmlSerializer(typeof(Profile));
+                FileStream myFileStream = new FileStream(path, FileMode.Open);
+
+                //Return the music
+                return ((Profile)mySerializer.Deserialize(myFileStream));
+
+
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("Erreur lors de l'ouverture du fichier", "Erreur");
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Le fichier n'est pas une grille", "Mauvais format");
+            }
             return null;
+        }
+
+        public void saveProfile(Profile p)
+        {
+
+            String path = "profiles\\"+ p.name+".XML";
+
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(Profile));
+                TextWriter textWriter = new StreamWriter(path);
+                serializer.Serialize(textWriter, p);
+                textWriter.Close();
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("Erreur lors de l'ecriture du fichier", "Erreur");
+            
+            }
+
         }
 
         public void saveSong(Song s, String filePath)
