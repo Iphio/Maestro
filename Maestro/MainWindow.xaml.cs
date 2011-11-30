@@ -181,8 +181,12 @@ namespace Maestro
         //!Play the song
         public void start_game()
         {
+
+            bgm.pause();
+
             //Run the song
             selectedSong.PlaySong(200);
+
             
 
 
@@ -202,6 +206,15 @@ namespace Maestro
 
 
                 //Combo system
+
+                //If end of song
+                if (selectedSong.getCurrentMillisecond() == selectedSong.Length)
+                {
+                    hudDisplay.endOfGameDisplay();
+                    currentScreen = Screen.Score;
+                    bgm.resume();
+                }
+            
 
             }
 

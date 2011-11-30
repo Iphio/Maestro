@@ -494,6 +494,12 @@ namespace Maestro
             }
         }
 
+        //Game over
+        public void endOfGameDisplay()
+        {
+            changeScreen(Screen.Score,0);
+        }
+
 
         public void generateMarker(int gridNum, int actionType)
         {

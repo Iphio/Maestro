@@ -57,7 +57,12 @@ namespace Maestro
             return time;
         }
 
-        public void Pause()
+        public void pause()
+        {
+
+        }
+
+        public void resume()
         {
 
         }
