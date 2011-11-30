@@ -36,12 +36,6 @@ namespace Maestro
 
             _listOfSteps = new List<Step>();
 
-
-            //CREATE A SONG HERE ! (don't forget to delete once it's done....)
-            _listOfSteps.Add(new Step(2000, Difficulty.Easy, 5, ActionType.Push));
-            _listOfSteps.Add(new Step(2050, Difficulty.Easy, 1, ActionType.Push));
-            _listOfSteps.Add(new Step(5000, Difficulty.Easy, 7, ActionType.Push));
-
         }
 
         public void PlaySong(int vol)
@@ -52,19 +46,19 @@ namespace Maestro
 
         public int getCurrentMillisecond()
         {
-            mciSendString("Status \"" + this.Title + "\" position", str, 0, IntPtr.Zero);
+            mciSendString("Status \"" + this.Title + "\" position", str, 128, IntPtr.Zero);
             int time = int.Parse(str.ToString());
             return time;
         }
 
         public void pause()
         {
-
+            mciSendString("pause \"" + this.Title + "\"", str, 0, IntPtr.Zero);
         }
 
         public void resume()
         {
-
+            mciSendString("resume \"" + this.Title + "\"", str, 0, IntPtr.Zero);
         }
     }
 }

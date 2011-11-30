@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Research.Kinect.Nui;
+using System.Xml.Serialization;
 
 
 namespace Maestro
@@ -79,7 +80,10 @@ namespace Maestro
         private DisplayEngine hudDisplay;
 
         //!Current profile
-        //public Profile _profile { get; set; }
+
+        [XmlArrayItem(typeof(Step))]
+        public List<Profile> _profiles { get; set; }
+        public int currentProfile { get; set; }
         
         //!Game Judge
         public Judge _judge { get; set; }
@@ -140,13 +144,24 @@ namespace Maestro
             parserUnit = new Parser();
 
             hudDisplay = new DisplayEngine(GameScreen);
-
+            displaySteps = new ActionDisplay(GameScreen);
 
             bgm = new Song("main_music.mp3");
             menu = new Song("Menu_selectS.wav");
+            selectedSong = new Song("songs\\test.mp3");
 
+            
 
-            Profile test = new Profile();
+            //CREATE A SONG HERE ! (don't forget to delete once it's done....)
+            selectedSong._listOfSteps.Add(new Step(5000, Difficulty.Easy, 0, ActionType.Push));
+            selectedSong._listOfSteps.Add(new Step(10000, Difficulty.Easy, 2, ActionType.Push));
+            selectedSong._listOfSteps.Add(new Step(15000, Difficulty.Easy, 3, ActionType.Push));
+            selectedSong._listOfSteps.Add(new Step(20000, Difficulty.Easy, 5, ActionType.Push));
+
+            
+            currentProfile = 0;
+            _profiles = new List<Profile>();
+
 
             //start music
             bgm.PlaySong(150);
@@ -154,9 +169,6 @@ namespace Maestro
             #region IO TESTS
             parserUnit.saveSong(bgm, null);
             //parserUnit.saveProfile(test);
-            test = parserUnit.loadProfile("Kihwan");
-
-            Console.WriteLine(test.name);
             #endregion
 
 
@@ -181,13 +193,13 @@ namespace Maestro
         //!Play the song
         public void start_game()
         {
-
             bgm.pause();
 
-            //Run the song
-            selectedSong.PlaySong(200);
+            displaySteps.loadSteps(selectedSong._listOfSteps);
 
-            
+            selectedSong.Length = 20000;
+            //Run the song
+            selectedSong.PlaySong(200);           
 
 
         }
@@ -203,7 +215,8 @@ namespace Maestro
                 //_score = _judge.getScore(leftHandPosition,rightHandPoint,leftFootPosition,rightFootPosition,
 
                 //Update the action display
-
+                int sec = selectedSong.getCurrentMillisecond();
+                displaySteps.displayStep(sec);
 
                 //Combo system
 
@@ -217,8 +230,6 @@ namespace Maestro
             
 
             }
-
-
             else
             {
                 //Update the HUD display       
@@ -226,6 +237,9 @@ namespace Maestro
                 {
                     menu.PlaySong(1000);
                     currentScreen = hudDisplay.clap(leftHandPosition, leftFootPosition, rightFootPosition);
+
+                    if (currentScreen == Screen.Game)
+                        start_game();
                 }
 
                 //CHANGE JUDGE DIFFICULTY
@@ -554,5 +568,11 @@ namespace Maestro
            return point;
        }
        #endregion
+
+       private void Window_KeyUp(object sender, KeyEventArgs e)
+       {
+
+       }
+
     }
 }

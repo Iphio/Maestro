@@ -141,7 +141,7 @@ namespace Maestro
 
         private void changeScreen(Screen screen, int shift)
         {
-            //GameScreen.Children.Clear();
+            
             GameScreen.Children.Clear();
             CurrentScreen = screen;
             active = false;
