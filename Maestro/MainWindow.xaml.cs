@@ -117,6 +117,10 @@ namespace Maestro
         private ActionDisplay displaySteps { get; set; }
         #endregion
 
+        //music attribute
+        private Song bgm = new Song("main_music.mp3");
+        private Song menu = new Song("Menu_selectS.wav");
+
         private Parser dataParser { get; set; }
 
         public Game_Engine()
@@ -130,6 +134,9 @@ namespace Maestro
         public void run()
         { 
             hudDisplay = new DisplayEngine(GameScreen);
+            
+            //start music
+            bgm.PlaySong(400);
 
             _difficulty = Difficulty.Easy;
             //_profile = new Profile();
@@ -181,6 +188,7 @@ namespace Maestro
                 //Update the HUD display       
                 if (leftHandPosition != 0 && rightHandPosition != 0 && Math.Sqrt(Math.Pow((leftHandPoint.X - rightHandPoint.X), 2) + Math.Pow((leftHandPoint.Y - rightHandPoint.Y), 2)) < 30)
                 {
+                    menu.PlaySong(1000);
                     currentScreen = hudDisplay.clap(leftHandPosition, leftFootPosition, rightFootPosition);
                 }
 

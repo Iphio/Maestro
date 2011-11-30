@@ -8,6 +8,7 @@ namespace Maestro
 {
     public class Song
     {
+        StringBuilder str = new StringBuilder(128);
         [DllImport("winmm.dll")]
         private static extern int mciSendString(string command, StringBuilder str, int iReturnLength, IntPtr hwndcallback);
 
@@ -21,19 +22,22 @@ namespace Maestro
         public Song(String SongTitle)
         {
             this.Title = SongTitle;
-            this.Length = mciSendString("status MediaFile length", null, 0, IntPtr.Zero);
+            mciSendString("status \""+this.Title+"\" length", str, 0, IntPtr.Zero);
+            this.Length = int.Parse(str.ToString());
             this.Artist = "";
             this.Filepath = "";//should be fixed. may not even need it
             _listOfSteps = Parser.loadStep();
         }
 
-        public void PlaySong()
+        public void PlaySong(int vol)
         {
-            mciSendString("play \""+this.Title+".mp3\"", null, 0, IntPtr.Zero);
+            mciSendString("play \""+this.Title+"\"", null, 0, IntPtr.Zero);
+            mciSendString("setaudio \"" + this.Title + "\" volume to vol", str, 0, IntPtr.Zero);
         }
         public int getCurrentMillisecond()
         {
-            int time = mciSendString("Status MediaFile position", null, 0, IntPtr.Zero);
+            mciSendString("Status \"" + this.Title + "\" position", str, 0, IntPtr.Zero);
+            int time = int.Parse(str.ToString());
             return time;
         }
     }
