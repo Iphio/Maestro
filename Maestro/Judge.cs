@@ -9,7 +9,7 @@ namespace Maestro
     {
 
         private List<Step> stepList { get; set; }
-        
+
         private Difficulty selectedDifficulty;
 
         #region constants
@@ -46,7 +46,7 @@ namespace Maestro
                 currentStep = stepList.ElementAt(i);
 
                 //If the step is valid
-                if (currentStep.timing - ERRORMARGIN < currentStep.timing && currentStep.timing < currentStep.timing + ERRORMARGIN)
+                if (!currentStep.done && currentTime - ERRORMARGIN < currentStep.timing && currentStep.timing < currentTime + ERRORMARGIN)
                 {
                     //If touch hand
                     if (currentStep.action == ActionType.TouchHand && (lHand == currentStep.area || rHand == currentStep.area))

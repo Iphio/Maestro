@@ -13,6 +13,7 @@ namespace Maestro
         public Difficulty stepDifficulty {get; set;}
         public int area { get; set; }
         public ActionType action { get; set; }
+
         public bool done { get; set; }
 
         public Step()
@@ -22,6 +23,19 @@ namespace Maestro
             area = 0;
             action = ActionType.TouchHand;
             done = false;
+
+            
+        }
+
+        public Step(int timing, Difficulty dif, int area, ActionType action)
+        {
+
+            done = false;
+            this.timing = timing;
+            stepDifficulty = dif;
+            this.area = area;
+            this.action = action;
+
         }
 
 

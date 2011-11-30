@@ -66,6 +66,9 @@ namespace Maestro
 
         #region Game Attributes
         
+        //Parser
+        public Parser parserUnit;
+
         //Current combo
         public int combos { get; set; }
 
@@ -118,8 +121,8 @@ namespace Maestro
         #endregion
 
         //music attribute
-        private Song bgm = new Song("main_music.mp3");
-        private Song menu = new Song("Menu_selectS.wav");
+        private Song bgm;
+        private Song menu;
 
         private Parser dataParser { get; set; }
 
@@ -132,11 +135,21 @@ namespace Maestro
 
         //!Run the game engine
         public void run()
-        { 
+        {
+            parserUnit = new Parser();
+
             hudDisplay = new DisplayEngine(GameScreen);
-            
+
+
+            bgm = new Song("main_music.mp3");
+            menu = new Song("Menu_selectS.wav");
+
+
             //start music
-            bgm.PlaySong(400);
+            bgm.PlaySong(150);
+
+
+            parserUnit.saveSong(bgm, null);
 
             _difficulty = Difficulty.Easy;
             //_profile = new Profile();
