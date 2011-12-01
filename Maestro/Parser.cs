@@ -102,13 +102,12 @@ namespace Maestro
 
         public void saveSong(Song s, String filePath)
         {
-
-            String test = "C:\\TEST.XML";
+                      
 
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(Song));
-                TextWriter textWriter = new StreamWriter(@test);
+                TextWriter textWriter = new StreamWriter(@filePath);
                 serializer.Serialize(textWriter, s);
                 textWriter.Close();
             }

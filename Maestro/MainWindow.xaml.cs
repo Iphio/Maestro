@@ -141,7 +141,7 @@ namespace Maestro
         //!Run the game engine
         public void run()
         {
-            parserUnit = new Parser();
+            //parserUnit = new Parser();
 
             hudDisplay = new DisplayEngine(GameScreen);
             displaySteps = new ActionDisplay(GameScreen);
@@ -167,7 +167,7 @@ namespace Maestro
             bgm.PlaySong(150);
 
             #region IO TESTS
-            parserUnit.saveSong(bgm, null);
+            //parserUnit.saveSong(bgm, "song1.xml");
             //parserUnit.saveProfile(test);
             #endregion
 
