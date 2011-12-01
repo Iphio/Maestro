@@ -31,8 +31,8 @@ namespace Maestro
             this.Title = SongTitle;
             mciSendString("status \""+this.Title+"\" length", str, 128, IntPtr.Zero);
             this.Length = int.Parse(str.ToString());
-            this.Artist = "TEST";
-            this.Filepath = "C:\\TEST";//should be fixed. may not even need it
+            //this.Artist = "TEST";
+            //this.Filepath = "C:\\TEST";//should be fixed. may not even need it
 
             _listOfSteps = new List<Step>();
 
