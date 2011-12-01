@@ -258,6 +258,8 @@ namespace Maestro
             //Run the Kinect UI
             nui = new Runtime();
 
+
+            refresh();
             //Initialize the skeletton
             try
             {
