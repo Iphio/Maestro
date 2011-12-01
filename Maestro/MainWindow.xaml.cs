@@ -167,7 +167,7 @@ namespace Maestro
             bgm.PlaySong(150);
 
             #region IO TESTS
-            parserUnit.saveSong(bgm, null);
+            parserUnit.saveSong(bgm, "song1.xml");
             //parserUnit.saveProfile(test);
             #endregion
 

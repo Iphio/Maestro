@@ -95,9 +95,7 @@ namespace Maestro
 
                     gameScreen.Children.Add(circle);
                 }
-                }
-
+            }
         }
-
     }
 }
