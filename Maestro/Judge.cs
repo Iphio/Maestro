@@ -50,6 +50,8 @@ namespace Maestro
             {
                 currentStep = stepList.ElementAt(i);
 
+                
+
                 //If the step is valid
                 if (!currentStep.done && currentTime - ERRORMARGIN < currentStep.timing && currentStep.timing < currentTime + ERRORMARGIN)
                 {
