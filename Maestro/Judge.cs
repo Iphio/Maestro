@@ -23,8 +23,13 @@ namespace Maestro
         const int EXCELLENTMARK = 3;
         #endregion
 
+        //Last judged note
+        private int lastIndex;
+
         public Judge()
         {
+
+            lastIndex = 0;
         }
 
         //Difficulty selection
@@ -41,13 +46,15 @@ namespace Maestro
             int score = 0;
 
             //Foreach step
-            for (int i = 0; i < stepList.Count; ++i)
+            for (int i = lastIndex; i < stepList.Count; ++i)
             {
                 currentStep = stepList.ElementAt(i);
 
                 //If the step is valid
                 if (!currentStep.done && currentTime - ERRORMARGIN < currentStep.timing && currentStep.timing < currentTime + ERRORMARGIN)
                 {
+                    lastIndex = i;
+
                     //If touch hand
                     if (currentStep.action == ActionType.TouchHand && (lHand == currentStep.area || rHand == currentStep.area))
                     {

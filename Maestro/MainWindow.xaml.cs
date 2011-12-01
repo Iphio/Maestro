@@ -196,7 +196,7 @@ namespace Maestro
             bgm.pause();
 
             displaySteps.loadSteps(selectedSong._listOfSteps);
-
+            
             selectedSong.Length = 20000;
             //Run the song
             selectedSong.PlaySong(200);
@@ -221,7 +221,7 @@ namespace Maestro
                 //Combo system
 
                 //If end of song
-                if (selectedSong.getCurrentMillisecond() == selectedSong.Length)
+                if (sec == selectedSong.Length)
                 {
                     hudDisplay.endOfGameDisplay();
                     currentScreen = Screen.Score;

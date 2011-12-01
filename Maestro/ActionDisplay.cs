@@ -17,6 +17,9 @@ namespace Maestro
         public double columnSpace {get;set;}
         public double rowSpace {get;set;}
 
+        //Last displayed index
+        private int lastIndex;
+
         public ActionDisplay()
         {
 
@@ -25,6 +28,8 @@ namespace Maestro
         public ActionDisplay(Canvas gameScreen)
         {
             this.gameScreen = gameScreen;
+
+            lastIndex = 0;
 
             //Divide the screen into 3 parts
             columnSpace = gameScreen.Width / 3.0;
@@ -41,19 +46,27 @@ namespace Maestro
 
             Step currentStep;
             gameScreen.Children.Clear();
+
+
+
             //Foreach step
-            for (int i = 0; i < stepList.Count; ++i)
+            for (int i = lastIndex; i < stepList.Count; ++i)
             {
                 currentStep = stepList.ElementAt(i);
 
                 //If the step is valid                
                 if (currentStep.done == false &&  currentTime - DISPLAYMARGIN <= currentStep.timing && currentStep.timing <= currentTime + DISPLAYMARGIN)
                 {
+                    //Store as last valid index
+                    lastIndex = i;
+
+                    //Create the visual component
                     Ellipse circle = new Ellipse();
                     circle.Stroke = Brushes.Gold;
                     circle.StrokeThickness = 15;
                     circle.Fill = Brushes.Red;
 
+                    //Display
                     switch (currentStep.area)
                     {
                         case 0:
@@ -93,6 +106,7 @@ namespace Maestro
                             break;
                     }
 
+                    //Add to the screen
                     gameScreen.Children.Add(circle);
                 }
             }
