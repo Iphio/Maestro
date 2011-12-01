@@ -17,7 +17,7 @@ using System.Xml.Serialization;
 
 namespace Maestro
 {
-    
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -66,7 +66,7 @@ namespace Maestro
         #endregion
 
         #region Game Attributes
-        
+
         //Parser
         public Parser parserUnit;
 
@@ -74,7 +74,7 @@ namespace Maestro
         public int combos { get; set; }
 
         //!Current difficulty
-        public Difficulty _difficulty{get;set;}
+        public Difficulty _difficulty { get; set; }
 
         //!Display engine
         private DisplayEngine hudDisplay;
@@ -84,18 +84,18 @@ namespace Maestro
         [XmlArrayItem(typeof(Step))]
         public List<Profile> _profiles { get; set; }
         public int currentProfile { get; set; }
-        
+
         //!Game Judge
         public Judge _judge { get; set; }
 
         //!Text list of songs
         public List<String> _listOfSongs { get; set; }
-        
+
         //!Song player
         //public SongPlayer _songPlayer { get; set; }
 
         //!Score
-        public int _score {get;set;}
+        public int _score { get; set; }
 
         //!Current screen
         public Screen currentScreen { get; set; }
@@ -150,7 +150,7 @@ namespace Maestro
             menu = new Song("Menu_selectS.wav");
             selectedSong = new Song("songs\\test.mp3");
 
-            
+
 
             //CREATE A SONG HERE ! (don't forget to delete once it's done....)
             selectedSong._listOfSteps.Add(new Step(5000, Difficulty.Easy, 0, ActionType.Push));
@@ -158,7 +158,7 @@ namespace Maestro
             selectedSong._listOfSteps.Add(new Step(15000, Difficulty.Easy, 3, ActionType.Push));
             selectedSong._listOfSteps.Add(new Step(20000, Difficulty.Easy, 5, ActionType.Push));
 
-            
+
             currentProfile = 0;
             _profiles = new List<Profile>();
 
@@ -183,13 +183,13 @@ namespace Maestro
             combos = 0;
 
             GameScreen.Background = main;
-            
+
             currentScreen = Screen.Main;
 
             hudDisplay.GenerateGrid();
         }
 
-        
+
         //!Play the song
         public void start_game()
         {
@@ -199,7 +199,7 @@ namespace Maestro
 
             selectedSong.Length = 20000;
             //Run the song
-            selectedSong.PlaySong(200);           
+            selectedSong.PlaySong(200);
 
 
         }
@@ -210,7 +210,7 @@ namespace Maestro
             //If actually playing
             if (currentScreen == Screen.Game)
             {
-                
+
                 //Check the points and calculate the score TODO : CHECK THE CURRENT TIME
                 //_score = _judge.getScore(leftHandPosition,rightHandPoint,leftFootPosition,rightFootPosition,
 
@@ -227,7 +227,7 @@ namespace Maestro
                     currentScreen = Screen.Score;
                     bgm.resume();
                 }
-            
+
 
             }
             else
@@ -253,11 +253,11 @@ namespace Maestro
         }
 
         //!Windows loading complete
-       private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-           //Run the Kinect UI
+            //Run the Kinect UI
             nui = new Runtime();
-        
+
             //Initialize the skeletton
             try
             {
@@ -281,94 +281,95 @@ namespace Maestro
             }
 
 
-           //When the frames are ready
+            //When the frames are ready
             nui.DepthFrameReady += new EventHandler<ImageFrameReadyEventArgs>(nui_DepthFrameReady);
             nui.SkeletonFrameReady += new EventHandler<SkeletonFrameReadyEventArgs>(nui_SkeletonFrameReady);
             nui.VideoFrameReady += new EventHandler<ImageFrameReadyEventArgs>(nui_ColorFrameReady);
         }
 
         //Background image ready
-       void nui_ColorFrameReady(object sender, ImageFrameReadyEventArgs e)
-       {
-           // 32-bit per pixel, RGBA image
-           PlanarImage Image = e.ImageFrame.Image;
+        void nui_ColorFrameReady(object sender, ImageFrameReadyEventArgs e)
+        {
+            // 32-bit per pixel, RGBA image
+            PlanarImage Image = e.ImageFrame.Image;
             video.Source = BitmapSource.Create(
                Image.Width, Image.Height, 96, 96, PixelFormats.Bgr32, null, Image.Bits, Image.Width * Image.BytesPerPixel);
-       }
+        }
 
         //!Display skeleton
-       void nui_SkeletonFrameReady(object sender, SkeletonFrameReadyEventArgs e)
-       {
-           SkeletonFrame skeletonFrame = e.SkeletonFrame;
-           int iSkeleton = 0;
-           Brush[] brushes = new Brush[6];
-           brushes[0] = new SolidColorBrush(Color.FromRgb(255, 0, 0));
-           brushes[1] = new SolidColorBrush(Color.FromRgb(0, 255, 0));
-           brushes[2] = new SolidColorBrush(Color.FromRgb(64, 255, 255));
-           brushes[3] = new SolidColorBrush(Color.FromRgb(255, 255, 64));
-           brushes[4] = new SolidColorBrush(Color.FromRgb(255, 64, 255));
-           brushes[5] = new SolidColorBrush(Color.FromRgb(128, 128, 255));
-           
-           //For each skeletton
-           foreach (SkeletonData data in skeletonFrame.Skeletons)
-           {
-               if (SkeletonTrackingState.Tracked == data.TrackingState)
-               {
-                   //Draw the Skeleton
-                   //drawSkeleton(iSkeleton, brushes, data);
+        void nui_SkeletonFrameReady(object sender, SkeletonFrameReadyEventArgs e)
+        {
+            SkeletonFrame skeletonFrame = e.SkeletonFrame;
+            int iSkeleton = 0;
+            Brush[] brushes = new Brush[6];
+            brushes[0] = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+            brushes[1] = new SolidColorBrush(Color.FromRgb(0, 255, 0));
+            brushes[2] = new SolidColorBrush(Color.FromRgb(64, 255, 255));
+            brushes[3] = new SolidColorBrush(Color.FromRgb(255, 255, 64));
+            brushes[4] = new SolidColorBrush(Color.FromRgb(255, 64, 255));
+            brushes[5] = new SolidColorBrush(Color.FromRgb(128, 128, 255));
 
-                   //Get the points
-                   getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandLeft);
-                   getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandRight);
-                   getBodyPoint(data.Joints, Brushes.Yellow, JointID.FootLeft);
-                   getBodyPoint(data.Joints, Brushes.Yellow, JointID.FootRight);
+            //For each skeletton
+            foreach (SkeletonData data in skeletonFrame.Skeletons)
+            {
+                if (SkeletonTrackingState.Tracked == data.TrackingState)
+                {
+                    //Draw the Skeleton
+                    //drawSkeleton(iSkeleton, brushes, data);
 
-               }
-               iSkeleton++;
-           } 
+                    //Get the points
+                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandLeft);
+                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandRight);
+                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.FootLeft);
+                    getBodyPoint(data.Joints, Brushes.Yellow, JointID.FootRight);
 
-           //Generate the grid
-           hudDisplay.GenerateGrid();
-           refresh();
+                }
+                iSkeleton++;
+            }
 
-       }
+            //Generate the grid
+            hudDisplay.GenerateGrid();
+            refresh();
+
+        }
 
         //Draw the skeleton
-       private void drawSkeleton(int iSkeleton, Brush[] brushes, SkeletonData data)
-       {
-           SkeletonCanvas.Children.Clear();
+        private void drawSkeleton(int iSkeleton, Brush[] brushes, SkeletonData data)
+        {
+            SkeletonCanvas.Children.Clear();
 
-           // Draw bones
-           Brush brush = brushes[iSkeleton % brushes.Length];
-           SkeletonCanvas.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.Spine, JointID.ShoulderCenter, JointID.Head));
-           SkeletonCanvas.Children.Add(getBodySegment(data.Joints, brush, JointID.ShoulderCenter, JointID.ShoulderLeft, JointID.ElbowLeft, JointID.WristLeft, JointID.HandLeft));
-           SkeletonCanvas.Children.Add(getBodySegment(data.Joints, brush, JointID.ShoulderCenter, JointID.ShoulderRight, JointID.ElbowRight, JointID.WristRight, JointID.HandRight));
-           SkeletonCanvas.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.HipLeft, JointID.KneeLeft, JointID.AnkleLeft, JointID.FootLeft));
-           SkeletonCanvas.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.HipRight, JointID.KneeRight, JointID.AnkleRight, JointID.FootRight));
+            // Draw bones
+            Brush brush = brushes[iSkeleton % brushes.Length];
+            SkeletonCanvas.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.Spine, JointID.ShoulderCenter, JointID.Head));
+            SkeletonCanvas.Children.Add(getBodySegment(data.Joints, brush, JointID.ShoulderCenter, JointID.ShoulderLeft, JointID.ElbowLeft, JointID.WristLeft, JointID.HandLeft));
+            SkeletonCanvas.Children.Add(getBodySegment(data.Joints, brush, JointID.ShoulderCenter, JointID.ShoulderRight, JointID.ElbowRight, JointID.WristRight, JointID.HandRight));
+            SkeletonCanvas.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.HipLeft, JointID.KneeLeft, JointID.AnkleLeft, JointID.FootLeft));
+            SkeletonCanvas.Children.Add(getBodySegment(data.Joints, brush, JointID.HipCenter, JointID.HipRight, JointID.KneeRight, JointID.AnkleRight, JointID.FootRight));
 
 
-           //Get hand position
-           SkeletonCanvas.Children.Add(getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandLeft));
-           SkeletonCanvas.Children.Add(getBodyPoint(data.Joints, Brushes.Tomato, JointID.HandRight));
-           SkeletonCanvas.Children.Add(getBodyPoint(data.Joints, Brushes.SteelBlue, JointID.FootLeft));
-           SkeletonCanvas.Children.Add(getBodyPoint(data.Joints, Brushes.PaleGreen, JointID.FootRight));
+            //Get hand position
+            SkeletonCanvas.Children.Add(getBodyPoint(data.Joints, Brushes.Yellow, JointID.HandLeft));
+            SkeletonCanvas.Children.Add(getBodyPoint(data.Joints, Brushes.Tomato, JointID.HandRight));
+            SkeletonCanvas.Children.Add(getBodyPoint(data.Joints, Brushes.SteelBlue, JointID.FootLeft));
+            SkeletonCanvas.Children.Add(getBodyPoint(data.Joints, Brushes.PaleGreen, JointID.FootRight));
 
-           // Draw joints
-           foreach (Joint joint in data.Joints)
-           {
-               Point jointPos = getDisplayPosition(joint);
-               Line jointLine = new Line();
-               jointLine.X1 = jointPos.X - 3;
-               jointLine.X2 = jointLine.X1 + 6;
-               jointLine.Y1 = jointLine.Y2 = jointPos.Y;
-               jointLine.Stroke = jointColors[joint.ID];
-               jointLine.StrokeThickness = 6;
-               SkeletonCanvas.Children.Add(jointLine);
-           }
-       }
-        
+            // Draw joints
+            foreach (Joint joint in data.Joints)
+            {
+                Point jointPos = getDisplayPosition(joint);
+                Line jointLine = new Line();
+                jointLine.X1 = jointPos.X - 3;
+                jointLine.X2 = jointLine.X1 + 6;
+                jointLine.Y1 = jointLine.Y2 = jointPos.Y;
+                jointLine.Stroke = jointColors[joint.ID];
+                jointLine.StrokeThickness = 6;
+                SkeletonCanvas.Children.Add(jointLine);
+            }
+        }
+
         //Get the position of an element
-        int getElementPosition(Point p){
+        int getElementPosition(Point p)
+        {
 
             //First column
             if (p.X < hudDisplay.columnSpace)
@@ -378,7 +379,7 @@ namespace Maestro
                 {
                     return 0;
                 }
-                    //Second case
+                //Second case
                 else if (p.Y < 2 * hudDisplay.rowSpace)
                 {
                     return 3;
@@ -429,7 +430,7 @@ namespace Maestro
             }
         }
 
-       #region Display Data
+        #region Display Data
 
         // Converts a 16-bit grayscale depth frame which includes player indexes into a 32-bit frame
         // that displays different players in different colors
@@ -496,83 +497,97 @@ namespace Maestro
         {
             PlanarImage Image = e.ImageFrame.Image;
             convertedDepthFrame = convertDepthFrame(Image.Bits);
-            
+
+            int test = (int)(leftHandPoint.X * leftHandPoint.Y);
+
+            Console.WriteLine(GetDistance(convertedDepthFrame.ElementAt(test),convertedDepthFrame.ElementAt(test+1)));
 
         }
 
-       private Point getDisplayPosition(Joint joint)
-       {
-           float depthX, depthY;
-           nui.SkeletonEngine.SkeletonToDepthImage(joint.Position, out depthX, out depthY);
-           depthX = depthX * 320; //convert to 320, 240 space
-           depthY = depthY * 240; //convert to 320, 240 space
-           int colorX, colorY;
-           ImageViewArea iv = new ImageViewArea();
-           // only ImageResolution.Resolution640x480 is supported at this point
-           nui.NuiCamera.GetColorPixelCoordinatesFromDepthPixel(ImageResolution.Resolution640x480, iv, (int)depthX, (int)depthY, (short)0, out colorX, out colorY);
+        //Get distance between player and screen
+        private int GetDistance(byte byte1, byte byte2)
+        {
 
-           // map back to skeleton.Width & skeleton.Height
-           return new Point((int)(GameScreen.Width * colorX / 640.0), (int)(GameScreen.Height * colorY / 480));
-       }
+            int distance = (int)(byte1 | byte2 << 8);
 
-       Polyline getBodySegment(Microsoft.Research.Kinect.Nui.JointsCollection joints, Brush brush, params JointID[] ids)
-       {
-           PointCollection points = new PointCollection(ids.Length);
-           for (int i = 0; i < ids.Length; ++i)
-           {
-               points.Add(getDisplayPosition(joints[ids[i]]));
-           }
+            return distance;
 
-           Polyline polyline = new Polyline();
-           polyline.Points = points;
-           polyline.Stroke = brush;
-           polyline.StrokeThickness = 5;
-           return polyline;
-       }
+        }
+
+
+        private Point getDisplayPosition(Joint joint)
+        {
+            float depthX, depthY;
+            nui.SkeletonEngine.SkeletonToDepthImage(joint.Position, out depthX, out depthY);
+            depthX = depthX * 320; //convert to 320, 240 space
+            depthY = depthY * 240; //convert to 320, 240 space
+            int colorX, colorY;
+            ImageViewArea iv = new ImageViewArea();
+            // only ImageResolution.Resolution640x480 is supported at this point
+            nui.NuiCamera.GetColorPixelCoordinatesFromDepthPixel(ImageResolution.Resolution640x480, iv, (int)depthX, (int)depthY, (short)0, out colorX, out colorY);
+
+            // map back to skeleton.Width & skeleton.Height
+            return new Point((int)(GameScreen.Width * colorX / 640.0), (int)(GameScreen.Height * colorY / 480));
+        }
+
+        Polyline getBodySegment(Microsoft.Research.Kinect.Nui.JointsCollection joints, Brush brush, params JointID[] ids)
+        {
+            PointCollection points = new PointCollection(ids.Length);
+            for (int i = 0; i < ids.Length; ++i)
+            {
+                points.Add(getDisplayPosition(joints[ids[i]]));
+            }
+
+            Polyline polyline = new Polyline();
+            polyline.Points = points;
+            polyline.Stroke = brush;
+            polyline.StrokeThickness = 5;
+            return polyline;
+        }
 
         //Get the point of the body part
-       Ellipse getBodyPoint(Microsoft.Research.Kinect.Nui.JointsCollection joints, Brush brush, params JointID[] ids)
-       {
-           Ellipse point = new Ellipse();
-           point.Stroke = brush;
-           
-           point.StrokeThickness = 50;
+        Ellipse getBodyPoint(Microsoft.Research.Kinect.Nui.JointsCollection joints, Brush brush, params JointID[] ids)
+        {
+            Ellipse point = new Ellipse();
+            point.Stroke = brush;
 
-           Point p = new Point();
+            point.StrokeThickness = 50;
 
-           p = getDisplayPosition(joints[ids[0]]);  
+            Point p = new Point();
 
-           point.RenderTransform = new TranslateTransform(p.X,p.Y);
+            p = getDisplayPosition(joints[ids[0]]);
 
-           if (ids[0] == JointID.HandLeft)
-           {
-               leftHandPosition = getElementPosition(p);
-               leftHandPoint = p;
-               
-           }
-           else if (ids[0] == JointID.HandRight)
-           {
-               rightHandPosition = getElementPosition(p);
-               rightHandPoint = p;
-           }
-           else if (ids[0] == JointID.FootLeft)
-           {
-               leftFootPosition = getElementPosition(p);
-               leftFootPoint = p;
-           }
-           else
-           {
-               rightFootPosition = getElementPosition(p);
-               rightFootPoint = p;
-           }
-           return point;
-       }
-       #endregion
+            point.RenderTransform = new TranslateTransform(p.X, p.Y);
 
-       private void Window_KeyUp(object sender, KeyEventArgs e)
-       {
+            if (ids[0] == JointID.HandLeft)
+            {
+                leftHandPosition = getElementPosition(p);
+                leftHandPoint = p;
 
-       }
+            }
+            else if (ids[0] == JointID.HandRight)
+            {
+                rightHandPosition = getElementPosition(p);
+                rightHandPoint = p;
+            }
+            else if (ids[0] == JointID.FootLeft)
+            {
+                leftFootPosition = getElementPosition(p);
+                leftFootPoint = p;
+            }
+            else
+            {
+                rightFootPosition = getElementPosition(p);
+                rightFootPoint = p;
+            }
+            return point;
+        }
+        #endregion
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
 
     }
 }
