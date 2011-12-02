@@ -68,7 +68,7 @@ namespace Maestro
                     //Create the visual component
                     Ellipse circle = new Ellipse();
                     circle.Stroke = Brushes.Gold;
-                    circle.StrokeThickness = 15;
+                    circle.StrokeThickness = 45;
                     circle.Fill = Brushes.Red;
 
                     //TODO : DISPLAY THE REDUCING CIRCLE, HOLD SYSTEM
@@ -115,6 +115,7 @@ namespace Maestro
 
                     //Add to the screen
                     gameScreen.Children.Add(circle);
+                    Console.WriteLine(currentTime);
                 }
             }
         }

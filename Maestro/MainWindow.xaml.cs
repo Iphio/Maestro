@@ -148,15 +148,17 @@ namespace Maestro
 
             bgm = new Song("main_music.mp3");
             menu = new Song("Menu_selectS.wav");
-            selectedSong = new Song("songs\\test.mp3");
+            selectedSong = new Song("songs\\UandMe.wav");
 
 
 
             //CREATE A SONG HERE ! (don't forget to delete once it's done....)
-            selectedSong._listOfSteps.Add(new Step(5000, Difficulty.Easy, 0, ActionType.Push));
-            selectedSong._listOfSteps.Add(new Step(10000, Difficulty.Easy, 2, ActionType.Push));
-            selectedSong._listOfSteps.Add(new Step(15000, Difficulty.Easy, 3, ActionType.Push));
-            selectedSong._listOfSteps.Add(new Step(20000, Difficulty.Easy, 5, ActionType.Push));
+            selectedSong.getList("songs\\UandMe.txt");
+            //selectedSong._listOfSteps.Add(new Step(5000, Difficulty.Easy, 0, ActionType.Push));
+            //selectedSong._listOfSteps.Add(new Step(10000, Difficulty.Easy, 2, ActionType.Push));
+            //selectedSong._listOfSteps.Add(new Step(15000, Difficulty.Easy, 3, ActionType.Push));
+            //selectedSong._listOfSteps.Add(new Step(20000, Difficulty.Easy, 5, ActionType.Push));
+
 
             //CREATE A PROFILE LIST
 
@@ -198,7 +200,7 @@ namespace Maestro
 
             displaySteps.loadSteps(selectedSong._listOfSteps);
             
-            selectedSong.Length = 20000;
+            selectedSong.Length = selectedSong.length();
             //Run the song
             selectedSong.PlaySong(200);
 
@@ -222,7 +224,7 @@ namespace Maestro
                 //Combo system
 
                 //If end of song
-                if (sec == selectedSong.Length)
+                if (sec >= selectedSong.Length)
                 {
                     hudDisplay.endOfGameDisplay();
                     currentScreen = Screen.Score;
@@ -285,7 +287,7 @@ namespace Maestro
 
 
             //When the frames are ready
-            nui.DepthFrameReady += new EventHandler<ImageFrameReadyEventArgs>(nui_DepthFrameReady);
+            //nui.DepthFrameReady += new EventHandler<ImageFrameReadyEventArgs>(nui_DepthFrameReady);
             nui.SkeletonFrameReady += new EventHandler<SkeletonFrameReadyEventArgs>(nui_SkeletonFrameReady);
             nui.VideoFrameReady += new EventHandler<ImageFrameReadyEventArgs>(nui_ColorFrameReady);
         }

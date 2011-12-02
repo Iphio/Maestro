@@ -25,7 +25,6 @@ namespace Maestro
         {
 
         }
-
         public Song(String SongTitle)
         {
             this.Title = SongTitle;
@@ -37,7 +36,17 @@ namespace Maestro
             _listOfSteps = new List<Step>();
 
         }
-
+        //actual parser
+        public void getList(String title)
+        {
+            String[] line = System.IO.File.ReadAllLines(title);
+            
+            for (int i = 0; i < line.Length; i++)
+            {
+                _listOfSteps.Add(new Step(Convert.ToInt32(line[i]),Difficulty.Easy, i%2 ,ActionType.Push));
+                Console.WriteLine(line[i]);
+            }
+        }
         public void PlaySong(int vol)
         {
             mciSendString("play \""+this.Title+"\"", null, 0, IntPtr.Zero);
@@ -47,7 +56,7 @@ namespace Maestro
         public int getCurrentMillisecond()
         {
             mciSendString("Status \"" + this.Title + "\" position", str, 128, IntPtr.Zero);
-            int time = int.Parse(str.ToString());
+            int time = Convert.ToInt32(str.ToString());
             return time;
         }
 
@@ -59,6 +68,12 @@ namespace Maestro
         public void resume()
         {
             mciSendString("resume \"" + this.Title + "\"", str, 0, IntPtr.Zero);
+        }
+        public int length()
+        {
+            mciSendString("Status \""+this.Title+"\" length", str, 128, IntPtr.Zero);
+            int time = Convert.ToInt32(str.ToString());
+            return time;
         }
     }
 }
