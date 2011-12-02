@@ -50,15 +50,15 @@ namespace Maestro
             {
                 currentStep = stepList.ElementAt(i);
 
-                
+                if (currentTime > currentStep.timing + ERRORMARGIN)
+                    return score;
 
                 //If the step is valid
                 if (!currentStep.done && currentTime - ERRORMARGIN < currentStep.timing && currentStep.timing < currentTime + ERRORMARGIN)
                 {
                     lastIndex = i;
 
-                    if (currentTime > currentStep.timing + ERRORMARGIN)
-                        return score;
+                    
 
                     //If touch hand
                     if (currentStep.action == ActionType.TouchHand && (lHand == currentStep.area || rHand == currentStep.area))

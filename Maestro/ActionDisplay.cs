@@ -54,14 +54,16 @@ namespace Maestro
             {
                 currentStep = stepList.ElementAt(i);
 
+                if (currentTime > currentStep.timing + DISPLAYMARGIN)
+                    return;
+
                 //If the step is valid                
                 if (currentStep.done == false &&  currentTime - DISPLAYMARGIN <= currentStep.timing && currentStep.timing <= currentTime + DISPLAYMARGIN)
                 {
                     //Store as last valid index
                     lastIndex = i;
 
-                    if (currentTime > currentStep.timing + DISPLAYMARGIN)
-                        return;
+                    
 
                     //Create the visual component
                     Ellipse circle = new Ellipse();
