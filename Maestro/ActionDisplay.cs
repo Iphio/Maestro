@@ -60,6 +60,9 @@ namespace Maestro
                     //Store as last valid index
                     lastIndex = i;
 
+                    if (currentTime > currentStep.timing + DISPLAYMARGIN)
+                        return;
+
                     //Create the visual component
                     Ellipse circle = new Ellipse();
                     circle.Stroke = Brushes.Gold;

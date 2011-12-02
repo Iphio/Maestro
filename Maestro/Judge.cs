@@ -57,6 +57,9 @@ namespace Maestro
                 {
                     lastIndex = i;
 
+                    if (currentTime > currentStep.timing + ERRORMARGIN)
+                        return score;
+
                     //If touch hand
                     if (currentStep.action == ActionType.TouchHand && (lHand == currentStep.area || rHand == currentStep.area))
                     {
