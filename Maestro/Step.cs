@@ -21,7 +21,7 @@ namespace Maestro
             timing = 0;
             stepDifficulty = Difficulty.Easy;
             area = 0;
-            action = ActionType.TouchHand;
+            action = ActionType.TouchHandLeft;
             done = false;
 
             

@@ -24,6 +24,11 @@ namespace Maestro
 
         }
 
+        public void updateScore(int newScore)
+        {
+            highScore = newScore;
+        }
+
 
     }
 

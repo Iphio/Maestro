@@ -61,7 +61,7 @@ namespace Maestro
                     
 
                     //If touch hand
-                    if (currentStep.action == ActionType.TouchHand && (lHand == currentStep.area || rHand == currentStep.area))
+                    if (currentStep.action == ActionType.TouchHandLeft && (lHand == currentStep.area || rHand == currentStep.area))
                     {
                         //Check the timing
                         if (currentStep.timing - BADMARGIN < currentTime && currentTime < currentStep.timing + BADMARGIN)
@@ -92,7 +92,7 @@ namespace Maestro
                         }
                     }
                     else //If touch foot
-                        if (currentStep.action == ActionType.TouchFeet && (lFoot == currentStep.area || rFoot == currentStep.area))
+                        if (currentStep.action == ActionType.TouchFeetLeft && (lFoot == currentStep.area || rFoot == currentStep.area))
                         {
                             //Check the timing
                             if (currentStep.timing - BADMARGIN < currentTime && currentTime < currentStep.timing + BADMARGIN)

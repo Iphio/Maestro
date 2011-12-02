@@ -158,6 +158,7 @@ namespace Maestro
             selectedSong._listOfSteps.Add(new Step(15000, Difficulty.Easy, 3, ActionType.Push));
             selectedSong._listOfSteps.Add(new Step(20000, Difficulty.Easy, 5, ActionType.Push));
 
+            //CREATE A PROFILE LIST
 
             currentProfile = 0;
             _profiles = new List<Profile>();

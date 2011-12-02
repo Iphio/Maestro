@@ -71,6 +71,8 @@ namespace Maestro
                     circle.StrokeThickness = 15;
                     circle.Fill = Brushes.Red;
 
+                    //TODO : DISPLAY THE REDUCING CIRCLE, HOLD SYSTEM
+
                     //Display
                     switch (currentStep.area)
                     {
