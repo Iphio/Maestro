@@ -134,6 +134,18 @@ namespace Maestro
         public Game_Engine()
         {
             InitializeComponent();
+
+            hudDisplay = new DisplayEngine(GameScreen);
+            displaySteps = new ActionDisplay(GameScreen);
+
+            currentProfile = 0;
+            _profiles = new List<Profile>();
+
+            bgm = new Song("main_music.mp3");
+            menu = new Song("Menu_selectS.wav");
+            selectedSong = new Song("songs\\UandMe.wav");
+
+
             run();
 
         }
@@ -141,16 +153,6 @@ namespace Maestro
         //!Run the game engine
         public void run()
         {
-            //parserUnit = new Parser();
-
-            hudDisplay = new DisplayEngine(GameScreen);
-            displaySteps = new ActionDisplay(GameScreen);
-
-            bgm = new Song("main_music.mp3");
-            menu = new Song("Menu_selectS.wav");
-            selectedSong = new Song("songs\\UandMe.wav");
-
-
 
             //CREATE A SONG HERE ! (don't forget to delete once it's done....)
             selectedSong.getList("songs\\UandMe.txt");
@@ -161,9 +163,10 @@ namespace Maestro
 
 
             //CREATE A PROFILE LIST
-
-            currentProfile = 0;
-            _profiles = new List<Profile>();
+            
+            //Load the profile list into the display
+            displayHUD.profileList = _profiles;
+            
 
 
             //start music
@@ -231,7 +234,6 @@ namespace Maestro
                 //Combo system
                 if (currentScore != 0)
                     combos++;
-                
 
                 //If end of song
                 if (sec >= selectedSong.Length)
@@ -240,8 +242,6 @@ namespace Maestro
                     currentScreen = Screen.Score;
                     bgm.resume();
                 }
-
-
             }
             else
             {
@@ -263,6 +263,8 @@ namespace Maestro
 
         }
 
+
+        #region Skeletton detection
         //!Windows loading complete
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -596,6 +598,6 @@ namespace Maestro
             return point;
         }
         #endregion
-
+        #endregion
     }
 }
