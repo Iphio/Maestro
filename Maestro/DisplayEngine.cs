@@ -31,6 +31,12 @@ namespace Maestro
         private bool active;
         private static Timer count;
 
+        //Current difficulty
+        public Difficulty selectedDifficulty;
+
+        //Profiles list
+        public List<Profile> profileList;
+
         //Constructor
         public DisplayEngine(Canvas mainScreen)
         {
@@ -238,11 +244,14 @@ namespace Maestro
                 if (shift == 0 || shift == 1 || shift == 2)
                 {
                     texts[3].Text = "Easy";
+                    selectedDifficulty = Difficulty.Easy;
                 }
 
                 if (shift == 3)
                 {
                     texts[3].Text = "Medium";
+                    selectedDifficulty = Difficulty.Medium;
+
                     /*
                     if (_difficulty == Difficulty.Easy)
                         texts[3].Text = "Medium";

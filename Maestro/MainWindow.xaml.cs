@@ -228,12 +228,15 @@ namespace Maestro
         {
             bgm.pause();
 
+            //Load the datas
             displaySteps.loadSteps(selectedSong._listOfSteps);
-            
+            _judge.selectedDifficulty = displayHUD.selectedDifficulty;
             selectedSong.Length = selectedSong.length();
+
+            _judge.updateSteps(selectedSong._listOfSteps);
+
             //Run the song
             selectedSong.PlaySong(200);
-
 
         }
 
@@ -244,14 +247,21 @@ namespace Maestro
             if (currentScreen == Screen.Game)
             {
 
-                //Check the points and calculate the score TODO : CHECK THE CURRENT TIME
-                //_score = _judge.getScore(leftHandPosition,rightHandPoint,leftFootPosition,rightFootPosition,
-
                 //Update the action display
                 int sec = selectedSong.getCurrentMillisecond();
                 displaySteps.displayStep(sec);
 
+                //Check the points and calculate the score TODO : CHECK THE CURRENT TIME
+                int currentScore = _judge.getScore(leftHandPosition, rightHandPosition, leftFootPosition, rightFootPosition, sec);
+
+                _score += currentScore;
+
+                Console.WriteLine(_score);
+
                 //Combo system
+                if (currentScore != 0)
+                    combos++;
+                
 
                 //If end of song
                 if (sec >= selectedSong.Length)
@@ -274,8 +284,6 @@ namespace Maestro
                     if (currentScreen == Screen.Game)
                         start_game();
                 }
-
-                //CHANGE JUDGE DIFFICULTY
             }
         }
 
@@ -535,7 +543,7 @@ namespace Maestro
 
             int test = (int)(leftHandPoint.X * leftHandPoint.Y);
 
-            Console.WriteLine(GetDistance(convertedDepthFrame.ElementAt(test),convertedDepthFrame.ElementAt(test+1)));
+           // Console.WriteLine(GetDistance(convertedDepthFrame.ElementAt(test),convertedDepthFrame.ElementAt(test+1)));
 
         }
 
@@ -618,11 +626,6 @@ namespace Maestro
             return point;
         }
         #endregion
-
-        private void Window_KeyUp(object sender, KeyEventArgs e)
-        {
-
-        }
 
     }
 }

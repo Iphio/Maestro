@@ -53,17 +53,12 @@ namespace Maestro
             for (int i = lastIndex; i < stepList.Count; ++i)
             {
                 currentStep = stepList.ElementAt(i);
-
-                if (currentTime > currentStep.timing + DISPLAYMARGIN)
-                    return;
-
+                
                 //If the step is valid                
-                if (currentStep.done == false &&  currentTime - DISPLAYMARGIN <= currentStep.timing && currentStep.timing <= currentTime + DISPLAYMARGIN)
+                if (currentStep.done == false &&  currentTime - DISPLAYMARGIN <= currentStep.timing &&  currentTime<= currentStep.timing + DISPLAYMARGIN)
                 {
                     //Store as last valid index
                     lastIndex = i;
-
-                    
 
                     //Create the visual component
                     Ellipse circle = new Ellipse();
@@ -115,7 +110,6 @@ namespace Maestro
 
                     //Add to the screen
                     gameScreen.Children.Add(circle);
-                    Console.WriteLine(currentTime);
                 }
             }
         }

@@ -10,7 +10,7 @@ namespace Maestro
 
         private List<Step> stepList { get; set; }
 
-        private Difficulty selectedDifficulty;
+        public Difficulty selectedDifficulty { get; set; }
 
         #region constants
         const int ERRORMARGIN = 1001;
@@ -32,6 +32,11 @@ namespace Maestro
             lastIndex = 0;
         }
 
+        public void updateSteps(List<Step> listOfSteps)
+        {
+            stepList = listOfSteps;
+        }
+
         //Difficulty selection
         public void selectDifficulty(Difficulty dif)
         {
@@ -50,82 +55,67 @@ namespace Maestro
             {
                 currentStep = stepList.ElementAt(i);
 
-                if (currentTime > currentStep.timing + ERRORMARGIN)
-                    return score;
-
                 //If the step is valid
-                if (!currentStep.done && currentTime - ERRORMARGIN < currentStep.timing && currentStep.timing < currentTime + ERRORMARGIN)
+                if (currentStep.stepDifficulty == selectedDifficulty && !currentStep.done && currentTime - ERRORMARGIN < currentStep.timing && currentStep.timing < currentTime + ERRORMARGIN)
                 {
+                    //Current step is done
                     lastIndex = i;
-
+                    currentStep.done = true;
                     
 
-                    //If touch hand
-                    if (currentStep.action == ActionType.TouchHandLeft && (lHand == currentStep.area || rHand == currentStep.area))
+                    //If touch left hand
+                    if (currentStep.action == ActionType.TouchHandLeft && (lHand == currentStep.area))
                     {
-                        //Check the timing
-                        if (currentStep.timing - BADMARGIN < currentTime && currentTime < currentStep.timing + BADMARGIN)
-                        {
-
-                            if (currentStep.timing - GOODMARGIN < currentTime && currentTime < currentStep.timing + GOODMARGIN)
-                            {
-
-                                if (currentStep.timing - EXCELLENTMARGIN < currentTime && currentTime < currentStep.timing + EXCELLENTMARGIN)
-                                {
-
-                                    score += EXCELLENTMARK;
-
-                                }
-                                //GOOD MARK
-                                else
-                                {
-                                    score += GOODMARK;
-                                }
-
-                            }
-                            //BAD MARK
-                            else
-                            {
-                                score += BADMARK;
-                            }
-
-                        }
+                        score = evaluate(currentTime, currentStep, score);
                     }
-                    else //If touch foot
-                        if (currentStep.action == ActionType.TouchFeetLeft && (lFoot == currentStep.area || rFoot == currentStep.area))
+                        //If touch left foot
+                    else if (currentStep.action == ActionType.TouchFeetLeft && (lFoot == currentStep.area))
                         {
-                            //Check the timing
-                            if (currentStep.timing - BADMARGIN < currentTime && currentTime < currentStep.timing + BADMARGIN)
-                            {
-
-                                if (currentStep.timing - GOODMARGIN < currentTime && currentTime < currentStep.timing + GOODMARGIN)
-                                {
-
-                                    if (currentStep.timing - EXCELLENTMARGIN < currentTime && currentTime < currentStep.timing + EXCELLENTMARGIN)
-                                    {
-
-                                        score += EXCELLENTMARK;
-
-                                    }
-                                    //GOOD MARK
-                                    else
-                                    {
-                                        score += GOODMARK;
-                                    }
-
-                                }
-                                //BAD MARK
-                                else
-                                {
-                                    score += BADMARK;
-                                }
-
-                            }
+                            score = evaluate(currentTime, currentStep, score);
                         }
+                        //If touch right hand
+                        else if(currentStep.action == ActionType.TouchHandRight && rHand == currentStep.area)
+                    {
+                        score = evaluate(currentTime, currentStep, score);
+                        }
+                    else if (currentStep.action == ActionType.TouchFeetRight && rFoot == currentStep.area){
+                        score = evaluate (currentTime, currentStep, score);
+                    }
+                }
+            }
+
+            return score;
+        }
+
+        private static int evaluate(int currentTime, Step currentStep, int score)
+        {
+            //Check the timing
+            if (currentStep.timing - BADMARGIN < currentTime && currentTime < currentStep.timing + BADMARGIN)
+            {
+
+                if (currentStep.timing - GOODMARGIN < currentTime && currentTime < currentStep.timing + GOODMARGIN)
+                {
+
+                    if (currentStep.timing - EXCELLENTMARGIN < currentTime && currentTime < currentStep.timing + EXCELLENTMARGIN)
+                    {
+
+                        score += EXCELLENTMARK;
+
+                    }
+                    //GOOD MARK
+                    else
+                    {
+                        score += GOODMARK;
+                    }
+
+                }
+                //BAD MARK
+                else
+                {
+                    score += BADMARK;
                 }
 
             }
-
             return score;
         }
     }
