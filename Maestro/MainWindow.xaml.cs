@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Research.Kinect.Nui;
 using System.Xml.Serialization;
+using System.IO;
 
 
 namespace Maestro
@@ -76,12 +77,11 @@ namespace Maestro
         //!Current difficulty
         public Difficulty _difficulty { get; set; }
 
-        //!Display engine
-        private DisplayEngine hudDisplay;
+        
 
         //!Current profile
 
-        [XmlArrayItem(typeof(Step))]
+        [XmlArrayItem(typeof(Profile))]
         public List<Profile> _profiles { get; set; }
         public int currentProfile { get; set; }
 
@@ -120,8 +120,12 @@ namespace Maestro
         #endregion
 
         #region Display Attributes
-        private DisplayEngine displayHUD { get; set; }
+
+        //!Display the stuff
         private ActionDisplay displaySteps { get; set; }
+
+        //!Display engine
+        private DisplayEngine hudDisplay;
         #endregion
 
         //music attribute
@@ -134,17 +138,17 @@ namespace Maestro
         public Game_Engine()
         {
             InitializeComponent();
-
             hudDisplay = new DisplayEngine(GameScreen);
             displaySteps = new ActionDisplay(GameScreen);
 
             currentProfile = 0;
             _profiles = new List<Profile>();
 
+            parserUnit = new Parser();
+
             bgm = new Song("main_music.mp3");
             menu = new Song("Menu_selectS.wav");
             selectedSong = new Song("songs\\UandMe.wav");
-
 
             run();
 
@@ -153,6 +157,19 @@ namespace Maestro
         //!Run the game engine
         public void run()
         {
+
+
+        
+            // creating the XML file for profile
+            /*_profiles.Add(new Profile("Kihwan", 1234));
+            _profiles.Add(new Profile("Heri", 1234));
+            _profiles.Add(new Profile("Minho", 1234));
+
+            parserUnit.saveProfiles(_profiles);*/
+
+
+            //loading profile
+            _profiles = parserUnit.loadProfile();
 
             //CREATE A SONG HERE ! (don't forget to delete once it's done....)
             selectedSong.getList("songs\\UandMe.txt");
@@ -165,7 +182,7 @@ namespace Maestro
             //CREATE A PROFILE LIST
             
             //Load the profile list into the display
-            displayHUD.profileList = _profiles;
+            hudDisplay.profileList = _profiles;
             
 
 
@@ -203,7 +220,7 @@ namespace Maestro
 
             //Load the datas
             displaySteps.loadSteps(selectedSong._listOfSteps);
-            _judge.selectedDifficulty = displayHUD.selectedDifficulty;
+            _judge.selectedDifficulty = hudDisplay.selectedDifficulty;
             selectedSong.Length = selectedSong.length();
 
             _judge.updateSteps(selectedSong._listOfSteps);

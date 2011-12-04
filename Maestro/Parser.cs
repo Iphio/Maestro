@@ -51,21 +51,21 @@ namespace Maestro
             return null;
         }
 
-        public Profile loadProfile(String profileName)
+        public List<Profile> loadProfile()
         {
             //create a song object here (Title, path)
 
-            String path = "profiles\\"+profileName+".XML";
+            String path = "profile\\profile.XML";
 
             try
             {
 
                 //Deserialiser le fichier
-                XmlSerializer mySerializer = new XmlSerializer(typeof(Profile));
+                XmlSerializer mySerializer = new XmlSerializer(typeof(List<Profile>));
                 FileStream myFileStream = new FileStream(path, FileMode.Open);
 
                 //Return the music
-                return ((Profile)mySerializer.Deserialize(myFileStream));
+                return ((List<Profile>)mySerializer.Deserialize(myFileStream));
 
 
             }
@@ -80,22 +80,21 @@ namespace Maestro
             return null;
         }
 
-        public void saveProfile(Profile p)
+        public void saveProfiles(List<Profile> l)
         {
 
-            String path = "profiles\\"+ p.name+".XML";
+            String path = "profiles\\profile.XML";
 
             try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(Profile));
-                TextWriter textWriter = new StreamWriter(path);
-                serializer.Serialize(textWriter, p);
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Profile>));
+                TextWriter textWriter = new StreamWriter("profile\\profile.XML");
+                serializer.Serialize(textWriter, l);
                 textWriter.Close();
             }
             catch (IOException)
             {
                 MessageBox.Show("Erreur lors de l'ecriture du fichier", "Erreur");
-            
             }
 
         }
