@@ -32,6 +32,11 @@ namespace Maestro
             lastIndex = 0;
         }
 
+        public void updateSteps(List<Step> listOfSteps)
+        {
+            stepList = listOfSteps;
+        }
+
         //Difficulty selection
         public void selectDifficulty(Difficulty dif)
         {
@@ -50,14 +55,12 @@ namespace Maestro
             {
                 currentStep = stepList.ElementAt(i);
 
-                if (currentTime > currentStep.timing + ERRORMARGIN)
-                    return score;
-
                 //If the step is valid
                 if (!currentStep.done && currentTime - ERRORMARGIN < currentStep.timing && currentStep.timing < currentTime + ERRORMARGIN)
                 {
+                    //Current step is done
                     lastIndex = i;
-
+                    currentStep.done = true;
                     
 
                     //If touch hand
