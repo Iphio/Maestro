@@ -157,8 +157,6 @@ namespace Maestro
         //!Run the game engine
         public void run()
         {
-
-
         
             // creating the XML file for profile
             /*_profiles.Add(new Profile("Kihwan", 1234));
@@ -172,11 +170,11 @@ namespace Maestro
             _profiles = parserUnit.loadProfile();
 
             //CREATE A SONG HERE ! (don't forget to delete once it's done....)
-            selectedSong.getList("songs\\UandMe.txt");
-            //selectedSong._listOfSteps.Add(new Step(5000, Difficulty.Easy, 0, ActionType.Push));
-            //selectedSong._listOfSteps.Add(new Step(10000, Difficulty.Easy, 2, ActionType.Push));
-            //selectedSong._listOfSteps.Add(new Step(15000, Difficulty.Easy, 3, ActionType.Push));
-            //selectedSong._listOfSteps.Add(new Step(20000, Difficulty.Easy, 5, ActionType.Push));
+            //selectedSong.getList("songs\\UandMe.txt");
+            selectedSong._listOfSteps.Add(new Step(5000, Difficulty.Easy, 0, ActionType.Push));
+            selectedSong._listOfSteps.Add(new Step(10000, Difficulty.Easy, 2, ActionType.Push));
+            selectedSong._listOfSteps.Add(new Step(15000, Difficulty.Easy, 3, ActionType.Push));
+            selectedSong._listOfSteps.Add(new Step(20000, Difficulty.Easy, 5, ActionType.Push));
 
 
             //CREATE A PROFILE LIST
@@ -210,6 +208,7 @@ namespace Maestro
             currentScreen = Screen.Main;
 
             hudDisplay.GenerateGrid();
+            
         }
 
 
@@ -220,7 +219,12 @@ namespace Maestro
 
             //Load the datas
             displaySteps.loadSteps(selectedSong._listOfSteps);
-            _judge.selectedDifficulty = hudDisplay.selectedDifficulty;
+
+            //TO UNCOMMENT
+            //_judge.selectedDifficulty = hudDisplay.selectedDifficulty;
+            //displaySteps.selectedDifficulty = hudDisplay.selectedDifficulty;
+            _judge.selectedDifficulty = Difficulty.Easy;
+            displaySteps.selectedDifficulty = Difficulty.Easy;
             selectedSong.Length = selectedSong.length();
 
             _judge.updateSteps(selectedSong._listOfSteps);
