@@ -51,21 +51,21 @@ namespace Maestro
             return null;
         }
 
-        public Profile loadProfile(String profileName)
+        public List<Profile> loadProfile()
         {
             //create a song object here (Title, path)
 
-            String path = "profiles\\"+profileName+".XML";
+            String path = "profile\\profile.XML";
 
             try
             {
 
                 //Deserialiser le fichier
-                XmlSerializer mySerializer = new XmlSerializer(typeof(Profile));
+                XmlSerializer mySerializer = new XmlSerializer(typeof(List<Profile>));
                 FileStream myFileStream = new FileStream(path, FileMode.Open);
 
                 //Return the music
-                return ((Profile)mySerializer.Deserialize(myFileStream));
+                return ((List<Profile>)mySerializer.Deserialize(myFileStream));
 
 
             }

@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Research.Kinect.Nui;
 using System.Xml.Serialization;
+using System.IO;
 
 
 namespace Maestro
@@ -81,7 +82,7 @@ namespace Maestro
 
         //!Current profile
 
-        [XmlArrayItem(typeof(Step))]
+        [XmlArrayItem(typeof(Profile))]
         public List<Profile> _profiles { get; set; }
         public int currentProfile { get; set; }
 
@@ -134,10 +135,22 @@ namespace Maestro
         public Game_Engine()
         {
             InitializeComponent();
+            //_profiles = new List<Profile>();
+            parserUnit = new Parser();
             run();
 
         }
+        public void getProfiles()
+        {
+            String[] files = Directory.GetFiles(@"profile\\");
+            //String[] line = System.IO.File.ReadAllLines(fname);
 
+            for (int i = 0; i < files.Length; i++)
+            {
+                //_profiles.Add(new Profile(Convert.ToInt32(line[i]), Difficulty.Easy, i % 2, ActionType.Push));
+                //Console.WriteLine(line[i]);
+            }
+        }
         //!Run the game engine
         public void run()
         {
@@ -149,9 +162,26 @@ namespace Maestro
             bgm = new Song("main_music.mp3");
             menu = new Song("Menu_selectS.wav");
             selectedSong = new Song("songs\\UandMe.wav");
+            
+            //loading profile
+            _profiles = parserUnit.loadProfile();
+            /* creating the XML file for profile
+            _profiles.Add(new Profile("Kihwan", 1234));
+            _profiles.Add(new Profile("Heri", 1234));
+            _profiles.Add(new Profile("Minho", 1234));
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Profile>));
+                TextWriter textWriter = new StreamWriter("profile\\profile.XML");
+                serializer.Serialize(textWriter, _profiles);
+                textWriter.Close();
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("Erreur lors de l'ecriture du fichier", "Erreur");
 
-
-
+            }*/
+            
             //CREATE A SONG HERE ! (don't forget to delete once it's done....)
             selectedSong.getList("songs\\UandMe.txt");
             //selectedSong._listOfSteps.Add(new Step(5000, Difficulty.Easy, 0, ActionType.Push));
