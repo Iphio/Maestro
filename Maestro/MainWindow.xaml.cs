@@ -171,10 +171,10 @@ namespace Maestro
 
             //CREATE A SONG HERE ! (don't forget to delete once it's done....)
             //selectedSong.getList("songs\\UandMe.txt");
-            selectedSong._listOfSteps.Add(new Step(5000, Difficulty.Easy, 0, ActionType.Push));
-            selectedSong._listOfSteps.Add(new Step(10000, Difficulty.Easy, 2, ActionType.Push));
-            selectedSong._listOfSteps.Add(new Step(15000, Difficulty.Easy, 3, ActionType.Push));
-            selectedSong._listOfSteps.Add(new Step(20000, Difficulty.Easy, 5, ActionType.Push));
+            selectedSong._listOfSteps.Add(new Step(5000, Difficulty.Easy, 0, ActionType.TouchHandLeft));
+            selectedSong._listOfSteps.Add(new Step(10000, Difficulty.Easy, 2, ActionType.TouchHandRight));
+            selectedSong._listOfSteps.Add(new Step(15000, Difficulty.Easy, 3, ActionType.TouchHandLeft));
+            selectedSong._listOfSteps.Add(new Step(20000, Difficulty.Easy, 5, ActionType.TouchHandRight));
 
 
             //CREATE A PROFILE LIST

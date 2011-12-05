@@ -8,7 +8,6 @@ namespace Maestro
     class SongPlayer
     {
         private List<String> _songList { get; set; }
-        private String currSong;
         private Song song;
         public void Start_Song(String toPlay, int vol)
         {

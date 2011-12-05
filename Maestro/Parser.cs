@@ -82,9 +82,6 @@ namespace Maestro
 
         public void saveProfiles(List<Profile> l)
         {
-
-            String path = "profiles\\profile.XML";
-
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(List<Profile>));

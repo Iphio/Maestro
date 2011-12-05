@@ -89,6 +89,15 @@ namespace Maestro
                         currentStep.done = true;
                         score = evaluate (currentTime, currentStep, score);
                     }
+                    //If it's a drag action
+                    else if (currentStep.action == ActionType.HoldHand && (rHand == currentStep.area || lHand == currentStep.area))
+                    {
+                        score ++;
+                    }
+                    else if (currentStep.action == ActionType.HoldFoot && (rFoot == currentStep.area || lFoot == currentStep.area))
+                    {
+                        score ++;
+                    }
                 }
             }
 

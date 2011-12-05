@@ -55,6 +55,7 @@ namespace Maestro
             {
                 currentStep = stepList.ElementAt(i);
 
+                #region step Done
                 if (currentStep.done == true)
                 {
 
@@ -110,7 +111,7 @@ namespace Maestro
                     gameScreen.Children.Add(textGreat);
 
                 }
-
+                #endregion
 
                 //If the step is valid                
                 if (currentStep.done == false && currentStep.timing - DISPLAYMARGIN <= currentTime && currentTime <= currentStep.timing + DISPLAYMARGIN)
