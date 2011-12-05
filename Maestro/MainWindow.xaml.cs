@@ -157,60 +157,71 @@ namespace Maestro
         //!Run the game engine
         public void run()
         {
-        
-            // creating the XML file for profile
-            /*_profiles.Add(new Profile("Kihwan", 1234));
-            _profiles.Add(new Profile("Heri", 1234));
-            _profiles.Add(new Profile("Minho", 1234));
-
-            parserUnit.saveProfiles(_profiles);*/
-
+            // creating the XMLfile for profile
+            /*
+             * _profiles.Add(new Profile("Kihwan",1234));
+             * _profiles.Add(new Profile("Heri", 1234));
+             * _profiles.Add(new Profile("Minho", 1234));
+             * parserUnit.saveProfiles(_profiles);
+             */
 
             //loading profile
+            
             _profiles = parserUnit.loadProfile();
-
             //CREATE A SONG HERE ! (don't forget to delete once it's done....)
+            
             //selectedSong.getList("songs\\UandMe.txt");
             selectedSong._listOfSteps.Add(new Step(5000, Difficulty.Easy, 0, ActionType.TouchHandLeft));
             selectedSong._listOfSteps.Add(new Step(10000, Difficulty.Easy, 2, ActionType.TouchHandRight));
             selectedSong._listOfSteps.Add(new Step(15000, Difficulty.Easy, 3, ActionType.TouchHandLeft));
             selectedSong._listOfSteps.Add(new Step(20000, Difficulty.Easy, 5, ActionType.TouchHandRight));
 
-
             //CREATE A PROFILE LIST
-            
-            //Load the profile list into the display
-            hudDisplay.profileList = _profiles;
-            
-
 
             //start music
             bgm.PlaySong(150);
-
+            
             #region IO TESTS
             //parserUnit.saveSong(bgm, "song1.xml");
             //parserUnit.saveProfile(test);
             #endregion
 
-
             _difficulty = Difficulty.Easy;
             _judge = new Judge();
-
             //Set up the bachground
+            
             ImageBrush main = new ImageBrush();
             main.ImageSource = new BitmapImage(
-                    new Uri("images\\screen_main.png", UriKind.Relative));
-
+                new Uri("images\\screen_main.png", UriKind.Relative));
             combos = 0;
-
             GameScreen.Background = main;
-
             currentScreen = Screen.Main;
-
             hudDisplay.GenerateGrid();
-            
+
+            //Load the profile list into the display
+            hudDisplay.profileList = _profiles;
+            hudDisplay.selectedDifficulty = _difficulty;
+
         }
 
+        //
+        public void drawWithLabel(TextBox t)
+        {
+            TextBox border = new TextBox();
+            border.Background = null;
+            border.BorderBrush = null;
+            border.TextAlignment = t.TextAlignment;
+            border.FontFamily = t.FontFamily;
+            border.Width = t.Width;
+            border.Text = t.Text;
+            border.RenderTransform = t.RenderTransform;
+
+            border.FontSize = t.FontSize * 1.02;
+            border.Foreground = new RadialGradientBrush(Colors.White, Colors.LightGray);
+            
+            GameScreen.Children.Add(border);
+            GameScreen.Children.Add(t);
+        }
 
         //!Play the song
         public void start_game()
