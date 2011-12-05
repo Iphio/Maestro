@@ -20,6 +20,9 @@ namespace Maestro
         //Last displayed index
         private int lastIndex;
 
+        //Current score
+        public int currentScore { get; set; }
+
         public Difficulty selectedDifficulty { get; set; }
 
         public ActionDisplay()
@@ -181,7 +184,7 @@ namespace Maestro
                 score.Foreground = Brushes.Snow;
 
                 score.RenderTransform = new TranslateTransform(columnSpace * 2.2, 0);
-                score.Text = "Score : 100";
+                score.Text = "Score : " + currentScore; ;
 
                 drawWithLabel(score);
 

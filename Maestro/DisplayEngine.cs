@@ -40,6 +40,8 @@ namespace Maestro
         //Song list
         public List<Song> songList;
 
+       
+
         //Constructor
         public DisplayEngine(Canvas mainScreen)
         {

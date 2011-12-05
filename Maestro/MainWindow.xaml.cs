@@ -254,14 +254,14 @@ namespace Maestro
 
                 //Update the action display
                 int sec = selectedSong.getCurrentMillisecond();
-                displaySteps.displayStep(sec);
 
                 //Check the points and calculate the score TODO : CHECK THE CURRENT TIME
                 int currentScore = _judge.getScore(leftHandPosition, rightHandPosition, leftFootPosition, rightFootPosition, sec);
 
                 _score += currentScore;
 
-                Console.WriteLine(_score);
+                displaySteps.currentScore = _score;
+                displaySteps.displayStep(sec);
 
                 //Combo system
                 if (currentScore != 0)
