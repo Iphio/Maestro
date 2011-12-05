@@ -41,6 +41,24 @@ namespace Maestro
             this.stepList = stepList;
         }
 
+        public void drawWithLabel(TextBox t)
+        {
+            TextBox border = new TextBox();
+            border.Background = null;
+            border.BorderBrush = null;
+            border.TextAlignment = t.TextAlignment;
+            border.FontFamily = t.FontFamily;
+            border.Width = t.Width;
+            border.Text = t.Text;
+            border.RenderTransform = t.RenderTransform;
+
+            border.FontSize = t.FontSize * 1.02;
+            border.Foreground = new RadialGradientBrush(Colors.White, Colors.LightGray);
+
+            gameScreen.Children.Add(border);
+            gameScreen.Children.Add(t);
+        }
+
         public void displayStep(int currentTime)
         {
 
@@ -48,69 +66,117 @@ namespace Maestro
             gameScreen.Children.Clear();
 
 
-
             //Foreach step
             for (int i = lastIndex; i < stepList.Count; ++i)
             {
                 currentStep = stepList.ElementAt(i);
-                
+
+                if (currentStep.done == true && currentTime - DISPLAYMARGIN <= currentStep.timing && currentTime <= currentStep.timing + DISPLAYMARGIN)
+                {
+                    //Visual for performance levels
+                    TextBox textGreat = new TextBox();
+
+                    textGreat.Background = null;
+                    textGreat.BorderBrush = null;
+                    textGreat.TextAlignment = System.Windows.TextAlignment.Center;
+                    textGreat.Width = columnSpace;
+
+                    textGreat.FontSize = 72;
+                    textGreat.FontFamily = new FontFamily("Jokerman");
+                    textGreat.Foreground = new RadialGradientBrush(Colors.Red, Colors.DarkRed);
+
+                    double marginX = 0;
+                    double marginY = rowSpace * 0.25;
+
+                    textGreat.RenderTransform = new TranslateTransform(currentStep.area % 3 + marginX, currentStep.area / 3 + marginY);
+                    textGreat.Text = "Great!!";
+                    //textGreat.Text = "Good!";
+                    //textGreat.Text = "No Good";
+
+                    //gameScreen.Children.Add(textGreat);
+                    drawWithLabel(textGreat);
+
+                }
+
                 //If the step is valid                
                 if (currentStep.done == false &&  currentTime - DISPLAYMARGIN <= currentStep.timing &&  currentTime<= currentStep.timing + DISPLAYMARGIN)
                 {
                     //Store as last valid index
                     lastIndex = i;
 
-                    //Create the visual component
                     Ellipse circle = new Ellipse();
-                    circle.Stroke = Brushes.Gold;
-                    circle.StrokeThickness = 45;
-                    circle.Fill = Brushes.Red;
+                    circle.Width = rowSpace * 0.75;
+                    circle.Height = rowSpace * 0.75;
+                    circle.StrokeThickness = 10;
+
+                    //SolidColorBrush myBrush = new SolidColorBrush();
+                    //System.Windows.Media.Animation.ColorAnimation colorAnime = new System.Windows.Media.Animation.ColorAnimation(Colors.Red, new Color(), TimeSpan.FromSeconds(3));
+                    //myBrush.BeginAnimation(SolidColorBrush.ColorProperty, colorAnime);
+                    //circle.Fill = myBrush;
+
+                    switch (currentStep.action)
+                    {
+                        case ActionType.TouchHandLeft:
+                            {
+                                circle.Stroke = new LinearGradientBrush(Colors.Orange, Colors.BlueViolet, 90);
+                                circle.Fill = new RadialGradientBrush(Colors.Red, Colors.DarkRed);
+                                break;
+                            }
+                        case ActionType.TouchHandRight:
+                            {
+                                circle.Stroke = new LinearGradientBrush(Colors.BlueViolet, Colors.Orange, 90);
+                                circle.Fill = new RadialGradientBrush(Colors.Yellow, Colors.Goldenrod);
+                                break;
+                            }
+                        case ActionType.TouchFeetLeft:
+                            {
+                                circle.Stroke = new LinearGradientBrush(Colors.Snow, Colors.HotPink, 90);
+                                circle.Fill = new RadialGradientBrush(Colors.LightGreen, Colors.Green);
+                                break;
+                            }
+                        case ActionType.TouchFeetRight:
+                            {
+                                circle.Stroke = new LinearGradientBrush(Colors.HotPink, Colors.Snow, 90);
+                                circle.Fill = new RadialGradientBrush(Colors.Blue, Colors.DarkBlue);
+                                break;
+                            }
+                        default:
+                            {
+                                circle.Stroke = new LinearGradientBrush(Colors.Orange, Colors.BlueViolet, 90);
+                                circle.Fill = new RadialGradientBrush(Colors.Red, Colors.DarkRed);
+                                break;
+                            }
+                    }
 
                     //TODO : DISPLAY THE REDUCING CIRCLE, HOLD SYSTEM
 
-                    //Display
-                    switch (currentStep.area)
-                    {
-                        case 0:
-                            circle.RenderTransform = new TranslateTransform(columnSpace / 2, rowSpace / 2);
-                            break;
+                    double marginX = columnSpace * 0.23;
+                    double marginY = rowSpace * 0.13;
 
-                        case 1:
-                            circle.RenderTransform = new TranslateTransform(columnSpace + columnSpace / 2, rowSpace / 2);
-                            break;
-
-                        case 2:
-                            circle.RenderTransform = new TranslateTransform(2 * columnSpace + columnSpace / 2, rowSpace / 2);
-                            break;
-
-                        case 3:
-                            circle.RenderTransform = new TranslateTransform(columnSpace / 2, rowSpace + rowSpace / 2);
-                            break;
-
-                        case 4:
-                            circle.RenderTransform = new TranslateTransform(columnSpace + columnSpace / 2, rowSpace + rowSpace / 2);
-                            break;
-
-                        case 5:
-                            circle.RenderTransform = new TranslateTransform(2 * columnSpace + columnSpace / 2, rowSpace + rowSpace / 2);
-                            break;
-
-                        case 6:
-                            circle.RenderTransform = new TranslateTransform(columnSpace / 2, 2 * rowSpace + rowSpace / 2);
-                            break;
-
-                        case 7:
-                            circle.RenderTransform = new TranslateTransform(columnSpace + columnSpace / 2, 2 * rowSpace + rowSpace / 2);
-                            break;
-
-                        case 8:
-                            circle.RenderTransform = new TranslateTransform(2 * columnSpace + columnSpace / 2, 2 * rowSpace + rowSpace / 2);
-                            break;
-                    }
+                    circle.RenderTransform = new TranslateTransform(currentStep.area % 3 + marginX, currentStep.area / 3 + marginY);
 
                     //Add to the screen
                     gameScreen.Children.Add(circle);
                 }
+
+
+                // current score display
+                TextBox score = new TextBox();
+
+                score.Background = null;
+                score.BorderBrush = null;
+                score.TextAlignment = System.Windows.TextAlignment.Center;
+                score.Width = columnSpace * 0.8;
+
+                score.FontSize = 36;
+                score.FontFamily = new FontFamily("MV Boli");
+                score.Foreground = Brushes.Snow;
+
+                score.RenderTransform = new TranslateTransform(columnSpace * 2.2, 0);
+                score.Text = "Score : 100";
+
+                drawWithLabel(score);
+
             }
         }
     }

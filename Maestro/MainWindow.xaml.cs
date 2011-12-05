@@ -165,6 +165,11 @@ namespace Maestro
             
             //loading profile
             _profiles = parserUnit.loadProfile();
+
+            //load profile into display engine
+            hudDisplay.profileList = _profiles;
+            hudDisplay.selectedDifficulty = _difficulty;
+
             /* creating the XML file for profile
             _profiles.Add(new Profile("Kihwan", 1234));
             _profiles.Add(new Profile("Heri", 1234));
@@ -220,8 +225,46 @@ namespace Maestro
             currentScreen = Screen.Main;
 
             hudDisplay.GenerateGrid();
+
+            //
+            double columnSpace = GameScreen.Width / 3.0;
+            double rowSpace = GameScreen.Height / 3.0;
+
+            TextBox score = new TextBox();
+
+            score.Background = null;
+            score.BorderBrush = null;
+            score.TextAlignment = System.Windows.TextAlignment.Center;
+            score.Width = columnSpace * 0.8;
+
+            score.FontSize = 36;
+            score.FontFamily = new FontFamily("MV Boli");
+            score.Foreground = Brushes.Snow;
+
+            score.RenderTransform = new TranslateTransform(columnSpace * 2.2, 0);
+            score.Text = "Score : 100";
+
+            drawWithLabel(score);
         }
 
+        //
+        public void drawWithLabel(TextBox t)
+        {
+            TextBox border = new TextBox();
+            border.Background = null;
+            border.BorderBrush = null;
+            border.TextAlignment = t.TextAlignment;
+            border.FontFamily = t.FontFamily;
+            border.Width = t.Width;
+            border.Text = t.Text;
+            border.RenderTransform = t.RenderTransform;
+
+            border.FontSize = t.FontSize * 1.02;
+            border.Foreground = new RadialGradientBrush(Colors.White, Colors.LightGray);
+            
+            GameScreen.Children.Add(border);
+            GameScreen.Children.Add(t);
+        }
 
         //!Play the song
         public void start_game()

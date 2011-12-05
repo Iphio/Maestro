@@ -37,6 +37,9 @@ namespace Maestro
         //Profiles list
         public List<Profile> profileList;
 
+        //Song list
+        public List<Song> songList;
+
         //Constructor
         public DisplayEngine(Canvas mainScreen)
         {
@@ -64,42 +67,6 @@ namespace Maestro
         //!Calculate grid position
         public void GenerateGrid()
         {
-            /*
-            //Add columns
-            for (double i = columnSpace; i < GameScreen.Width; i += columnSpace)
-            {
-                Line currentColumn = new Line();
-                currentColumn.Stroke = System.Windows.Media.Brushes.DarkSlateBlue;
-                currentColumn.StrokeThickness = 5;
-                currentColumn.X1 = i;
-                currentColumn.Y1 = 0;
-
-                currentColumn.X2 = i;
-                currentColumn.Y2 = GameScreen.Height;
-
-                GameScreen.Children.Add(currentColumn);
-            }
-
-            //Add rows
-            for (double j = rowSpace; j < GameScreen.Height; j += rowSpace)
-            {
-                Line currentRow = new Line();
-                currentRow.StrokeThickness = 5;
-                currentRow.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
-
-                currentRow.X1 = 0;
-                currentRow.Y1 = j;
-
-                currentRow.X2 = GameScreen.Width;
-                currentRow.Y2 = j;
-
-                GameScreen.Children.Add(currentRow);
-
-
-            }
-            GameScreen.Children.Add(new Line());
-             */
-
             int x = 0, y = 0;
 
             //Put the grid
@@ -128,15 +95,36 @@ namespace Maestro
             for (int c = 0; c < 4; c++)
             {
                 texts[c] = new TextBox();
-                //texts[c].FontFamily = new FontFamily("Jokerman");
-                //texts[c].TextAlignment = System.Windows.TextAlignment.Center;
-                //texts[c].Width = columnSpace;
+
                 texts[c].Background = null;
                 texts[c].BorderBrush = null;
-                texts[c].Foreground = Brushes.Red;
-
-                //GameScreen.Children.Add(texts[c]);
+                texts[c].Foreground = new RadialGradientBrush(Colors.Red, Colors.DarkRed);
             }
+
+            
+            songList.Add(new Song("songs\\UandMe.wav"));
+            songList.Add(new Song("songs\\UandMe.wav"));
+            songList.Add(new Song("songs\\UandMe.wav"));
+
+        }
+
+
+        public void drawWithLabel(TextBox t)
+        {
+            TextBox border = new TextBox();
+            border.Background = null;
+            border.BorderBrush = null;
+            border.TextAlignment = t.TextAlignment;
+            border.FontFamily = t.FontFamily;
+            border.Width = t.Width;
+            border.Text = t.Text;
+            border.RenderTransform = t.RenderTransform;
+
+            border.FontSize = t.FontSize * 1.02;
+            border.Foreground = new RadialGradientBrush(Colors.White, Colors.LightGray);
+
+            GameScreen.Children.Add(border);
+            GameScreen.Children.Add(t);
         }
 
         public Screen clap(int hand, int leftFoot, int rightFoot)
@@ -153,6 +141,7 @@ namespace Maestro
             active = false;
             count.Start();
 
+
             if (screen == Screen.Profile)
             {
                 for (int c = 0; c < 4; c++)
@@ -162,10 +151,10 @@ namespace Maestro
                     texts[c].Width = columnSpace;
                 }
 
-                texts[0].FontSize = 96;
-                texts[1].FontSize = 48;
-                texts[2].FontSize = 48;
-                texts[3].FontSize = 36;
+                texts[0].FontSize = 90;
+                texts[1].FontSize = 60;
+                texts[2].FontSize = 60;
+                texts[3].FontSize = 48;
 
                 texts[0].RenderTransform = new TranslateTransform(columnSpace, 150);
                 texts[1].RenderTransform = new TranslateTransform(0, 130);
@@ -174,28 +163,28 @@ namespace Maestro
 
                 if (shift == 0)
                 {
-                    texts[0].Text = "Minho";
-                    texts[1].Text = "Kihwan";
-                    texts[2].Text = "Heri";
-                    
+                    //nothing
                 }
                 else if (shift == 1)
                 {
-                    texts[0].Text = "Kihwan";
-                    texts[1].Text = "Heri";
-                    texts[2].Text = "Minho";
+                    Profile p = profileList.ElementAt(0);
+                    profileList.Remove(p);
+                    profileList.Add(p);
                 }
                 else if (shift == 2)
                 {
-                    texts[0].Text = "Heri";
-                    texts[1].Text = "MInho";
-                    texts[2].Text = "Kihwan";
+                    Profile p = profileList.ElementAt(profileList.Count - 1);
+                    profileList.Remove(p);
+                    profileList.Insert(0, p);
                 }
+
+                texts[0].Text = profileList.ElementAt(0).name;
+                texts[1].Text = profileList.ElementAt(1).name;
+                texts[2].Text = profileList.ElementAt(2).name;
                 texts[3].Text = "Player";
-                
 
                 for (int c = 0; c < 4; c++)
-                    GameScreen.Children.Add(texts[c]);
+                    drawWithLabel(texts[c]);
             }
             else if (screen == Screen.SelectSong)
             {
@@ -206,16 +195,10 @@ namespace Maestro
                     texts[c].Width = columnSpace;
                 }
 
-                /*
-                texts[0].FontSize = 72;
-                texts[1].FontSize = 40;
-                texts[2].FontSize = 40;
-                texts[3].FontSize = 32;
-                 * */
-                texts[0].FontSize = 96;
-                texts[1].FontSize = 48;
-                texts[2].FontSize = 48;
-                texts[3].FontSize = 36;
+                texts[0].FontSize = 90;
+                texts[1].FontSize = 60;
+                texts[2].FontSize = 60;
+                texts[3].FontSize = 48;
 
                 texts[0].RenderTransform = new TranslateTransform(columnSpace, 150);
                 texts[1].RenderTransform = new TranslateTransform(0, 130);
@@ -224,46 +207,60 @@ namespace Maestro
 
                 if (shift == 0 || shift == 3)
                 {
-                    texts[0].Text = "Song A";
-                    texts[1].Text = "Song B";
-                    texts[2].Text = "Song C";
+                    //texts[0].Text = "Song A";
+                    //texts[1].Text = "Song B";
+                    //texts[2].Text = "Song C";
                 }
                 else if (shift == 1)
                 {
-                    texts[0].Text = "Song B";
-                    texts[1].Text = "Song C";
-                    texts[2].Text = "Song A";
+                    Song s = songList.ElementAt(0);
+                    songList.Remove(s);
+                    songList.Add(s);
+
+                    //texts[0].Text = "Song B";
+                    //texts[1].Text = "Song C";
+                    //texts[2].Text = "Song A";
                 }
                 else if (shift == 2)
                 {
-                    texts[0].Text = "Song C";
-                    texts[1].Text = "Song A";
-                    texts[2].Text = "Song B";
-                }
+                    Song s = songList.ElementAt(songList.Count - 1);
+                    songList.Remove(s);
+                    songList.Insert(0, s);
 
-                if (shift == 0 || shift == 1 || shift == 2)
-                {
-                    texts[3].Text = "Easy";
-                    selectedDifficulty = Difficulty.Easy;
+                    //texts[0].Text = "Song C";
+                    //texts[1].Text = "Song A";
+                    //texts[2].Text = "Song B";
                 }
 
                 if (shift == 3)
                 {
-                    texts[3].Text = "Medium";
-                    selectedDifficulty = Difficulty.Medium;
-
-                    /*
-                    if (_difficulty == Difficulty.Easy)
+                    if (selectedDifficulty == Difficulty.Easy)
+                    {
+                        selectedDifficulty = Difficulty.Medium;
                         texts[3].Text = "Medium";
-                    if (_difficulty == Difficulty.Medium)
+                    }
+                    else if (selectedDifficulty == Difficulty.Medium)
+                    {
+                        selectedDifficulty = Difficulty.Hard;
                         texts[3].Text = "Hard";
-                    if (_difficulty == Difficulty.Hard)
+                    }
+                    else if (selectedDifficulty == Difficulty.Hard)
+                    {
+                        selectedDifficulty = Difficulty.Easy;
                         texts[3].Text = "Easy";
-                     * */
+                    }
+                }
+                else
+                {
+                    texts[3].Text = "Easy";
                 }
 
+                texts[0].Text = songList.ElementAt(0).Title;
+                texts[1].Text = songList.ElementAt(1).Title;
+                texts[2].Text = songList.ElementAt(2).Title;
+
                 for (int c = 0; c < 4; c++)
-                    GameScreen.Children.Add(texts[c]);
+                    drawWithLabel(texts[c]);
             }
             else if (screen == Screen.Leaderboards)
             {
@@ -272,7 +269,7 @@ namespace Maestro
                     texts[c].FontFamily = new FontFamily("MV Boli");
                     texts[c].TextAlignment = System.Windows.TextAlignment.Left;
                     texts[c].Width = 3 * columnSpace;
-                    texts[c].FontSize = 40;
+                    texts[c].FontSize = 54;
                 }
 
                 texts[0].RenderTransform = new TranslateTransform(140, 240);
@@ -285,7 +282,7 @@ namespace Maestro
                 texts[3].Text = "";
 
                 for (int c = 0; c < 4; c++)
-                    GameScreen.Children.Add(texts[c]);
+                    drawWithLabel(texts[c]);
             }
             else if (screen == Screen.Score)
             {
@@ -294,7 +291,7 @@ namespace Maestro
                     texts[c].FontFamily = new FontFamily("MV Boli");
                     texts[c].TextAlignment = System.Windows.TextAlignment.Center;
                     texts[c].Width = columnSpace;
-                    texts[c].FontSize = 60;
+                    texts[c].FontSize = 72;
                 }
                 texts[0].FontFamily = new FontFamily("Jokerman");
                 texts[0].FontSize = 216;
@@ -303,23 +300,28 @@ namespace Maestro
                 texts[1].RenderTransform = new TranslateTransform(columnSpace, 260);
                 texts[2].RenderTransform = new TranslateTransform(2 * columnSpace, 260);
 
-                texts[0].Text = "B";
-                texts[1].Text = "Minho\nSong A";
-                texts[2].Text = "Score\n195";
-                texts[3].Text = "";
+                //int score = getTotalScore();
+                int score = 200;
+
+                if (score >= 300)
+                    texts[0].Text = "A";
+                else if (score >= 200)
+                    texts[0].Text = "B";
+                else if (score >= 100)
+                    texts[0].Text = "C";
+                else
+                    texts[0].Text = "F";
+
+                //texts[1].Text = "Minho\nSong A";
+                texts[1].Text = profileList[0] + "\n" + songList[0];
+                texts[2].Text = "Score\n" + score;
 
                 for (int c = 0; c < 4; c++)
-                    GameScreen.Children.Add(texts[c]);
+                    drawWithLabel(texts[c]);
             }
             else
             {
-                /*
-                for (int c = 0; c < 4; c++)
-                    texts[c].Text = "";
-
-                for (int c = 0; c < 4; c++)
-                    GameScreen.Children.Add(texts[c]);
-                 * */
+                //nothing
             }
         }
 
@@ -335,8 +337,7 @@ namespace Maestro
             grid[rightHand].Opacity = 0.7;
             grid[rightHand].Fill = Brushes.Gold;*/
 
-            
-            
+
             if (active)
             {
 
@@ -483,36 +484,11 @@ namespace Maestro
             }
         }
 
-        public void updateSelect(int leftHand, int rightHand, int leftFoot, int rightFoot)
-        {
-
-            if (active)
-            {
-
-                switch (CurrentScreen)
-                {
-                    case Screen.Profile:
-                        if (leftHand == 3)
-                        {
-
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
 
         //Game over
         public void endOfGameDisplay()
         {
-            changeScreen(Screen.Score,0);
-        }
-
-
-        public void generateMarker(int gridNum, int actionType)
-        {
-            grid[gridNum].Fill = Brushes.Gold;
+            changeScreen(Screen.Score, 0);
         }
 
     }
