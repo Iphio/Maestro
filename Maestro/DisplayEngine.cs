@@ -101,6 +101,9 @@ namespace Maestro
                 texts[c].Background = null;
                 texts[c].BorderBrush = null;
                 texts[c].Foreground = new RadialGradientBrush(Colors.Red, Colors.DarkRed);
+
+                texts[c].TextAlignment = System.Windows.TextAlignment.Center;
+                texts[c].Width = columnSpace;
             }
 
             /*
@@ -150,8 +153,6 @@ namespace Maestro
                 for (int c = 0; c < 4; c++)
                 {
                     texts[c].FontFamily = new FontFamily("Jokerman");
-                    texts[c].TextAlignment = System.Windows.TextAlignment.Center;
-                    texts[c].Width = columnSpace;
                 }
 
                 texts[0].FontSize = 90;
@@ -194,8 +195,6 @@ namespace Maestro
                 for (int c = 0; c < 4; c++)
                 {
                     texts[c].FontFamily = new FontFamily("Jokerman");
-                    texts[c].TextAlignment = System.Windows.TextAlignment.Center;
-                    texts[c].Width = columnSpace;
                 }
 
                 texts[0].FontSize = 90;
@@ -270,15 +269,12 @@ namespace Maestro
                 for (int c = 0; c < 4; c++)
                 {
                     texts[c].FontFamily = new FontFamily("MV Boli");
-                    texts[c].TextAlignment = System.Windows.TextAlignment.Left;
-                    texts[c].Width = columnSpace;
                     texts[c].FontSize = 54;
                 }
 
-                double marginX = columnSpace * 0.2;
                 texts[0].RenderTransform = new TranslateTransform(0, 240);
-                texts[1].RenderTransform = new TranslateTransform(marginX + columnSpace, 240);
-                texts[2].RenderTransform = new TranslateTransform(marginX + columnSpace *2, 240);
+                texts[1].RenderTransform = new TranslateTransform(columnSpace, 240);
+                texts[2].RenderTransform = new TranslateTransform(columnSpace * 2, 240);
 
                 //profileList.Sort();
 
@@ -295,8 +291,6 @@ namespace Maestro
                 for (int c = 0; c < 4; c++)
                 {
                     texts[c].FontFamily = new FontFamily("MV Boli");
-                    texts[c].TextAlignment = System.Windows.TextAlignment.Center;
-                    texts[c].Width = columnSpace;
                     texts[c].FontSize = 72;
                 }
                 texts[0].FontFamily = new FontFamily("Jokerman");

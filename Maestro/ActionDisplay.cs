@@ -96,7 +96,7 @@ namespace Maestro
                     double marginX = 0;
                     double marginY = rowSpace * 0.25;
 
-                    textGreat.RenderTransform = new TranslateTransform(currentStep.area % 3 + marginX, currentStep.area / 3 + marginY);
+                    textGreat.RenderTransform = new TranslateTransform(columnSpace * (currentStep.area % 3) + marginX, rowSpace * (currentStep.area / 3) + marginY);
                     textGreat.Text = "Great!!";
                     //textGreat.Text = "Good!";
                     //textGreat.Text = "No Good";
@@ -164,7 +164,7 @@ namespace Maestro
                     double marginX = columnSpace * 0.23;
                     double marginY = rowSpace * 0.13;
 
-                    circle.RenderTransform = new TranslateTransform(currentStep.area % 3 + marginX, currentStep.area / 3 + marginY);
+                    circle.RenderTransform = new TranslateTransform(columnSpace * (currentStep.area % 3) + marginX, rowSpace * (currentStep.area / 3) + marginY);
 
                     //Add to the screens
                     gameScreen.Children.Add(circle);
