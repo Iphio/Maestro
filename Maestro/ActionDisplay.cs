@@ -20,6 +20,8 @@ namespace Maestro
         //Last displayed index
         private int lastIndex;
 
+        public Difficulty selectedDifficulty { get; set; }
+
         public ActionDisplay()
         {
 
@@ -99,7 +101,7 @@ namespace Maestro
                 }
 
                 //If the step is valid                
-                if (currentStep.done == false &&  currentTime - DISPLAYMARGIN <= currentStep.timing &&  currentTime<= currentStep.timing + DISPLAYMARGIN)
+                if (currentStep.done == false && currentStep.timing - DISPLAYMARGIN <= currentTime && currentTime <= currentStep.timing + DISPLAYMARGIN)
                 {
                     //Store as last valid index
                     lastIndex = i;

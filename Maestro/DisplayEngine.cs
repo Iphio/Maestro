@@ -54,7 +54,7 @@ namespace Maestro
             rowSpace = GameScreen.Height / 3.0;
 
             active = true;
-            count = new Timer(2000);
+            count = new Timer(1200);
             count.Elapsed += delegate
             {
 
@@ -101,10 +101,11 @@ namespace Maestro
                 texts[c].Foreground = new RadialGradientBrush(Colors.Red, Colors.DarkRed);
             }
 
-            
+            /*
             songList.Add(new Song("songs\\UandMe.wav"));
             songList.Add(new Song("songs\\UandMe.wav"));
             songList.Add(new Song("songs\\UandMe.wav"));
+             * */
 
         }
 
@@ -207,29 +208,29 @@ namespace Maestro
 
                 if (shift == 0 || shift == 3)
                 {
-                    //texts[0].Text = "Song A";
-                    //texts[1].Text = "Song B";
-                    //texts[2].Text = "Song C";
+                    texts[0].Text = "Song A";
+                    texts[1].Text = "Song B";
+                    texts[2].Text = "Song C";
                 }
                 else if (shift == 1)
                 {
-                    Song s = songList.ElementAt(0);
-                    songList.Remove(s);
-                    songList.Add(s);
+                    //Song s = songList.ElementAt(0);
+                    //songList.Remove(s);
+                    //songList.Add(s);
 
-                    //texts[0].Text = "Song B";
-                    //texts[1].Text = "Song C";
-                    //texts[2].Text = "Song A";
+                    texts[0].Text = "Song B";
+                    texts[1].Text = "Song C";
+                    texts[2].Text = "Song A";
                 }
                 else if (shift == 2)
                 {
-                    Song s = songList.ElementAt(songList.Count - 1);
-                    songList.Remove(s);
-                    songList.Insert(0, s);
+                    //Song s = songList.ElementAt(songList.Count - 1);
+                    //songList.Remove(s);
+                    //songList.Insert(0, s);
 
-                    //texts[0].Text = "Song C";
-                    //texts[1].Text = "Song A";
-                    //texts[2].Text = "Song B";
+                    texts[0].Text = "Song C";
+                    texts[1].Text = "Song A";
+                    texts[2].Text = "Song B";
                 }
 
                 if (shift == 3)
@@ -255,9 +256,9 @@ namespace Maestro
                     texts[3].Text = "Easy";
                 }
 
-                texts[0].Text = songList.ElementAt(0).Title;
-                texts[1].Text = songList.ElementAt(1).Title;
-                texts[2].Text = songList.ElementAt(2).Title;
+                //texts[0].Text = songList.ElementAt(0).Title;
+                //texts[1].Text = songList.ElementAt(1).Title;
+                //texts[2].Text = songList.ElementAt(2).Title;
 
                 for (int c = 0; c < 4; c++)
                     drawWithLabel(texts[c]);
@@ -268,17 +269,20 @@ namespace Maestro
                 {
                     texts[c].FontFamily = new FontFamily("MV Boli");
                     texts[c].TextAlignment = System.Windows.TextAlignment.Left;
-                    texts[c].Width = 3 * columnSpace;
+                    texts[c].Width = columnSpace;
                     texts[c].FontSize = 54;
                 }
 
-                texts[0].RenderTransform = new TranslateTransform(140, 240);
-                texts[1].RenderTransform = new TranslateTransform(140, 300);
-                texts[2].RenderTransform = new TranslateTransform(140, 360);
+                double marginX = columnSpace * 0.2;
+                texts[0].RenderTransform = new TranslateTransform(0, 240);
+                texts[1].RenderTransform = new TranslateTransform(marginX + columnSpace, 240);
+                texts[2].RenderTransform = new TranslateTransform(marginX + columnSpace *2, 240);
 
-                texts[0].Text = "1 Heri   \tSong A  \t298";
-                texts[1].Text = "2 Kihwan   \tSong B  \t201";
-                texts[2].Text = "3 Minho   \tSong C  \t195";
+                //profileList.Sort();
+
+                texts[0].Text = "1 Heri\n2 Kihwan\n3 Minho";
+                texts[1].Text = "Song A\nSong B\nSong C";
+                texts[2].Text = "298\n201\n195";
                 texts[3].Text = "";
 
                 for (int c = 0; c < 4; c++)

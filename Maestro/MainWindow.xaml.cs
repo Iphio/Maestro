@@ -77,8 +77,7 @@ namespace Maestro
         //!Current difficulty
         public Difficulty _difficulty { get; set; }
 
-        //!Display engine
-        private DisplayEngine hudDisplay;
+        
 
         //!Current profile
 
@@ -121,8 +120,12 @@ namespace Maestro
         #endregion
 
         #region Display Attributes
-        private DisplayEngine displayHUD { get; set; }
+
+        //!Display the stuff
         private ActionDisplay displaySteps { get; set; }
+
+        //!Display engine
+        private DisplayEngine hudDisplay;
         #endregion
 
         //music attribute
@@ -135,116 +138,70 @@ namespace Maestro
         public Game_Engine()
         {
             InitializeComponent();
-            //_profiles = new List<Profile>();
-            parserUnit = new Parser();
-            run();
-
-        }
-        public void getProfiles()
-        {
-            String[] files = Directory.GetFiles(@"profile\\");
-            //String[] line = System.IO.File.ReadAllLines(fname);
-
-            for (int i = 0; i < files.Length; i++)
-            {
-                //_profiles.Add(new Profile(Convert.ToInt32(line[i]), Difficulty.Easy, i % 2, ActionType.Push));
-                //Console.WriteLine(line[i]);
-            }
-        }
-        //!Run the game engine
-        public void run()
-        {
-            //parserUnit = new Parser();
-
             hudDisplay = new DisplayEngine(GameScreen);
             displaySteps = new ActionDisplay(GameScreen);
-
-            bgm = new Song("main_music.mp3");
-            menu = new Song("Menu_selectS.wav");
-            selectedSong = new Song("songs\\UandMe.wav");
-            
-            //loading profile
-            _profiles = parserUnit.loadProfile();
-
-            //load profile into display engine
-            hudDisplay.profileList = _profiles;
-            hudDisplay.selectedDifficulty = _difficulty;
-
-            /* creating the XML file for profile
-            _profiles.Add(new Profile("Kihwan", 1234));
-            _profiles.Add(new Profile("Heri", 1234));
-            _profiles.Add(new Profile("Minho", 1234));
-            try
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<Profile>));
-                TextWriter textWriter = new StreamWriter("profile\\profile.XML");
-                serializer.Serialize(textWriter, _profiles);
-                textWriter.Close();
-            }
-            catch (IOException)
-            {
-                MessageBox.Show("Erreur lors de l'ecriture du fichier", "Erreur");
-
-            }*/
-            
-            //CREATE A SONG HERE ! (don't forget to delete once it's done....)
-            selectedSong.getList("songs\\UandMe.txt");
-            //selectedSong._listOfSteps.Add(new Step(5000, Difficulty.Easy, 0, ActionType.Push));
-            //selectedSong._listOfSteps.Add(new Step(10000, Difficulty.Easy, 2, ActionType.Push));
-            //selectedSong._listOfSteps.Add(new Step(15000, Difficulty.Easy, 3, ActionType.Push));
-            //selectedSong._listOfSteps.Add(new Step(20000, Difficulty.Easy, 5, ActionType.Push));
-
-
-            //CREATE A PROFILE LIST
 
             currentProfile = 0;
             _profiles = new List<Profile>();
 
+            parserUnit = new Parser();
+
+            bgm = new Song("main_music.mp3");
+            menu = new Song("Menu_selectS.wav");
+            selectedSong = new Song("songs\\UandMe.wav");
+
+            run();
+
+        }
+
+        //!Run the game engine
+        public void run()
+        {
+            // creating the XMLfile for profile
+            /*
+             * _profiles.Add(new Profile("Kihwan",1234));
+             * _profiles.Add(new Profile("Heri", 1234));
+             * _profiles.Add(new Profile("Minho", 1234));
+             * parserUnit.saveProfiles(_profiles);
+             */
+
+            //loading profile
+            
+            _profiles = parserUnit.loadProfile();
+            //CREATE A SONG HERE ! (don't forget to delete once it's done....)
+            
+            //selectedSong.getList("songs\\UandMe.txt");
+            selectedSong._listOfSteps.Add(new Step(5000, Difficulty.Easy, 0, ActionType.TouchHandLeft));
+            selectedSong._listOfSteps.Add(new Step(10000, Difficulty.Easy, 2, ActionType.TouchHandRight));
+            selectedSong._listOfSteps.Add(new Step(15000, Difficulty.Easy, 3, ActionType.TouchHandLeft));
+            selectedSong._listOfSteps.Add(new Step(20000, Difficulty.Easy, 5, ActionType.TouchHandRight));
+
+            //CREATE A PROFILE LIST
 
             //start music
             bgm.PlaySong(150);
-
+            
             #region IO TESTS
             //parserUnit.saveSong(bgm, "song1.xml");
             //parserUnit.saveProfile(test);
             #endregion
 
-
             _difficulty = Difficulty.Easy;
             _judge = new Judge();
-
             //Set up the bachground
+            
             ImageBrush main = new ImageBrush();
             main.ImageSource = new BitmapImage(
-                    new Uri("images\\screen_main.png", UriKind.Relative));
-
+                new Uri("images\\screen_main.png", UriKind.Relative));
             combos = 0;
-
             GameScreen.Background = main;
-
             currentScreen = Screen.Main;
-
             hudDisplay.GenerateGrid();
 
-            //
-            double columnSpace = GameScreen.Width / 3.0;
-            double rowSpace = GameScreen.Height / 3.0;
+            //Load the profile list into the display
+            hudDisplay.profileList = _profiles;
+            hudDisplay.selectedDifficulty = _difficulty;
 
-            TextBox score = new TextBox();
-
-            score.Background = null;
-            score.BorderBrush = null;
-            score.TextAlignment = System.Windows.TextAlignment.Center;
-            score.Width = columnSpace * 0.8;
-
-            score.FontSize = 36;
-            score.FontFamily = new FontFamily("MV Boli");
-            score.Foreground = Brushes.Snow;
-
-            score.RenderTransform = new TranslateTransform(columnSpace * 2.2, 0);
-            score.Text = "Score : 100";
-
-            drawWithLabel(score);
         }
 
         //
@@ -273,7 +230,12 @@ namespace Maestro
 
             //Load the datas
             displaySteps.loadSteps(selectedSong._listOfSteps);
-            _judge.selectedDifficulty = displayHUD.selectedDifficulty;
+
+            //TO UNCOMMENT
+            //_judge.selectedDifficulty = hudDisplay.selectedDifficulty;
+            //displaySteps.selectedDifficulty = hudDisplay.selectedDifficulty;
+            _judge.selectedDifficulty = Difficulty.Easy;
+            displaySteps.selectedDifficulty = Difficulty.Easy;
             selectedSong.Length = selectedSong.length();
 
             _judge.updateSteps(selectedSong._listOfSteps);
@@ -304,7 +266,6 @@ namespace Maestro
                 //Combo system
                 if (currentScore != 0)
                     combos++;
-                
 
                 //If end of song
                 if (sec >= selectedSong.Length)
@@ -313,8 +274,6 @@ namespace Maestro
                     currentScreen = Screen.Score;
                     bgm.resume();
                 }
-
-
             }
             else
             {
@@ -336,6 +295,8 @@ namespace Maestro
 
         }
 
+
+        #region Skeletton detection
         //!Windows loading complete
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -669,6 +630,6 @@ namespace Maestro
             return point;
         }
         #endregion
-
+        #endregion
     }
 }
