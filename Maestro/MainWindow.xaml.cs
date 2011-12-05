@@ -260,6 +260,7 @@ namespace Maestro
 
                 _score += currentScore;
 
+                //Comment
                 displaySteps.currentScore = _score;
                 displaySteps.displayStep(sec);
 
