@@ -166,7 +166,7 @@ namespace Maestro
 
                     circle.RenderTransform = new TranslateTransform(currentStep.area % 3 + marginX, currentStep.area / 3 + marginY);
 
-                    //Add to the screen
+                    //Add to the screens
                     gameScreen.Children.Add(circle);
                 }
 
