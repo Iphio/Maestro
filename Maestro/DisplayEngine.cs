@@ -38,7 +38,7 @@ namespace Maestro
         public List<Profile> profileList;
 
         //Song list
-        public List<Song> songList;
+        public List<String> songList;
 
        
 
@@ -106,11 +106,6 @@ namespace Maestro
                 texts[c].Width = columnSpace;
             }
 
-            /*
-            songList.Add(new Song("songs\\UandMe.wav"));
-            songList.Add(new Song("songs\\UandMe.wav"));
-            songList.Add(new Song("songs\\UandMe.wav"));
-             * */
 
         }
 
@@ -209,29 +204,29 @@ namespace Maestro
 
                 if (shift == 0 || shift == 3)
                 {
-                    texts[0].Text = "Song A";
-                    texts[1].Text = "Song B";
-                    texts[2].Text = "Song C";
+                    //texts[0].Text = "Song A";
+                    //texts[1].Text = "Song B";
+                    //texts[2].Text = "Song C";
                 }
                 else if (shift == 1)
                 {
-                    //Song s = songList.ElementAt(0);
-                    //songList.Remove(s);
-                    //songList.Add(s);
+                    String s = songList.ElementAt(0);
+                    songList.Remove(s);
+                    songList.Add(s);
 
-                    texts[0].Text = "Song B";
-                    texts[1].Text = "Song C";
-                    texts[2].Text = "Song A";
+                    //texts[0].Text = "Song B";
+                    //texts[1].Text = "Song C";
+                    //texts[2].Text = "Song A";
                 }
                 else if (shift == 2)
                 {
-                    //Song s = songList.ElementAt(songList.Count - 1);
-                    //songList.Remove(s);
-                    //songList.Insert(0, s);
+                    String s = songList.ElementAt(songList.Count - 1);
+                    songList.Remove(s);
+                    songList.Insert(0, s);
 
-                    texts[0].Text = "Song C";
-                    texts[1].Text = "Song A";
-                    texts[2].Text = "Song B";
+                    //texts[0].Text = "Song C";
+                    //texts[1].Text = "Song A";
+                    //texts[2].Text = "Song B";
                 }
 
                 if (shift == 3)
@@ -257,9 +252,9 @@ namespace Maestro
                     texts[3].Text = "Easy";
                 }
 
-                //texts[0].Text = songList.ElementAt(0).Title;
-                //texts[1].Text = songList.ElementAt(1).Title;
-                //texts[2].Text = songList.ElementAt(2).Title;
+                texts[0].Text = songList.ElementAt(0);
+                texts[1].Text = songList.ElementAt(1);
+                texts[2].Text = songList.ElementAt(2);
 
                 for (int c = 0; c < 4; c++)
                     drawWithLabel(texts[c]);
@@ -328,15 +323,12 @@ namespace Maestro
         //Update the screen
         public void updateScreen(int leftHand, int rightHand, int leftFoot, int rightFoot)
         {
-            //Clear everything
-            /*grid[0].Opacity = grid[1].Opacity = grid[2].Opacity = grid[3].Opacity = grid[4].Opacity = grid[5].Opacity = grid[6].Opacity = grid[7].Opacity = grid[8].Opacity = 0.0;
-
-
+            /*
             grid[leftHand].Opacity = 0.7;
             grid[leftHand].Fill = Brushes.Green;
             grid[rightHand].Opacity = 0.7;
-            grid[rightHand].Fill = Brushes.Gold;*/
-
+            grid[rightHand].Fill = Brushes.Gold;
+             * */
 
             if (active)
             {

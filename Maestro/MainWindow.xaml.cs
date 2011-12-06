@@ -265,6 +265,7 @@ namespace Maestro
             //Load the profile list into the display
             hudDisplay.profileList = _profiles;
             hudDisplay.selectedDifficulty = _difficulty;
+            hudDisplay.songList = _listOfSongs;
 
         }
 
