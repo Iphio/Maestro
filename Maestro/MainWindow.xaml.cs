@@ -149,7 +149,7 @@ namespace Maestro
 
             bgm = new Song("..\\main_music.mp3","a");
             menu = new Song("..\\Menu_selectS.wav", "b");
-            selectedSong = new Song("너와나.wav", "아이유");
+            
 
             run();
 
@@ -170,7 +170,7 @@ namespace Maestro
             
             _profiles = parserUnit.loadProfile();
             //CREATE A SONG HERE ! (don't forget to delete once it's done....)
-            
+            selectedSong = new Song("너와나.mp3", "아이유");
             String[] line = System.IO.File.ReadAllLines("songs\\UandMe.txt");
             for (int i = 0; i < line.Length; i++)
             {
@@ -185,7 +185,7 @@ namespace Maestro
                 //Console.WriteLine(line[i]);
             }
             parserUnit.saveSong(selectedSong, "너와나");
-
+            selectedSong = new Song("네박자.mp3", "송대관");
             line = System.IO.File.ReadAllLines("songs\\네박자.txt");
             for (int i = 0; i < line.Length; i++)
             {
@@ -205,6 +205,7 @@ namespace Maestro
             }
             parserUnit.saveSong(selectedSong, "네박자");
 
+            selectedSong = new Song("단발머리.mp3", "조용필");
             line = System.IO.File.ReadAllLines("songs\\단발머리.txt");
             for (int i = 0; i < line.Length; i++)
             {
