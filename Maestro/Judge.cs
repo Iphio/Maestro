@@ -42,7 +42,7 @@ namespace Maestro
         }
 
         //Returns the score of the current frame
-        public int getScore(int lHand, int rHand, int lFoot, int rFoot, int currentTime)
+        public int getScore(int lHand, int rHand, int lFoot, int rFoot, int currentTime, int []scoreTable)
         {
             Step currentStep;
 
@@ -62,7 +62,7 @@ namespace Maestro
                         //Current step is done
                         lastIndex = i;
                         currentStep.done = true;
-                        score = evaluate(currentTime, currentStep, score);
+                        score = evaluate(currentTime, currentStep, score, scoreTable);
                     }
                         //If touch left foot
                     else if (currentStep.action == ActionType.TouchFeetLeft && (lFoot == currentStep.area))
@@ -70,7 +70,7 @@ namespace Maestro
                             //Current step is done
                             lastIndex = i;
                             currentStep.done = true;
-                            score = evaluate(currentTime, currentStep, score);
+                            score = evaluate(currentTime, currentStep, score, scoreTable);
                         }
                         //If touch right hand
                         else if(currentStep.action == ActionType.TouchHandRight && rHand == currentStep.area)
@@ -78,14 +78,14 @@ namespace Maestro
                         //Current step is done
                         lastIndex = i;
                         currentStep.done = true;
-                        score = evaluate(currentTime, currentStep, score);
+                        score = evaluate(currentTime, currentStep, score, scoreTable);
                         }
                     else if (currentStep.action == ActionType.TouchFeetRight && rFoot == currentStep.area){
 
                         //Current step is done
                         lastIndex = i;
                         currentStep.done = true;
-                        score = evaluate (currentTime, currentStep, score);
+                        score = evaluate(currentTime, currentStep, score, scoreTable);
                     }
                     //If it's a drag action
                     else if (currentStep.action == ActionType.HoldHand && (rHand == currentStep.area || lHand == currentStep.area))
@@ -101,7 +101,7 @@ namespace Maestro
             return score;
         }
 
-        private static int evaluate(int currentTime, Step currentStep, int score)
+        private static int evaluate(int currentTime, Step currentStep, int score,int[] scoreTable)
         {
             //Check the timing
             if (currentStep.timing - BADMARGIN < currentTime && currentTime < currentStep.timing + BADMARGIN)
@@ -111,17 +111,20 @@ namespace Maestro
                     if (currentStep.timing - EXCELLENTMARGIN < currentTime && currentTime < currentStep.timing + EXCELLENTMARGIN)
                     {
                         score += EXCELLENTMARK;
+                        scoreTable[0]++;
                     }
                     //GOOD MARK
                     else
                     {
                         score += GOODMARK;
+                        scoreTable[1]++;
                     }
                 }
                 //BAD MARK
                 else
                 {
                     score += BADMARK;
+                    scoreTable[2]++;
                 }
             }
             return score;

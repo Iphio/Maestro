@@ -80,7 +80,6 @@ namespace Maestro
         
 
         //!Current profile
-
         [XmlArrayItem(typeof(Profile))]
         public List<Profile> _profiles { get; set; }
         public int currentProfile { get; set; }
@@ -93,6 +92,9 @@ namespace Maestro
 
         //!Song player
         //public SongPlayer _songPlayer { get; set; }
+
+        //Score table
+        public int[] scoreTable;
 
         //!Score
         public int _score { get; set; }
@@ -144,6 +146,9 @@ namespace Maestro
             currentProfile = 0;
             _profiles = new List<Profile>();
             _listOfSongs = new List<String>();
+
+            scoreTable = new int[3];
+            
 
             parserUnit = new Parser();
 
@@ -303,6 +308,8 @@ namespace Maestro
             displaySteps.selectedDifficulty = Difficulty.Easy;
             selectedSong.Length = selectedSong.length();
 
+            scoreTable[0] = scoreTable[1] = scoreTable[2] = 0;
+
             _judge.updateSteps(selectedSong._listOfSteps);
 
             //Run the song
@@ -321,7 +328,7 @@ namespace Maestro
                 int sec = selectedSong.getCurrentMillisecond();
 
                 //Check the points and calculate the score TODO : CHECK THE CURRENT TIME
-                int currentScore = _judge.getScore(leftHandPosition, rightHandPosition, leftFootPosition, rightFootPosition, sec);
+                int currentScore = _judge.getScore(leftHandPosition, rightHandPosition, leftFootPosition, rightFootPosition, sec,scoreTable);
 
                 _score += currentScore;
 
