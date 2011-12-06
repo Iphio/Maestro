@@ -96,14 +96,14 @@ namespace Maestro
 
         }
 
-        public void saveSong(Song s, String filePath)
+        public void saveSong(Song s, String title)
         {
                       
 
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(Song));
-                TextWriter textWriter = new StreamWriter(@filePath);
+                TextWriter textWriter = new StreamWriter("songs\\"+title+".XML");
                 serializer.Serialize(textWriter, s);
                 textWriter.Close();
             }

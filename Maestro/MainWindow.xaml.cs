@@ -143,12 +143,13 @@ namespace Maestro
 
             currentProfile = 0;
             _profiles = new List<Profile>();
+            _listOfSongs = new List<String>();
 
             parserUnit = new Parser();
 
-            bgm = new Song("main_music.mp3");
-            menu = new Song("Menu_selectS.wav");
-            selectedSong = new Song("songs\\UandMe.wav");
+            bgm = new Song("..\\main_music.mp3","a");
+            menu = new Song("..\\Menu_selectS.wav", "b");
+            selectedSong = new Song("너와나.wav", "아이유");
 
             run();
 
@@ -170,11 +171,73 @@ namespace Maestro
             _profiles = parserUnit.loadProfile();
             //CREATE A SONG HERE ! (don't forget to delete once it's done....)
             
+            String[] line = System.IO.File.ReadAllLines("songs\\UandMe.txt");
+            for (int i = 0; i < line.Length; i++)
+            {
+                if(i%4 == 0)
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]),Difficulty.Easy, 0 ,ActionType.TouchHandLeft));
+                else if (i%4 == 1)
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 2, ActionType.TouchHandRight));
+                else if (i%4 == 2)
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 3, ActionType.TouchHandLeft));
+                else
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 5, ActionType.TouchHandRight));
+                //Console.WriteLine(line[i]);
+            }
+            parserUnit.saveSong(selectedSong, "너와나");
+
+            line = System.IO.File.ReadAllLines("songs\\네박자.txt");
+            for (int i = 0; i < line.Length; i++)
+            {
+                if (i % 6 == 0)
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 0, ActionType.TouchHandLeft));
+                else if (i % 6 == 1)
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 2, ActionType.TouchHandRight));
+                else if (i % 6 == 2)
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 3, ActionType.TouchHandLeft));
+                else if (i % 6 == 3)
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 5, ActionType.TouchHandRight));
+                else if (i % 6 == 4)
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 6, ActionType.TouchFeetLeft));
+                else
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 8, ActionType.TouchFeetRight));
+                //Console.WriteLine(line[i]);
+            }
+            parserUnit.saveSong(selectedSong, "네박자");
+
+            line = System.IO.File.ReadAllLines("songs\\단발머리.txt");
+            for (int i = 0; i < line.Length; i++)
+            {
+                if (i % 6 == 0)
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 0, ActionType.TouchHandLeft));
+                else if (i % 6 == 1)
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 2, ActionType.TouchHandRight));
+                else if (i % 6 == 2)
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 3, ActionType.TouchHandLeft));
+                else if (i % 6 == 3)
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 5, ActionType.TouchHandRight));
+                else if (i % 6 == 4)
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 6, ActionType.TouchFeetLeft));
+                else
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 8, ActionType.TouchFeetRight));
+                //Console.WriteLine(line[i]);
+            }
+            parserUnit.saveSong(selectedSong, "단발머리");
+
+            //to retrieve list of songs
+            String[] files = Directory.GetFiles("songs\\", "*.XML");
+            for (int i = 0; i < files.Length; i++)
+            {
+                _listOfSongs.Add(files[i].Substring(6));
+                Console.WriteLine(files[i].Substring(6));
+            }
+                
+
             //selectedSong.getList("songs\\UandMe.txt");
-            selectedSong._listOfSteps.Add(new Step(5000, Difficulty.Easy, 0, ActionType.TouchHandLeft));
-            selectedSong._listOfSteps.Add(new Step(10000, Difficulty.Easy, 2, ActionType.TouchHandRight));
-            selectedSong._listOfSteps.Add(new Step(15000, Difficulty.Easy, 3, ActionType.TouchHandLeft));
-            selectedSong._listOfSteps.Add(new Step(20000, Difficulty.Easy, 5, ActionType.TouchHandRight));
+            //selectedSong._listOfSteps.Add(new Step(5000, Difficulty.Easy, 0, ActionType.TouchHandLeft));
+            //selectedSong._listOfSteps.Add(new Step(10000, Difficulty.Easy, 2, ActionType.TouchHandRight));
+            //selectedSong._listOfSteps.Add(new Step(15000, Difficulty.Easy, 3, ActionType.TouchHandLeft));
+            //selectedSong._listOfSteps.Add(new Step(20000, Difficulty.Easy, 5, ActionType.TouchHandRight));
 
             //CREATE A PROFILE LIST
 

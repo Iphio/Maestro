@@ -7,7 +7,6 @@ namespace Maestro
 {
     public class Judge
     {
-
         private List<Step> stepList { get; set; }
 
         public Difficulty selectedDifficulty { get; set; }
@@ -28,7 +27,6 @@ namespace Maestro
 
         public Judge()
         {
-
             lastIndex = 0;
         }
 
@@ -100,7 +98,6 @@ namespace Maestro
                     }
                 }
             }
-
             return score;
         }
 
@@ -109,31 +106,24 @@ namespace Maestro
             //Check the timing
             if (currentStep.timing - BADMARGIN < currentTime && currentTime < currentStep.timing + BADMARGIN)
             {
-
                 if (currentStep.timing - GOODMARGIN < currentTime && currentTime < currentStep.timing + GOODMARGIN)
                 {
-
                     if (currentStep.timing - EXCELLENTMARGIN < currentTime && currentTime < currentStep.timing + EXCELLENTMARGIN)
                     {
-
                         score += EXCELLENTMARK;
-
                     }
                     //GOOD MARK
                     else
                     {
                         score += GOODMARK;
                     }
-
                 }
                 //BAD MARK
                 else
                 {
                     score += BADMARK;
                 }
-
             }
-            
             return score;
         }
     }

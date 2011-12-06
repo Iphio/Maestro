@@ -25,10 +25,11 @@ namespace Maestro
         {
 
         }
-        public Song(String SongTitle)
+        public Song(String SongTitle, String artist)
         {
             this.Title = SongTitle;
-            mciSendString("status \""+this.Title+"\" length", str, 128, IntPtr.Zero);
+            this.Artist = artist;
+            mciSendString("status \"songs\\"+this.Title+"\" length", str, 128, IntPtr.Zero);
             this.Length = int.Parse(str.ToString());
             //this.Artist = "TEST";
             //this.Filepath = "C:\\TEST";//should be fixed. may not even need it
@@ -36,42 +37,32 @@ namespace Maestro
             _listOfSteps = new List<Step>();
 
         }
-        //actual parser
-        public void getList(String title)
-        {
-            String[] line = System.IO.File.ReadAllLines(title);
-            
-            for (int i = 0; i < line.Length; i++)
-            {
-                _listOfSteps.Add(new Step(Convert.ToInt32(line[i]),Difficulty.Easy, i%2 ,ActionType.Push));
-                Console.WriteLine(line[i]);
-            }
-        }
+        
         public void PlaySong(int vol)
         {
-            mciSendString("play \""+this.Title+"\"", null, 0, IntPtr.Zero);
-            mciSendString("setaudio \"" + this.Title + "\" volume to "+vol, str, 0, IntPtr.Zero);
+            mciSendString("play \"songs\\"+this.Title+"\"", null, 0, IntPtr.Zero);
+            mciSendString("setaudio \"songs\\" + this.Title + "\" volume to "+vol, str, 0, IntPtr.Zero);
         }
 
         public int getCurrentMillisecond()
         {
-            mciSendString("Status \"" + this.Title + "\" position", str, 128, IntPtr.Zero);
+            mciSendString("Status \"songs\\" + this.Title + "\" position", str, 128, IntPtr.Zero);
             int time = Convert.ToInt32(str.ToString());
             return time;
         }
 
         public void pause()
         {
-            mciSendString("pause \"" + this.Title + "\"", str, 0, IntPtr.Zero);
+            mciSendString("pause \"songs\\" + this.Title + "\"", str, 0, IntPtr.Zero);
         }
 
         public void resume()
         {
-            mciSendString("resume \"" + this.Title + "\"", str, 0, IntPtr.Zero);
+            mciSendString("resume \"songs\\" + this.Title + "\"", str, 0, IntPtr.Zero);
         }
         public int length()
         {
-            mciSendString("Status \""+this.Title+"\" length", str, 128, IntPtr.Zero);
+            mciSendString("Status \"songs\\"+this.Title+"\" length", str, 128, IntPtr.Zero);
             int time = Convert.ToInt32(str.ToString());
             return time;
         }
