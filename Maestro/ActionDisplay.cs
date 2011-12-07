@@ -30,10 +30,6 @@ namespace Maestro
 
         public Difficulty selectedDifficulty { get; set; }
 
-        //9 by 4 invisible markers on each grid
-        private Ellipse[] markers;
-        private TextBox[] poppers;
-
         public ActionDisplay()
         {
 

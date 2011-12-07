@@ -13,6 +13,7 @@ namespace Maestro
         public Difficulty stepDifficulty {get; set;}
         public int area { get; set; }
         public ActionType action { get; set; }
+        public int holdTime { get; set; }
 
         public bool done { get; set; }
 
@@ -27,9 +28,9 @@ namespace Maestro
             
         }
 
-        public Step(int timing, Difficulty dif, int area, ActionType action)
+        public Step(int timing, Difficulty dif, int area, ActionType action, int holdTime)
         {
-
+            this.holdTime = holdTime;
             done = false;
             this.timing = timing;
             stepDifficulty = dif;

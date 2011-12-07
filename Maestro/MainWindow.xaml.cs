@@ -180,16 +180,17 @@ namespace Maestro
             for (int i = 0; i < line.Length; i++)
             {
                 if(i%4 == 0)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]),Difficulty.Easy, 0 ,ActionType.TouchHandLeft));
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]),Difficulty.Easy, 0 ,ActionType.TouchHandLeft,0));
                 else if (i%4 == 1)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 2, ActionType.TouchHandRight));
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 2, ActionType.TouchHandRight, 0));
                 else if (i%4 == 2)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 3, ActionType.TouchHandLeft));
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 3, ActionType.TouchHandLeft, 0));
                 else
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 5, ActionType.TouchHandRight));
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 5, ActionType.TouchHandRight, 0));
                 //Console.WriteLine(line[i]);
             }
             parserUnit.saveSong(selectedSong, "1");
+            /*
             selectedSong = new Song("2.mp3", "송대관");
             line = System.IO.File.ReadAllLines("songs\\2.txt");
             for (int i = 0; i < line.Length; i++)
@@ -209,7 +210,7 @@ namespace Maestro
                 //Console.WriteLine(line[i]);
             }
             parserUnit.saveSong(selectedSong, "2");
-            /*
+            
             selectedSong = new Song("3.mp3", "조용필");
             line = System.IO.File.ReadAllLines("songs\\3.txt");
             for (int i = 0; i < line.Length; i++)
