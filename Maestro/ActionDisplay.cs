@@ -16,11 +16,13 @@ namespace Maestro
         private Canvas gameScreen { get; set; }
         private List<Step> stepList { get; set; }
         private int index = 0;
+        private int index2 = 0; //
         public double columnSpace {get;set;}
         public double rowSpace {get;set;}
 
         //Step id's
         string[] uidSteps;
+        string[] uidTexts; //
 
         //Last displayed index
         private int lastIndex;
@@ -30,9 +32,6 @@ namespace Maestro
 
         public Difficulty selectedDifficulty { get; set; }
 
-        //9 by 4 invisible markers on each grid
-        private Ellipse[] markers;
-        private TextBox[] poppers;
 
         public ActionDisplay()
         {
@@ -50,8 +49,7 @@ namespace Maestro
             rowSpace = gameScreen.Height / 3.0;
 
             uidSteps = new string[36];
-
-           
+            uidTexts = new string[9]; //
         }
 
         public void loadSteps(List<Step> stepList)
@@ -73,7 +71,7 @@ namespace Maestro
             border.FontSize = t.FontSize * 1.02;
             border.Foreground = new RadialGradientBrush(Colors.White, Colors.LightGray);
             //
-            border.Visibility = System.Windows.Visibility.Hidden;
+            border.Opacity = 0;
 
             gameScreen.Children.Add(border);
             gameScreen.Children.Add(t);
@@ -98,31 +96,32 @@ namespace Maestro
                     circle.Height = rowSpace * 0.75;
                     circle.StrokeThickness = 10;
 
-                    if(j == 0){
-                                circle.Stroke = new LinearGradientBrush(Colors.Orange, Colors.BlueViolet, 90);
-                                circle.Fill = new RadialGradientBrush(Colors.Red, Colors.DarkRed);
-                                
-                            }
-                    else if (j == 1)
-                            {
-                                circle.Stroke = new LinearGradientBrush(Colors.BlueViolet, Colors.Orange, 90);
-                                circle.Fill = new RadialGradientBrush(Colors.Yellow, Colors.Goldenrod);
-                                
-                            }
-                    else if (j ==2)
-                            {
-                                circle.Stroke = new LinearGradientBrush(Colors.Snow, Colors.HotPink, 90);
-                                circle.Fill = new RadialGradientBrush(Colors.LightGreen, Colors.Green);
-                                
-                            }
-                    else 
-                            {
-                                circle.Stroke = new LinearGradientBrush(Colors.HotPink, Colors.Snow, 90);
-                                circle.Fill = new RadialGradientBrush(Colors.Blue, Colors.DarkBlue);
-                                
-                            }
+                    if (j == 0)
+                    {
+                        circle.Stroke = new LinearGradientBrush(Colors.Orange, Colors.BlueViolet, 90);
+                        circle.Fill = new RadialGradientBrush(Colors.Red, Colors.DarkRed);
 
-                    
+                    }
+                    else if (j == 1)
+                    {
+                        circle.Stroke = new LinearGradientBrush(Colors.BlueViolet, Colors.Orange, 90);
+                        circle.Fill = new RadialGradientBrush(Colors.Yellow, Colors.Goldenrod);
+
+                    }
+                    else if (j == 2)
+                    {
+                        circle.Stroke = new LinearGradientBrush(Colors.Snow, Colors.HotPink, 90);
+                        circle.Fill = new RadialGradientBrush(Colors.LightGreen, Colors.Green);
+
+                    }
+                    else
+                    {
+                        circle.Stroke = new LinearGradientBrush(Colors.HotPink, Colors.Snow, 90);
+                        circle.Fill = new RadialGradientBrush(Colors.Blue, Colors.DarkBlue);
+
+                    }
+
+
                     //Place it correctly
                     circle.RenderTransform = new TranslateTransform(columnSpace * (i % 3) + marginX, rowSpace * (i / 3) + marginY);
 
@@ -136,33 +135,60 @@ namespace Maestro
 
                     //Increment the index
                     index++;
-                    
+
                     //Add it to the canvas
                     gameScreen.Children.Add(circle);
-                    }
-
                 }
 
-                // current score display
-                /*
-                TextBox score = new TextBox();
+            }
 
-                score.Background = null;
-                score.BorderBrush = null;
-                score.TextAlignment = System.Windows.TextAlignment.Center;
-                score.Width = columnSpace * 0.8;
+            for (int i = 0; i < 9; i++)
+            {
+                
+                TextBox popper = new TextBox();
 
-                score.FontSize = 36;
-                score.FontFamily = new FontFamily("MV Boli");
-                score.Foreground = Brushes.Snow;
+                popper.Background = null;
+                popper.BorderBrush = null;
+                popper.TextAlignment = System.Windows.TextAlignment.Center;
+                popper.Width = columnSpace;
 
-                score.RenderTransform = new TranslateTransform(columnSpace * 2.2, 0);
-                score.Text = "Score : ";
+                popper.FontSize = 60;
+                popper.FontFamily = new FontFamily("Jokerman");
+                popper.Foreground = new RadialGradientBrush(Colors.Red, Colors.DarkRed);
 
-                drawWithLabel(score);
-                 * */
+                marginX = 0;
+                marginY = rowSpace * 0.25;
+
+                popper.RenderTransform = new TranslateTransform(columnSpace * (i % 3) + marginX, rowSpace * (i / 3) + marginY);
+                popper.Text = "Great!!";
+
+                popper.Opacity = 0;
+                popper.Uid = index2.ToString();
+                uidTexts[index2] = popper.Uid;
+                index2++;
+
+                drawWithLabel(popper);
 
             }
+
+            // current score display
+            TextBox score = new TextBox();
+
+            score.Background = null;
+            score.BorderBrush = null;
+            score.TextAlignment = System.Windows.TextAlignment.Center;
+            score.Width = columnSpace * 0.8;
+
+            score.FontSize = 36;
+            score.FontFamily = new FontFamily("MV Boli");
+            score.Foreground = Brushes.Snow;
+
+            score.RenderTransform = new TranslateTransform(columnSpace * 2.2, 0);
+            score.Text = "Score : " + currentScore;
+
+            drawWithLabel(score);
+
+        }
             
 
         //Check if I should make the step visible or not
@@ -179,34 +205,28 @@ namespace Maestro
                 currentStep = stepList.ElementAt(i);
 
                 #region step Done
-         
-                //if (currentStep.done == true && currentTime - DISPLAYMARGIN <= currentStep.timing && currentTime <= currentStep.timing + DISPLAYMARGIN)
 
-                //{
-                //    //Visual for performance levels
-                //    TextBox textGreat = new TextBox();
+                if (currentStep.done == true && currentTime - DISPLAYMARGIN <= currentStep.timing && currentTime <= currentStep.timing + DISPLAYMARGIN)
+                {
 
-                //    textGreat.Background = null;
-                //    textGreat.BorderBrush = null;
-                //    textGreat.TextAlignment = System.Windows.TextAlignment.Center;
-                //    textGreat.Width = columnSpace;
+                    int indexToAppear = currentStep.area;
+                    string currentID = "";
 
-                //    textGreat.FontSize = 72;
-                //    textGreat.FontFamily = new FontFamily("Jokerman");
-                //    textGreat.Foreground = new RadialGradientBrush(Colors.Red, Colors.DarkRed);
+                    //Print the step
+                    foreach (UIElement currentItem in gameScreen.Children)
+                    {
+                        currentID = uidTexts[currentStep.area];
+                        //Display the action
+                        if (currentItem.Uid.CompareTo(currentID) == 0)
+                        {
+                            currentItem.Opacity = 100;
 
-                //    double marginX = 0;
-                //    double marginY = rowSpace * 0.25;
-
-                //    textGreat.RenderTransform = new TranslateTransform(columnSpace * (currentStep.area % 3) + marginX, rowSpace * (currentStep.area / 3) + marginY);
-                //    textGreat.Text = "Great!!";
-                //    //textGreat.Text = "Good!";
-                //    //textGreat.Text = "No Good";
-
-                //    //gameScreen.Children.Add(textGreat);
-                //    drawWithLabel(textGreat);
-
-                //}
+                        }
+                        else
+                            currentItem.Opacity = 0;
+                    }
+                }
+                    
 
                 #endregion
 
@@ -253,10 +273,6 @@ namespace Maestro
                     
                     
                 }
-
-
-                
-
             }
         }
     }
