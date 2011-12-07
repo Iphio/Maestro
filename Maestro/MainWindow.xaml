@@ -5,6 +5,8 @@
     <Grid>
         <Canvas Margin="25,24,0,0" Name="GameScreen" HorizontalAlignment="Left" Width="965" Height="693" VerticalAlignment="Top" Background="{x:Null}"></Canvas>
         <Image Height="694" HorizontalAlignment="Left" Margin="25,24,0,0" Name="video" Stretch="Fill" VerticalAlignment="Top" Width="965" Opacity="0.2" />
-        <Canvas Height="695" HorizontalAlignment="Left" Margin="25,24,0,0" Name="SkeletonCanvas" VerticalAlignment="Top" Width="967" />
+        <Canvas Height="695" HorizontalAlignment="Left" Margin="25,24,0,0" Name="SkeletonCanvas" VerticalAlignment="Top" Width="967">
+            <TextBox Canvas.Left="777" Canvas.Top="12" Height="42" Name="_scoreBox" Width="183" Opacity="0" />
+        </Canvas>
     </Grid>
 </Window>

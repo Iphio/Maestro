@@ -52,20 +52,26 @@ namespace Maestro
             for (int i = lastIndex; i < stepList.Count; ++i)
             {
                 currentStep = stepList.ElementAt(i);
-                
-                //If the step is valid
-                if (!currentStep.done && currentStep.stepDifficulty == selectedDifficulty && !currentStep.done && currentTime - ERRORMARGIN < currentStep.timing && currentStep.timing < currentTime + ERRORMARGIN)
-                {                    
-                    //If touch left hand
-                    if (currentStep.action == ActionType.TouchHandLeft && (lHand == currentStep.area))
+
+                if (currentTime > currentStep.timing + ERRORMARGIN)
+                {
+
+                }
+                else
+
+                    //If the step is valid
+                    if (!currentStep.done && currentStep.stepDifficulty == selectedDifficulty && !currentStep.done && currentTime - ERRORMARGIN < currentStep.timing && currentStep.timing < currentTime + ERRORMARGIN)
                     {
-                        //Current step is done
-                        lastIndex = i;
-                        currentStep.done = true;
-                        score = evaluate(currentTime, currentStep, score, scoreTable);
-                    }
+                        //If touch left hand
+                        if (currentStep.action == ActionType.TouchHandLeft && (lHand == currentStep.area))
+                        {
+                            //Current step is done
+                            lastIndex = i;
+                            currentStep.done = true;
+                            score = evaluate(currentTime, currentStep, score, scoreTable);
+                        }
                         //If touch left foot
-                    else if (currentStep.action == ActionType.TouchFeetLeft && (lFoot == currentStep.area))
+                        else if (currentStep.action == ActionType.TouchFeetLeft && (lFoot == currentStep.area))
                         {
                             //Current step is done
                             lastIndex = i;
@@ -73,30 +79,31 @@ namespace Maestro
                             score = evaluate(currentTime, currentStep, score, scoreTable);
                         }
                         //If touch right hand
-                        else if(currentStep.action == ActionType.TouchHandRight && rHand == currentStep.area)
-                    {
-                        //Current step is done
-                        lastIndex = i;
-                        currentStep.done = true;
-                        score = evaluate(currentTime, currentStep, score, scoreTable);
+                        else if (currentStep.action == ActionType.TouchHandRight && rHand == currentStep.area)
+                        {
+                            //Current step is done
+                            lastIndex = i;
+                            currentStep.done = true;
+                            score = evaluate(currentTime, currentStep, score, scoreTable);
                         }
-                    else if (currentStep.action == ActionType.TouchFeetRight && rFoot == currentStep.area){
+                        else if (currentStep.action == ActionType.TouchFeetRight && rFoot == currentStep.area)
+                        {
 
-                        //Current step is done
-                        lastIndex = i;
-                        currentStep.done = true;
-                        score = evaluate(currentTime, currentStep, score, scoreTable);
+                            //Current step is done
+                            lastIndex = i;
+                            currentStep.done = true;
+                            score = evaluate(currentTime, currentStep, score, scoreTable);
+                        }
+                        //If it's a drag action
+                        else if (currentStep.action == ActionType.HoldHand && (rHand == currentStep.area || lHand == currentStep.area))
+                        {
+                            score++;
+                        }
+                        else if (currentStep.action == ActionType.HoldFoot && (rFoot == currentStep.area || lFoot == currentStep.area))
+                        {
+                            score++;
+                        }
                     }
-                    //If it's a drag action
-                    else if (currentStep.action == ActionType.HoldHand && (rHand == currentStep.area || lHand == currentStep.area))
-                    {
-                        score ++;
-                    }
-                    else if (currentStep.action == ActionType.HoldFoot && (rFoot == currentStep.area || lFoot == currentStep.area))
-                    {
-                        score ++;
-                    }
-                }
             }
             return score;
         }
