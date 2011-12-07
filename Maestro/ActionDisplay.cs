@@ -25,6 +25,10 @@ namespace Maestro
 
         public Difficulty selectedDifficulty { get; set; }
 
+        //9 by 4 invisible markers on each grid
+        private Ellipse[] markers;
+        private TextBox[] poppers;
+
         public ActionDisplay()
         {
 
@@ -39,6 +43,58 @@ namespace Maestro
             //Divide the screen into 3 parts
             columnSpace = gameScreen.Width / 3.0;
             rowSpace = gameScreen.Height / 3.0;
+
+            //9 by 4 invisible markers on each grid
+            markers = new Ellipse[9];
+            poppers = new TextBox[9];
+
+            for (int i = 0; i < 9; i++)
+            {
+                double marginX, marginY;
+
+
+                markers[i] = new Ellipse();
+
+                markers[i].Width = rowSpace * 0.75;
+                markers[i].Height = rowSpace * 0.75;
+                markers[i].StrokeThickness = 10;
+
+                markers[i].Stroke = new LinearGradientBrush(Colors.Orange, Colors.BlueViolet, 90);
+                markers[i].Fill = new RadialGradientBrush(Colors.OrangeRed, Colors.Orange);
+
+                markers[i].Visibility = System.Windows.Visibility.Hidden;
+
+                marginX = columnSpace * 0.23;
+                marginY = rowSpace * 0.13;
+
+                markers[i].RenderTransform = new TranslateTransform(columnSpace * (i % 3) + marginX, rowSpace * (i / 3) + marginY);
+
+                //Add to the screens
+                gameScreen.Children.Add(markers[i]);
+
+
+
+                poppers[i] = new TextBox();
+
+                poppers[i].Background = null;
+                poppers[i].BorderBrush = null;
+                poppers[i].TextAlignment = System.Windows.TextAlignment.Center;
+                poppers[i].Width = columnSpace;
+
+                poppers[i].FontSize = 60;
+                poppers[i].FontFamily = new FontFamily("Jokerman");
+                poppers[i].Foreground = new RadialGradientBrush(Colors.Red, Colors.DarkRed);
+
+                marginX = 0;
+                marginY = rowSpace * 0.25;
+
+                poppers[i].RenderTransform = new TranslateTransform(columnSpace * (i % 3) + marginX, rowSpace * (i / 3) + marginY);
+                poppers[i].Text = "Great!!";
+
+                poppers[i].Visibility = System.Windows.Visibility.Hidden;
+
+                drawWithLabel(poppers[i]);
+            }
         }
 
         public void loadSteps(List<Step> stepList)
@@ -59,6 +115,8 @@ namespace Maestro
 
             border.FontSize = t.FontSize * 1.02;
             border.Foreground = new RadialGradientBrush(Colors.White, Colors.LightGray);
+            //
+            border.Visibility = System.Windows.Visibility.Hidden;
 
             gameScreen.Children.Add(border);
             gameScreen.Children.Add(t);
@@ -68,7 +126,12 @@ namespace Maestro
         {
 
             Step currentStep;
-            gameScreen.Children.Clear();
+            //gameScreen.Children.Clear();
+            for (int i = 0; i < 9; i++)
+            {
+                markers[i].Visibility = System.Windows.Visibility.Hidden;
+                poppers[i].Visibility = System.Windows.Visibility.Hidden;
+            }
 
 
             //Foreach step
@@ -81,6 +144,8 @@ namespace Maestro
                 if (currentStep.done == true && currentTime - DISPLAYMARGIN <= currentStep.timing && currentTime <= currentStep.timing + DISPLAYMARGIN)
 
                 {
+                    poppers[currentStep.area].Visibility = System.Windows.Visibility.Visible;
+                    /*
                     //Visual for performance levels
                     TextBox textGreat = new TextBox();
 
@@ -103,6 +168,7 @@ namespace Maestro
 
                     //gameScreen.Children.Add(textGreat);
                     drawWithLabel(textGreat);
+                     * */
 
                 }
 
@@ -115,6 +181,8 @@ namespace Maestro
                     //Store as last valid index
                     lastIndex = i;
 
+                    markers[currentStep.area].Visibility = System.Windows.Visibility.Visible;
+                    /*
                     Ellipse circle = new Ellipse();
                     circle.Width = rowSpace * 0.75;
                     circle.Height = rowSpace * 0.75;
@@ -168,10 +236,13 @@ namespace Maestro
 
                     //Add to the screens
                     gameScreen.Children.Add(circle);
+                     * 
+                     * */
                 }
 
 
                 // current score display
+                /*
                 TextBox score = new TextBox();
 
                 score.Background = null;
@@ -187,6 +258,7 @@ namespace Maestro
                 score.Text = "Score : " + currentScore; ;
 
                 drawWithLabel(score);
+                 * */
 
             }
         }
