@@ -30,6 +30,10 @@ namespace Maestro
 
         public Difficulty selectedDifficulty { get; set; }
 
+        //9 by 4 invisible markers on each grid
+        private Ellipse[] markers;
+        private TextBox[] poppers;
+
         public ActionDisplay()
         {
 
@@ -46,6 +50,8 @@ namespace Maestro
             rowSpace = gameScreen.Height / 3.0;
 
             uidSteps = new string[36];
+
+           
         }
 
         public void loadSteps(List<Step> stepList)
@@ -66,6 +72,8 @@ namespace Maestro
 
             border.FontSize = t.FontSize * 1.02;
             border.Foreground = new RadialGradientBrush(Colors.White, Colors.LightGray);
+            //
+            border.Visibility = System.Windows.Visibility.Hidden;
 
             gameScreen.Children.Add(border);
             gameScreen.Children.Add(t);
@@ -85,7 +93,6 @@ namespace Maestro
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    //Draw each action
                     Ellipse circle = new Ellipse();
                     circle.Width = rowSpace * 0.75;
                     circle.Height = rowSpace * 0.75;
@@ -137,6 +144,7 @@ namespace Maestro
                 }
 
                 // current score display
+                /*
                 TextBox score = new TextBox();
 
                 score.Background = null;
@@ -152,6 +160,7 @@ namespace Maestro
                 score.Text = "Score : ";
 
                 drawWithLabel(score);
+                 * */
 
             }
             
