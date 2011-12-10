@@ -18,7 +18,7 @@ namespace Maestro
         {
             return null;
         }
-        
+
         public Song PrepareSongForGame(String filePath)
         {
             //create a song object here (Title, path)
@@ -32,7 +32,7 @@ namespace Maestro
                 //Return the music
                 return ((Song)mySerializer.Deserialize(myFileStream));
 
-               
+
             }
             catch (IOException)
             {
@@ -98,12 +98,12 @@ namespace Maestro
 
         public void saveSong(Song s, String title)
         {
-                      
+
 
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(Song));
-                TextWriter textWriter = new StreamWriter("songs\\"+title+".XML");
+                TextWriter textWriter = new StreamWriter("songs\\" + title + ".XML");
                 serializer.Serialize(textWriter, s);
                 textWriter.Close();
             }

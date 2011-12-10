@@ -7,15 +7,17 @@ namespace Maestro
 {
     public class Step
     {
-	
-	//This is a test for Step.cs
+
+        //This is a test for Step.cs
         public int timing { get; set; }
-        public Difficulty stepDifficulty {get; set;}
+        public Difficulty stepDifficulty { get; set; }
         public int area { get; set; }
         public ActionType action { get; set; }
         public int holdTime { get; set; }
 
         public bool done { get; set; }
+
+        public bool scored { get; set; }
 
         public Step()
         {
@@ -25,7 +27,8 @@ namespace Maestro
             action = ActionType.TouchHandLeft;
             done = false;
 
-            
+            scored = false;
+
         }
 
         public Step(int timing, Difficulty dif, int area, ActionType action, int holdTime)
@@ -37,6 +40,7 @@ namespace Maestro
             this.area = area;
             this.action = action;
 
+            scored = false;
         }
 
 
