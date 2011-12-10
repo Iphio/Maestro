@@ -312,11 +312,12 @@ namespace Maestro
                 //If end of song
                 if (sec >= selectedSong.Length-500)
                 {
+                    GameScreen.Children.Clear();//
                     hudDisplay.endOfGameDisplay();
                     currentScreen = Screen.Score;
                     bgm.resume();
 
-                    GameScreen.Children.Clear();//
+                    
                 }
 
 
