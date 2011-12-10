@@ -42,6 +42,8 @@ namespace Maestro
 
         public int currentScore;//
 
+        private ImageBrush main, profile, leaderboards, selectsong, game, score;
+
         //Constructor
         public DisplayEngine(Canvas mainScreen)
         {
@@ -65,6 +67,31 @@ namespace Maestro
                 active = true;
 
             };
+
+
+            main = new ImageBrush();
+            main.ImageSource = new BitmapImage(
+                    new Uri("images\\screen_main.png", UriKind.Relative));
+
+            profile = new ImageBrush();
+            profile.ImageSource = new BitmapImage(
+                    new Uri("images\\screen_profile.png", UriKind.Relative));
+
+            leaderboards = new ImageBrush();
+            leaderboards.ImageSource = new BitmapImage(
+                    new Uri("images\\screen_leaderboards.png", UriKind.Relative));
+
+            selectsong = new ImageBrush();
+            selectsong.ImageSource = new BitmapImage(
+                    new Uri("images\\screen_selectsong.png", UriKind.Relative));
+
+            game = new ImageBrush();
+            game.ImageSource = new BitmapImage(
+                    new Uri("images\\screen_game.png", UriKind.Relative));
+
+            score = new ImageBrush();
+            score.ImageSource = new BitmapImage(
+                    new Uri("images\\screen_score.png", UriKind.Relative));
 
         }
 
@@ -112,7 +139,7 @@ namespace Maestro
         }
 
 
-        public void drawWithLabel(TextBox t)
+        public TextBox drawWithLabel(TextBox t)
         {
             TextBox border = new TextBox();
             border.Background = null;
@@ -128,6 +155,8 @@ namespace Maestro
 
             GameScreen.Children.Add(border);
             GameScreen.Children.Add(t);
+
+            return border;
         }
 
         public Screen clap(int hand, int leftFoot, int rightFoot)
@@ -267,6 +296,7 @@ namespace Maestro
                 texts[2].RenderTransform = new TranslateTransform(columnSpace * 2, 240);
 
                 //profileList.Sort();
+                profileList.Sort();
 
                 texts[0].Text = "1 Heri\n2 Kihwan\n3 Minho";
                 texts[1].Text = "Song A\nSong B\nSong C";
@@ -416,31 +446,6 @@ namespace Maestro
         //Update the display
         public void Display()
         {
-
-            ImageBrush main = new ImageBrush();
-            main.ImageSource = new BitmapImage(
-                    new Uri("images\\screen_main.png", UriKind.Relative));
-
-            ImageBrush profile = new ImageBrush();
-            profile.ImageSource = new BitmapImage(
-                    new Uri("images\\screen_profile.png", UriKind.Relative));
-
-            ImageBrush leaderboards = new ImageBrush();
-            leaderboards.ImageSource = new BitmapImage(
-                    new Uri("images\\screen_leaderboards.png", UriKind.Relative));
-
-            ImageBrush selectsong = new ImageBrush();
-            selectsong.ImageSource = new BitmapImage(
-                    new Uri("images\\screen_selectsong.png", UriKind.Relative));
-
-            ImageBrush game = new ImageBrush();
-            game.ImageSource = new BitmapImage(
-                    new Uri("images\\screen_game.png", UriKind.Relative));
-
-            ImageBrush score = new ImageBrush();
-            score.ImageSource = new BitmapImage(
-                    new Uri("images\\screen_score.png", UriKind.Relative));
-
             if (CurrentScreen == Screen.Main)
             {
                 GameScreen.Background = main;

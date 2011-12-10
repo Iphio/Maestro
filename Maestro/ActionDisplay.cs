@@ -67,7 +67,7 @@ namespace Maestro
             this.stepList = stepList;
         }
 
-        public void drawWithLabel(TextBox t)
+        public TextBox drawWithLabel(TextBox t)
         {
             TextBox border = new TextBox();
             border.Background = null;
@@ -83,6 +83,8 @@ namespace Maestro
             
             StpScr.Children.Add(border);
             StpScr.Children.Add(t);
+
+            return border;
         }
 
         public void prepareCanvas()
@@ -134,8 +136,6 @@ namespace Maestro
 
         public void displayStep(int currentTime)
         {
-            bool touched = false;
-
 
             Step curStep = stepList.ElementAt(currentStep);
             //score.UpdateLayout();
@@ -315,8 +315,8 @@ namespace Maestro
                                     popper.RenderTransform = new TranslateTransform(col - 0.3 * columnSpace, row + 0.1 * rowSpace);
                                     popper.Text = "Great!!";
 
-                                    //drawWithLabel(popper);
-                                    StpScr.Children.Add(popper);
+                                    TextBox border = drawWithLabel(popper);
+                                    //StpScr.Children.Add(popper);
 
                                     //sleep
                                     System.Timers.Timer timer2 = new System.Timers.Timer(1000);
@@ -327,6 +327,7 @@ namespace Maestro
                                                 delegate()
                                                 {
                                                     StpScr.Children.Remove(popper);
+                                                    StpScr.Children.Remove(border);//
                                                 }
                                         )
                                     );
