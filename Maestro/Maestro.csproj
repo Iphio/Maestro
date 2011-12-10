@@ -60,6 +60,7 @@
     <Compile Include="ActionType.cs" />
     <Compile Include="DisplayEngine.cs" />
     <Compile Include="Parser.cs" />
+    <Compile Include="Score.cs" />
     <Compile Include="Screen.cs" />
     <Compile Include="Song.cs" />
     <Compile Include="SongPlayer.cs" />
