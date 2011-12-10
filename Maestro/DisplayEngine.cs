@@ -40,7 +40,7 @@ namespace Maestro
         //Song list
         public List<String> songList;
 
-
+        public int currentScore;//
 
         //Constructor
         public DisplayEngine(Canvas mainScreen)
@@ -54,6 +54,8 @@ namespace Maestro
             //Divide the screen into 3 parts
             columnSpace = GameScreen.Width / 3.0;
             rowSpace = GameScreen.Height / 3.0;
+
+            currentScore = 0;
 
             active = true;
             count = new Timer(1200);
@@ -289,7 +291,7 @@ namespace Maestro
                 texts[2].RenderTransform = new TranslateTransform(2 * columnSpace, 260);
 
                 //int score = getTotalScore();
-                int score = 200;
+                int score = currentScore;
 
                 if (score >= 300)
                     texts[0].Text = "A";

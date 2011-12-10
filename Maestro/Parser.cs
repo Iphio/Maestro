@@ -46,8 +46,30 @@ namespace Maestro
             return null;
         }
 
-        public List<Step> loadStep(String songFile)
+        public Song loadSSong(String songFile)
         {
+            String path = "songs\\" + songFile + ".XML";
+
+            try
+            {
+
+                //Deserialiser le fichier
+                XmlSerializer mySerializer = new XmlSerializer(typeof(Song));
+                FileStream myFileStream = new FileStream(path, FileMode.Open);
+
+                //Return the music
+                return ((Song)mySerializer.Deserialize(myFileStream));
+
+
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("Erreur lors de l'ouverture du fichier", "Erreur");
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Le fichier n'est pas une grille", "Mauvais format");
+            }
             return null;
         }
 

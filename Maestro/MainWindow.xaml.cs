@@ -164,6 +164,7 @@ namespace Maestro
             _profiles = parserUnit.loadProfile();
             //CREATE A SONG HERE ! (don't forget to delete once it's done....)
             
+            /*
             selectedSong = new Song("U&I.mp3", "IU");
             String[] line = System.IO.File.ReadAllLines("songs\\U&I.txt");
             for (int i = 0; i < line.Length; i++)
@@ -179,6 +180,7 @@ namespace Maestro
                 //Console.WriteLine(line[i]);
             }
             parserUnit.saveSong(selectedSong, "U&I");
+             * */
             /*
             selectedSong = new Song("Nebakja.mp3", "송대관");
             line = System.IO.File.ReadAllLines("songs\\Nebakja.txt");
@@ -220,6 +222,8 @@ namespace Maestro
             }
             parserUnit.saveSong(selectedSong, "Danbalmuri");
             */
+
+            //selectedSong = parserUnit.loadSSong("U&I");
 
             String[] files = Directory.GetFiles("songs\\", "*.XML");
             for (int i = 0; i < files.Length; i++)
@@ -264,6 +268,9 @@ namespace Maestro
         //!Play the song
         public void start_game()
         {
+            _profiles = hudDisplay.profileList;
+            selectedSong = parserUnit.loadSSong(hudDisplay.songList.ElementAt(0));
+
             bgm.pause();
 
             //Load the datas
@@ -280,8 +287,9 @@ namespace Maestro
 
             _judge.updateSteps(selectedSong._listOfSteps);
             //Run the song
-            selectedSong.PlaySong(200);
             displaySteps.prepareCanvas();
+            selectedSong.PlaySong(200);
+            
 
         }
 
@@ -301,6 +309,7 @@ namespace Maestro
                 _score += currentScore;
 
                 //Comment
+                hudDisplay.currentScore = _score;
                 displaySteps.currentScore = _score;
                 //  displaySteps.displayStep(sec);
                 displaySteps.displayStep(sec);
@@ -312,11 +321,11 @@ namespace Maestro
                 //If end of song
                 if (sec >= selectedSong.Length-500)
                 {
+                    GameScreen.Children.Clear();//
                     hudDisplay.endOfGameDisplay();
                     currentScreen = Screen.Score;
                     bgm.resume();
 
-                    GameScreen.Children.Clear();//
                 }
 
 
@@ -332,6 +341,7 @@ namespace Maestro
                     if (currentScreen == Screen.Game)
                         start_game();
                 }
+
 
                 //CHANGE JUDGE DIFFICULTY
             }

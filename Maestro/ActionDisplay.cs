@@ -144,7 +144,7 @@ namespace Maestro
             score.UpdateLayout();
 
             double col, row;
-            if (currentTime >= curStep.timing - 2000 && currentTime < curStep.timing + 0)
+            if (currentTime >= curStep.timing - 3000 && currentTime < curStep.timing + 0)
             {
                 double marginX = columnSpace * 0.33;
                 double marginY = rowSpace * 0.27;
@@ -215,7 +215,7 @@ namespace Maestro
                                 Console.WriteLine("circle is made");
                                 Console.WriteLine("circle is about to appear");
 
-                                ColorAnimation anime = new ColorAnimation(Colors.White, fill, TimeSpan.FromSeconds(2));
+                                ColorAnimation anime = new ColorAnimation(Colors.White, fill, TimeSpan.FromSeconds(3));
                                 SolidColorBrush myBrush = new SolidColorBrush();
                                 myBrush.BeginAnimation(SolidColorBrush.ColorProperty, anime);
 
@@ -223,8 +223,8 @@ namespace Maestro
                                 double midX = columnSpace + marginX;
                                 double midY = rowSpace + marginY;
 
-                                DoubleAnimation animeX = new DoubleAnimation(midX, col, TimeSpan.FromSeconds(2));
-                                DoubleAnimation animeY = new DoubleAnimation(midY, row, TimeSpan.FromSeconds(2));
+                                DoubleAnimation animeX = new DoubleAnimation(midX, col, TimeSpan.FromSeconds(3));
+                                DoubleAnimation animeY = new DoubleAnimation(midY, row, TimeSpan.FromSeconds(3));
 
                                 TranslateTransform trans = new TranslateTransform();
                                 trans.BeginAnimation(TranslateTransform.XProperty, animeX);
@@ -233,7 +233,7 @@ namespace Maestro
 
 
 
-                                DoubleAnimation animeY2 = new DoubleAnimation(midY + 0.15 * rowSpace, row + 0.15 * rowSpace, TimeSpan.FromSeconds(2));
+                                DoubleAnimation animeY2 = new DoubleAnimation(midY + 0.15 * rowSpace, row + 0.15 * rowSpace, TimeSpan.FromSeconds(3));
                                 TranslateTransform trans2 = new TranslateTransform();
                                 trans2.BeginAnimation(TranslateTransform.XProperty, animeX);
                                 trans2.BeginAnimation(TranslateTransform.YProperty, animeY2);
@@ -244,7 +244,7 @@ namespace Maestro
                                 //StpScr.Children.Add(block);//
 
                                 //Console.WriteLine("circle appeared");
-                                System.Timers.Timer timer = new System.Timers.Timer(2200);
+                                System.Timers.Timer timer = new System.Timers.Timer(3200);
                                 timer.Elapsed += delegate
                                 {
                                     circle.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal,
@@ -301,37 +301,6 @@ namespace Maestro
                                 };
                                 timer.Start();
 
-                                switch (theCurStp.action)
-                                {
-                                    case ActionType.TouchHandLeft:
-                                        if (leftHandPos == theCurStp.area)
-                                        {
-                                            touched = true;
-                                            timer.Dispose();
-                                        }
-                                        break;
-                                    case ActionType.TouchHandRight:
-                                        if (rightHandPos == theCurStp.area)
-                                        {
-                                            touched = true;
-                                            timer.Dispose();
-                                        }
-                                        break;
-                                    case ActionType.TouchFeetLeft:
-                                        if (leftFootPos == theCurStp.area)
-                                        {
-                                            touched = true;
-                                            timer.Dispose();
-                                        }
-                                        break;
-                                    case ActionType.TouchFeetRight:
-                                        if (rightFootPos == theCurStp.area)
-                                        {
-                                            touched = true;
-                                            timer.Dispose();
-                                        }
-                                        break;
-                                }
                             }
                         ));
                     }
