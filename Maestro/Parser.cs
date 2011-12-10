@@ -64,11 +64,11 @@ namespace Maestro
             }
             catch (IOException)
             {
-                MessageBox.Show("Erreur lors de l'ouverture du fichier", "Erreur");
+                MessageBox.Show("IO error", "Erreur");
             }
             catch (InvalidOperationException)
             {
-                MessageBox.Show("Le fichier n'est pas une grille", "Mauvais format");
+                MessageBox.Show("File is not a step", "Mauvais format");
             }
             return null;
         }

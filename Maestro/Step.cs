@@ -17,7 +17,7 @@ namespace Maestro
         public int area { get; set; }
         public ActionType action { get; set; }
         public int holdTime { get; set; }
-        private Score stepscore { get; set; }
+        public Score stepscore { get;  set; }
 
         //Change the state of the step
         public event StateChangedEventHandler stepDone; 

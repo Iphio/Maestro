@@ -23,7 +23,7 @@ namespace Maestro
         private Judge judge= new Judge();
 
 
-        private ImageBrush lefthand, righthand, leftfoot, rightfoot;
+        private ImageBrush lefthand, righthand, leftfoot, rightfoot, clapIcon;
         private TextBox score, combo, comboBorder;
         public int currentScore { get; set; }
         public int currentCombo { get; set; }
@@ -52,11 +52,13 @@ namespace Maestro
             righthand = new ImageBrush();
             leftfoot = new ImageBrush();
             rightfoot = new ImageBrush();
+            clapIcon = new ImageBrush();
 
             lefthand.ImageSource = new BitmapImage(new Uri("images\\icon_lefthand.jpg", UriKind.Relative));
             righthand.ImageSource = new BitmapImage(new Uri("images\\icon_righthand.jpg", UriKind.Relative));
             leftfoot.ImageSource = new BitmapImage(new Uri("images\\icon_leftfoot.jpg", UriKind.Relative));
             rightfoot.ImageSource = new BitmapImage(new Uri("images\\icon_rightfoot.jpg", UriKind.Relative));
+            clapIcon.ImageSource = new BitmapImage(new Uri("images\\icon_clap.jpg", UriKind.Relative));
 
             leftHandPos = 0;
             rightHandPos = 0;
@@ -199,23 +201,11 @@ namespace Maestro
                 circle.StrokeThickness = 10;
 
 
-                //Text for actiontype
-                TextBlock block = new TextBlock();
-                block.Width = rowSpace * 0.5;
-                block.Background = null;
-                block.TextAlignment = System.Windows.TextAlignment.Center;
-
-                block.FontSize = 30;
-                block.FontFamily = new FontFamily("Jokerman");
-                block.Foreground = Brushes.Snow;
-
-
                 if (curStep.action == ActionType.TouchHandLeft)
                 {
                     circle.Stroke = new LinearGradientBrush(Colors.Orange, Colors.BlueViolet, 90);
                     //circle.Fill = new RadialGradientBrush(Colors.Orange, Colors.BlueViolet);
                     fill = Colors.Red;
-                    block.Text = "Left";
                     circle.Fill = lefthand;
                 }
                 else if (curStep.action == ActionType.TouchHandRight)
@@ -223,7 +213,6 @@ namespace Maestro
                     circle.Stroke = new LinearGradientBrush(Colors.BlueViolet, Colors.Orange, 90);
                     //circle.Fill = new RadialGradientBrush(Colors.BlueViolet, Colors.Orange);
                     fill = Colors.OrangeRed;
-                    block.Text = "Right";
                     circle.Fill = righthand;
                 }
                 else if (curStep.action == ActionType.TouchFeetLeft)
@@ -231,18 +220,25 @@ namespace Maestro
                     circle.Stroke = new LinearGradientBrush(Colors.Violet, Colors.LightBlue, 90);
                     //circle.Fill = new RadialGradientBrush((Colors.Violet, Colors.LightBlue);
                     fill = Colors.Blue;
-                    block.Text = "Left";
                     circle.Fill = leftfoot;
                 }
-                else
+                else if (curStep.action == ActionType.TouchFeetRight)
                 {
                     circle.Stroke = new LinearGradientBrush(Colors.LightBlue, Colors.Violet, 90);
                     //circle.Fill = new RadialGradientBrush((Colors.LightBlue, Colors.Violet);
                     fill = Colors.BlueViolet;
-                    block.Text = "Right";
                     circle.Fill = rightfoot;
                 }
-
+                else if (curStep.action == ActionType.Clap)
+                {
+                    circle.Stroke = new LinearGradientBrush(Colors.BlueViolet, Colors.Orange, 90);
+                    //circle.Fill = new RadialGradientBrush(Colors.BlueViolet, Colors.Orange);
+                    fill = Colors.OrangeRed;
+                    circle.Fill = clapIcon;
+                }
+                else
+                {
+                }
 
                 Console.WriteLine("Correct condition");
                 Thread t = new Thread(new ThreadStart(
@@ -255,9 +251,9 @@ namespace Maestro
                                 Console.WriteLine("circle is made");
                                 Console.WriteLine("circle is about to appear");
 
-                                ColorAnimation anime = new ColorAnimation(Colors.White, fill, TimeSpan.FromSeconds(3));
-                                SolidColorBrush myBrush = new SolidColorBrush();
-                                myBrush.BeginAnimation(SolidColorBrush.ColorProperty, anime);
+                                //ColorAnimation anime = new ColorAnimation(Colors.White, fill, TimeSpan.FromSeconds(3));
+                                //SolidColorBrush myBrush = new SolidColorBrush();
+                                //myBrush.BeginAnimation(SolidColorBrush.ColorProperty, anime);
 
                                 //circle.Fill = myBrush;
                                 double midX = columnSpace + marginX;
@@ -271,18 +267,7 @@ namespace Maestro
                                 trans.BeginAnimation(TranslateTransform.YProperty, animeY);
                                 circle.RenderTransform = trans;
 
-
-                                /*
-                                DoubleAnimation animeY2 = new DoubleAnimation(midY + 0.15 * rowSpace, row + 0.15 * rowSpace, TimeSpan.FromSeconds(3));
-                                TranslateTransform trans2 = new TranslateTransform();
-                                trans2.BeginAnimation(TranslateTransform.XProperty, animeX);
-                                trans2.BeginAnimation(TranslateTransform.YProperty, animeY2);
-                                block.RenderTransform = trans2;//
-                                 * */
-
-
                                 StpScr.Children.Add(circle);
-                                //StpScr.Children.Add(block);//
 
                                 //Console.WriteLine("circle appeared");
                                 System.Timers.Timer timer = new System.Timers.Timer(3500);
@@ -303,8 +288,7 @@ namespace Maestro
                                 {
                                     StpScr.Children.Remove(circle);
                                     //text box pops up
-
-
+                                    
                                     TextBox popper = new TextBox();
 
                                     popper.Background = null;
@@ -312,12 +296,18 @@ namespace Maestro
                                     popper.TextAlignment = System.Windows.TextAlignment.Center;
                                     popper.Width = columnSpace;
 
-                                    popper.FontSize = 40;
+                                    popper.FontSize = 48;
                                     popper.FontFamily = new FontFamily("Jokerman");
                                     popper.Foreground = new RadialGradientBrush(Colors.Red, Colors.DarkRed);
 
-                                    popper.RenderTransform = new TranslateTransform(col - 0.3 * columnSpace, row + 0.1 * rowSpace);
-                                    popper.Text = "Great!!";
+                                    popper.RenderTransform = new TranslateTransform(col - 0.35 * columnSpace, row + 0.1 * rowSpace);
+
+                                    if (curStep.stepscore == Score.Excellent)
+                                        popper.Text = "Great!!";
+                                    else if (curStep.stepscore == Score.Good)
+                                        popper.Text = "Good!";
+                                    else
+                                        popper.Text = "Bad";
 
                                     TextBox border = drawWithLabel(popper);
                                     //StpScr.Children.Add(popper);
