@@ -5,5 +5,5 @@ using System.Text;
 
 namespace Maestro
 {
-    public enum ActionType { TouchHandRight, TouchHandLeft, TouchFeetLeft, TouchFeetRight, Push, HoldHand, HoldFoot }
+    public enum ActionType { Clap, TouchHandRight, TouchHandLeft, TouchFeetLeft, TouchFeetRight, Push, HoldHand, HoldFoot }
 }

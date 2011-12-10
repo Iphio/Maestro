@@ -22,6 +22,7 @@ namespace Maestro
         private int currentStep = 0;
         private Judge judge= new Judge();
 
+
         private ImageBrush lefthand, righthand, leftfoot, rightfoot;
         private TextBox score;
         public int currentScore { get; set; }
@@ -44,6 +45,7 @@ namespace Maestro
             //Step.gameScr = gameScreen;
 
             currentScore = 0;
+
             lefthand = new ImageBrush();
             righthand = new ImageBrush();
             leftfoot = new ImageBrush();
@@ -130,7 +132,6 @@ namespace Maestro
             //drawWithLabel(score);
         }
 
-
         public void displayStep(int currentTime)
         {
             Step curStep = stepList.ElementAt(currentStep);
@@ -214,8 +215,8 @@ namespace Maestro
                                 ColorAnimation anime = new ColorAnimation(Colors.White, fill, TimeSpan.FromSeconds(2));
                                 SolidColorBrush myBrush = new SolidColorBrush();
                                 myBrush.BeginAnimation(SolidColorBrush.ColorProperty, anime);
-                                //circle.Fill = myBrush;
 
+                                //circle.Fill = myBrush;
                                 double midX = columnSpace + marginX;
                                 double midY = rowSpace + marginY;
 
@@ -239,8 +240,7 @@ namespace Maestro
                                 StpScr.Children.Add(circle);
                                 //StpScr.Children.Add(block);//
 
-
-                                Console.WriteLine("circle appeared");
+                                //Console.WriteLine("circle appeared");
                                 System.Timers.Timer timer = new System.Timers.Timer(2200);
                                 timer.Elapsed += delegate
                                 {
@@ -298,8 +298,17 @@ namespace Maestro
 
                                 };
                                 timer.Start();
-
                                 
+                                //timer2.Start();
+                                
+                                bool touched = false;
+                                
+                                if (theCurStp.done)
+                                {
+                                    touched = true;
+                                    timer.Dispose();
+                                }
+                               
                             }
                         ));
                     }

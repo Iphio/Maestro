@@ -296,7 +296,7 @@ namespace Maestro
                 int sec = selectedSong.getCurrentMillisecond();
 
                 //Check the points and calculate the score TODO : CHECK THE CURRENT TIME
-                int currentScore = _judge.getScore(leftHandPosition, rightHandPosition, leftFootPosition, rightFootPosition, sec, scoreTable);
+                int currentScore = _judge.getScore(leftHandPosition, rightHandPosition, leftFootPosition, rightFootPosition, sec, leftHandPoint, rightHandPoint , scoreTable);
 
                 _score += currentScore;
 

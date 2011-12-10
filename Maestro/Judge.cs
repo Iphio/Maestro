@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 namespace Maestro
 {
@@ -42,11 +43,13 @@ namespace Maestro
         }
 
         //Returns the score of the current frame
-        public int getScore(int lHand, int rHand, int lFoot, int rFoot, int currentTime, int[] scoreTable)
+        public int getScore(int lHand, int rHand, int lFoot, int rFoot, int currentTime,Point lHandP, Point rHandP, int[] scoreTable)
         {
             Step currentStep;
 
             int score = 0;
+
+            
 
             //Foreach step
             for (int i = lastIndex; i < stepList.Count; ++i)
@@ -55,7 +58,7 @@ namespace Maestro
 
                 if (currentTime > currentStep.timing + ERRORMARGIN)
                 {
-
+                    return score;
                 }
                 //Hold hand case
                 else if (!currentStep.done && currentStep.action == ActionType.HoldHand && currentStep.stepDifficulty == selectedDifficulty && currentStep.timing + currentStep.holdTime < currentTime)
@@ -70,7 +73,17 @@ namespace Maestro
                     if (currentStep.area == lFoot || currentStep.area == rFoot)
                         score++;
                 }
+                //Clap case
+                else if (!currentStep.done && currentStep.action == ActionType.Clap && currentStep.stepDifficulty == selectedDifficulty && currentTime - ERRORMARGIN < currentStep.timing && currentStep.timing < currentTime + ERRORMARGIN)
+                {
+                    //Update the HUD display       
+                if (Math.Sqrt(Math.Pow((lHandP.X - rHandP.X), 2) + Math.Pow((lHandP.Y - rHandP.Y), 2)) < 30)
+                {
+                    score = evaluate(currentTime, currentStep, score, scoreTable);
 
+                }
+                    
+                }
                 //Touch case
                 else if (!currentStep.done && currentStep.stepDifficulty == selectedDifficulty && currentTime - ERRORMARGIN < currentStep.timing && currentStep.timing < currentTime + ERRORMARGIN)
                 {
