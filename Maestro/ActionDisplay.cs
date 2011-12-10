@@ -301,37 +301,45 @@ namespace Maestro
                                 };
                                 timer.Start();
 
-                                switch (theCurStp.action)
+                                theCurStp.stepDone += delegate
                                 {
-                                    case ActionType.TouchHandLeft:
-                                        if (leftHandPos == theCurStp.area)
-                                        {
-                                            touched = true;
-                                            timer.Dispose();
-                                        }
-                                        break;
-                                    case ActionType.TouchHandRight:
-                                        if (rightHandPos == theCurStp.area)
-                                        {
-                                            touched = true;
-                                            timer.Dispose();
-                                        }
-                                        break;
-                                    case ActionType.TouchFeetLeft:
-                                        if (leftFootPos == theCurStp.area)
-                                        {
-                                            touched = true;
-                                            timer.Dispose();
-                                        }
-                                        break;
-                                    case ActionType.TouchFeetRight:
-                                        if (rightFootPos == theCurStp.area)
-                                        {
-                                            touched = true;
-                                            timer.Dispose();
-                                        }
-                                        break;
-                                }
+                                    timer.Dispose();
+                                };
+
+                                //while (!touched)
+                                //{
+                                //    switch (theCurStp.action)
+                                //    {
+                                //        case ActionType.TouchHandLeft:
+                                //            if (leftHandPos == theCurStp.area)
+                                //            {
+                                //                touched = true;
+                                //                timer.Dispose();
+                                //            }
+                                //            break;
+                                //        case ActionType.TouchHandRight:
+                                //            if (rightHandPos == theCurStp.area)
+                                //            {
+                                //                touched = true;
+                                //                timer.Dispose();
+                                //            }
+                                //            break;
+                                //        case ActionType.TouchFeetLeft:
+                                //            if (leftFootPos == theCurStp.area)
+                                //            {
+                                //                touched = true;
+                                //                timer.Dispose();
+                                //            }
+                                //            break;
+                                //        case ActionType.TouchFeetRight:
+                                //            if (rightFootPos == theCurStp.area)
+                                //            {
+                                //                touched = true;
+                                //                timer.Dispose();
+                                //            }
+                                //            break;
+                                //    }
+                                //}
                             }
                         ));
                     }
