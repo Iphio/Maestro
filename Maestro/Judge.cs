@@ -56,7 +56,7 @@ namespace Maestro
 
                 if (currentTime > currentStep.timing + ERRORMARGIN)
                 {
-                    return score;
+                   // return score;
                 }
                 //Hold hand case
                 else if (!currentStep.done && currentStep.action == ActionType.HoldHand && currentStep.stepDifficulty == _selectedDifficulty && currentStep.timing + currentStep.holdTime < currentTime)
