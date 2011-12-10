@@ -23,7 +23,7 @@ namespace Maestro
         private Judge judge= new Judge();
 
 
-        private ImageBrush lefthand, righthand, leftfoot, rightfoot, clapIcon;
+        private ImageBrush lefthand, righthand, leftfoot, rightfoot, clapIcon, holdIcon;
         private TextBox score, combo, comboBorder;
         public int currentScore { get; set; }
         public int currentCombo { get; set; }
@@ -53,12 +53,14 @@ namespace Maestro
             leftfoot = new ImageBrush();
             rightfoot = new ImageBrush();
             clapIcon = new ImageBrush();
+            holdIcon = new ImageBrush();
 
             lefthand.ImageSource = new BitmapImage(new Uri("images\\icon_lefthand.jpg", UriKind.Relative));
             righthand.ImageSource = new BitmapImage(new Uri("images\\icon_righthand.jpg", UriKind.Relative));
             leftfoot.ImageSource = new BitmapImage(new Uri("images\\icon_leftfoot.jpg", UriKind.Relative));
             rightfoot.ImageSource = new BitmapImage(new Uri("images\\icon_rightfoot.jpg", UriKind.Relative));
             clapIcon.ImageSource = new BitmapImage(new Uri("images\\icon_clap.jpg", UriKind.Relative));
+            holdIcon.ImageSource = new BitmapImage(new Uri("images\\icon_hold.jpg", UriKind.Relative));
 
             leftHandPos = 0;
             rightHandPos = 0;
@@ -111,7 +113,14 @@ namespace Maestro
                     circle.Height = rowSpace * 0.5;
                     circle.StrokeThickness = 10;
 
-                    circle.Stroke = new LinearGradientBrush(Colors.Snow, Colors.SkyBlue, 90);
+                    //circle.Stroke = new LinearGradientBrush(Colors.Snow, Colors.SkyBlue, 90);
+                    ColorAnimation animeStroke = new ColorAnimation(Colors.White, Colors.Violet, TimeSpan.FromSeconds(3));
+                    animeStroke.AutoReverse = true;
+                    animeStroke.RepeatBehavior = RepeatBehavior.Forever;
+                    SolidColorBrush myBrushStroke = new SolidColorBrush();
+                    myBrushStroke.BeginAnimation(SolidColorBrush.ColorProperty, animeStroke);
+                    circle.Stroke = myBrushStroke;
+
                     circle.RenderTransform = new TranslateTransform(columnSpace * (i % 3) + marginX, rowSpace * (i / 3) + marginY);
 
                     //Add it to the canvas
@@ -150,6 +159,7 @@ namespace Maestro
             //combo.Foreground = new RadialGradientBrush(Colors.Red, Colors.DarkRed);
             ColorAnimation anime = new ColorAnimation(Colors.Red, Colors.Orange, TimeSpan.FromSeconds(3));
             anime.AutoReverse = true;
+            anime.RepeatBehavior = RepeatBehavior.Forever;
             SolidColorBrush myBrush = new SolidColorBrush();
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, anime);
             combo.Foreground = myBrush;
@@ -190,7 +200,6 @@ namespace Maestro
             {
                 double marginX = columnSpace * 0.33;
                 double marginY = rowSpace * 0.27;
-                Color fill;
 
                 col = columnSpace * (curStep.area % 3) + marginX;
                 row = rowSpace * (curStep.area / 3) + marginY;
@@ -200,40 +209,34 @@ namespace Maestro
                 circle.Height = rowSpace * 0.5;
                 circle.StrokeThickness = 10;
 
-
                 if (curStep.action == ActionType.TouchHandLeft)
                 {
                     circle.Stroke = new LinearGradientBrush(Colors.Orange, Colors.BlueViolet, 90);
-                    //circle.Fill = new RadialGradientBrush(Colors.Orange, Colors.BlueViolet);
-                    fill = Colors.Red;
                     circle.Fill = lefthand;
                 }
                 else if (curStep.action == ActionType.TouchHandRight)
                 {
                     circle.Stroke = new LinearGradientBrush(Colors.BlueViolet, Colors.Orange, 90);
-                    //circle.Fill = new RadialGradientBrush(Colors.BlueViolet, Colors.Orange);
-                    fill = Colors.OrangeRed;
                     circle.Fill = righthand;
                 }
                 else if (curStep.action == ActionType.TouchFeetLeft)
                 {
                     circle.Stroke = new LinearGradientBrush(Colors.Violet, Colors.LightBlue, 90);
-                    //circle.Fill = new RadialGradientBrush((Colors.Violet, Colors.LightBlue);
-                    fill = Colors.Blue;
                     circle.Fill = leftfoot;
                 }
                 else if (curStep.action == ActionType.TouchFeetRight)
                 {
                     circle.Stroke = new LinearGradientBrush(Colors.LightBlue, Colors.Violet, 90);
-                    //circle.Fill = new RadialGradientBrush((Colors.LightBlue, Colors.Violet);
-                    fill = Colors.BlueViolet;
                     circle.Fill = rightfoot;
                 }
                 else if (curStep.action == ActionType.Clap)
                 {
                     circle.Stroke = new LinearGradientBrush(Colors.BlueViolet, Colors.Orange, 90);
-                    //circle.Fill = new RadialGradientBrush(Colors.BlueViolet, Colors.Orange);
-                    fill = Colors.OrangeRed;
+                    circle.Fill = clapIcon;
+                }
+                else if (curStep.action == ActionType.HoldHand)
+                {
+                    circle.Stroke = new LinearGradientBrush(Colors.BlueViolet, Colors.Orange, 90);
                     circle.Fill = clapIcon;
                 }
                 else
