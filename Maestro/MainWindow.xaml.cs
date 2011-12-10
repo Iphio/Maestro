@@ -327,7 +327,8 @@ namespace Maestro
                     //GameScreen.Children.Clear();//
                     displaySteps.StpScr.Children.Clear();//
 
-                    hudDisplay.endOfGameDisplay();
+                    //hudDisplay.endOfGameDisplay();
+                    hudDisplay.changeScreen(Screen.Score, 0);
                     currentScreen = Screen.Score;
                     bgm.resume();
 

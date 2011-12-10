@@ -165,7 +165,7 @@ namespace Maestro
             return CurrentScreen;
         }
 
-        private void changeScreen(Screen screen, int shift)
+        public void changeScreen(Screen screen, int shift)
         {
 
             GameScreen.Children.Clear();
@@ -298,10 +298,17 @@ namespace Maestro
                 //profileList.Sort();
                 profileList.Sort();
 
+                texts[0].Text = "1 " + profileList.ElementAt(0) + "\n2 " + profileList.ElementAt(1) + "\n3 " + profileList.ElementAt(2);
+                texts[1].Text = "U&I\nDanbalmuri\nNebakja";
+                texts[2].Text = profileList.ElementAt(0).highScore + "\n" + profileList.ElementAt(1).highScore + "\n" + profileList.ElementAt(2).highScore;
+                texts[3].Text = "";
+
+                /*
                 texts[0].Text = "1 Heri\n2 Kihwan\n3 Minho";
                 texts[1].Text = "Song A\nSong B\nSong C";
                 texts[2].Text = "298\n201\n195";
                 texts[3].Text = "";
+                 * */
 
                 for (int c = 0; c < 4; c++)
                     drawWithLabel(texts[c]);
@@ -420,12 +427,6 @@ namespace Maestro
                         if (leftHand == 8)
                         {
                             changeScreen(Screen.Profile, 0);
-                        }
-                        break;
-                    case Screen.Game:
-                        if (leftHand == 8)
-                        {
-                            changeScreen(Screen.Score, 0);
                         }
                         break;
                     case Screen.Score:
