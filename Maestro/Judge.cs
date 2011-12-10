@@ -8,9 +8,9 @@ namespace Maestro
 {
     public class Judge
     {
-        private List<Step> stepList { get; set; }
+        private List<Step> _stepList { get; set; }
 
-        public Difficulty selectedDifficulty { get; set; }
+        public Difficulty _selectedDifficulty { get; set; }
 
         #region constants
         const int ERRORMARGIN = 1001;
@@ -24,74 +24,73 @@ namespace Maestro
         #endregion
 
         //Last judged note
-        private int lastIndex;
+        private int _lastIndex;
 
         public Judge()
         {
-            lastIndex = 0;
+            _lastIndex = 0;
         }
 
         public void updateSteps(List<Step> listOfSteps)
         {
-            stepList = listOfSteps;
+            _stepList = listOfSteps;
         }
 
         //Difficulty selection
         public void selectDifficulty(Difficulty dif)
         {
-            selectedDifficulty = dif;
+            _selectedDifficulty = dif;
         }
 
         //Returns the score of the current frame
-        public int getScore(int lHand, int rHand, int lFoot, int rFoot, int currentTime,Point lHandP, Point rHandP, int[] scoreTable)
+        public int getScore(int lHand, int rHand, int lFoot, int rFoot, int currentTime, Point lHandP, Point rHandP, int[] scoreTable)
         {
             Step currentStep;
 
             int score = 0;
-
             
-
             //Foreach step
-            for (int i = lastIndex; i < stepList.Count; ++i)
+            for (int i = _lastIndex; i < _stepList.Count; ++i)
             {
-                currentStep = stepList.ElementAt(i);
+                currentStep = _stepList.ElementAt(i);
 
                 if (currentTime > currentStep.timing + ERRORMARGIN)
                 {
                     return score;
                 }
                 //Hold hand case
-                else if (!currentStep.done && currentStep.action == ActionType.HoldHand && currentStep.stepDifficulty == selectedDifficulty && currentStep.timing + currentStep.holdTime < currentTime)
+                else if (!currentStep.done && currentStep.action == ActionType.HoldHand && currentStep.stepDifficulty == _selectedDifficulty && currentStep.timing + currentStep.holdTime < currentTime)
                 {
 
                     if (currentStep.area == lHand || currentStep.area == rHand)
                         score++;
                 }
                 //Hold foot case
-                else if (!currentStep.done && currentStep.action == ActionType.HoldHand && currentStep.stepDifficulty == selectedDifficulty && currentStep.timing + currentStep.holdTime < currentTime)
+                else if (!currentStep.done && currentStep.action == ActionType.HoldHand && currentStep.stepDifficulty == _selectedDifficulty && currentStep.timing + currentStep.holdTime < currentTime)
                 {
                     if (currentStep.area == lFoot || currentStep.area == rFoot)
                         score++;
                 }
                 //Clap case
-                else if (!currentStep.done && currentStep.action == ActionType.Clap && currentStep.stepDifficulty == selectedDifficulty && currentTime - ERRORMARGIN < currentStep.timing && currentStep.timing < currentTime + ERRORMARGIN)
+                else if (!currentStep.done && currentStep.action == ActionType.Clap && currentStep.stepDifficulty == _selectedDifficulty && currentTime - ERRORMARGIN < currentStep.timing && currentStep.timing < currentTime + ERRORMARGIN)
                 {
-                    //Update the HUD display       
-                if (Math.Sqrt(Math.Pow((lHandP.X - rHandP.X), 2) + Math.Pow((lHandP.Y - rHandP.Y), 2)) < 30)
-                {
-                    score = evaluate(currentTime, currentStep, score, scoreTable);
+
+                    //Check the    
+                    if (Math.Sqrt(Math.Pow((lHandP.X - rHandP.X), 2) + Math.Pow((lHandP.Y - rHandP.Y), 2)) < 30)
+                    {
+                        score = evaluate(currentTime, currentStep, score, scoreTable);
+
+                    }
 
                 }
-                    
-                }
                 //Touch case
-                else if (!currentStep.done && currentStep.stepDifficulty == selectedDifficulty && currentTime - ERRORMARGIN < currentStep.timing && currentStep.timing < currentTime + ERRORMARGIN)
+                else if (!currentStep.done && currentStep.stepDifficulty == _selectedDifficulty && currentTime - ERRORMARGIN < currentStep.timing && currentStep.timing < currentTime + ERRORMARGIN)
                 {
                     //If touch left hand
                     if (currentStep.action == ActionType.TouchHandLeft && (lHand == currentStep.area))
                     {
                         //Current step is done
-                        lastIndex = i;
+                        _lastIndex = i;
                         currentStep.done = true;
                         score = evaluate(currentTime, currentStep, score, scoreTable);
                     }
@@ -99,7 +98,7 @@ namespace Maestro
                     else if (currentStep.action == ActionType.TouchFeetLeft && (lFoot == currentStep.area))
                     {
                         //Current step is done
-                        lastIndex = i;
+                        _lastIndex = i;
                         currentStep.done = true;
                         score = evaluate(currentTime, currentStep, score, scoreTable);
                     }
@@ -107,7 +106,7 @@ namespace Maestro
                     else if (currentStep.action == ActionType.TouchHandRight && rHand == currentStep.area)
                     {
                         //Current step is done
-                        lastIndex = i;
+                        _lastIndex = i;
                         currentStep.done = true;
                         score = evaluate(currentTime, currentStep, score, scoreTable);
                     }
@@ -115,7 +114,7 @@ namespace Maestro
                     {
 
                         //Current step is done
-                        lastIndex = i;
+                        _lastIndex = i;
                         currentStep.done = true;
                         score = evaluate(currentTime, currentStep, score, scoreTable);
                     }
@@ -124,7 +123,7 @@ namespace Maestro
             return score;
         }
 
-        private static int evaluate(int currentTime, Step currentStep, int score, int[] scoreTable)
+        private static int evaluate(int currentTime, Step currentStep, int frameScore, int[] scoreTable)
         {
             //Check the timing
             if (currentStep.timing - BADMARGIN < currentTime && currentTime < currentStep.timing + BADMARGIN)
@@ -133,14 +132,14 @@ namespace Maestro
                 {
                     if (currentStep.timing - EXCELLENTMARGIN < currentTime && currentTime < currentStep.timing + EXCELLENTMARGIN)
                     {
-                        score += EXCELLENTMARK;
+                        frameScore += EXCELLENTMARK;
                         scoreTable[0]++;
                         currentStep.done = true;
                     }
                     //GOOD MARK
                     else
                     {
-                        score += GOODMARK;
+                        frameScore += GOODMARK;
                         scoreTable[1]++;
                         currentStep.done = true;
                     }
@@ -148,12 +147,12 @@ namespace Maestro
                 //BAD MARK
                 else
                 {
-                    score += BADMARK;
+                    frameScore += BADMARK;
                     scoreTable[2]++;
                     currentStep.done = true;
                 }
             }
-            return score;
+            return frameScore;
         }
     }
 }
