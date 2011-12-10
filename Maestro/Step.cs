@@ -17,6 +17,7 @@ namespace Maestro
         public int area { get; set; }
         public ActionType action { get; set; }
         public int holdTime { get; set; }
+        private Score stepscore { get; set; }
 
         //Change the state of the step
         public event StateChangedEventHandler stepDone; 
@@ -45,13 +46,14 @@ namespace Maestro
             stepDifficulty = dif;
             this.area = area;
             this.action = action;
-
+            stepscore = Score.None;
             scored = false;
         }
 
-        public void step_Done(){
+        public void step_Done(Score score)
+        {
 
-            
+            this.stepscore = score;
             done = true;
 
             if (stepDone != null)

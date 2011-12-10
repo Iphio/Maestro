@@ -64,7 +64,7 @@ namespace Maestro
                     //If we reach the end of the hold
                     if (currentTime == (currentStep.timing + currentStep.holdTime))
                     {
-                        currentStep.step_Done();
+                        currentStep.step_Done(Score.Good);
                     }
 
                     if (currentStep.area == lHand || currentStep.area == rHand)
@@ -76,7 +76,7 @@ namespace Maestro
                     //If we reach the end of the hold
                     if (currentTime == (currentStep.timing + currentStep.holdTime))
                     {
-                        currentStep.step_Done();
+                        currentStep.step_Done(Score.Good);
                     }
 
                     if (currentStep.area == lFoot || currentStep.area == rFoot)
@@ -90,7 +90,6 @@ namespace Maestro
                     if (Math.Sqrt(Math.Pow((lHandP.X - rHandP.X), 2) + Math.Pow((lHandP.Y - rHandP.Y), 2)) < 30)
                     {
                         score = evaluate(currentTime, currentStep, score, scoreTable);
-                        currentStep.step_Done();
                         _lastIndex = i;
 
                     }
@@ -104,7 +103,6 @@ namespace Maestro
                     {
                         //Current step is done
                         _lastIndex = i;
-                        currentStep.step_Done();
                         score = evaluate(currentTime, currentStep, score, scoreTable);
                     }
                     //If touch left foot
@@ -112,7 +110,6 @@ namespace Maestro
                     {
                         //Current step is done
                         _lastIndex = i;
-                        currentStep.step_Done();
                         score = evaluate(currentTime, currentStep, score, scoreTable);
                     }
                     //If touch right hand
@@ -120,7 +117,6 @@ namespace Maestro
                     {
                         //Current step is done
                         _lastIndex = i;
-                        currentStep.step_Done();
                         score = evaluate(currentTime, currentStep, score, scoreTable);
                     }
                     else if (currentStep.action == ActionType.TouchFeetRight && rFoot == currentStep.area)
@@ -128,7 +124,7 @@ namespace Maestro
 
                         //Current step is done
                         _lastIndex = i;
-                        currentStep.step_Done();
+                        
                         score = evaluate(currentTime, currentStep, score, scoreTable);
                     }
                 }
@@ -147,14 +143,15 @@ namespace Maestro
                     {
                         frameScore += EXCELLENTMARK;
                         scoreTable[0]++;
-                        currentStep.done = true;
+                        currentStep.step_Done(Score.Excellent);
+
                     }
                     //GOOD MARK
                     else
                     {
                         frameScore += GOODMARK;
                         scoreTable[1]++;
-                        currentStep.done = true;
+                        currentStep.step_Done(Score.Good);
                     }
                 }
                 //BAD MARK
@@ -162,7 +159,7 @@ namespace Maestro
                 {
                     frameScore += BADMARK;
                     scoreTable[2]++;
-                    currentStep.done = true;
+                    currentStep.step_Done(Score.Bad);
                 }
             }
             return frameScore;
