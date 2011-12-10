@@ -15,11 +15,11 @@ namespace Maestro
     {
         const int DISPLAYMARGIN = 1001;
 
-        private Canvas StpScr { get; set; }
+        public Canvas StpScr { get; set; }
         private List<Step> stepList { get; set; }
         public double columnSpace {get;set;}
         public double rowSpace {get;set;}
-        private int currentStep = 0;
+        public int currentStep = 0;
         private Judge judge= new Judge();
 
 
@@ -232,12 +232,13 @@ namespace Maestro
                                 circle.RenderTransform = trans;
 
 
-
+                                /*
                                 DoubleAnimation animeY2 = new DoubleAnimation(midY + 0.15 * rowSpace, row + 0.15 * rowSpace, TimeSpan.FromSeconds(3));
                                 TranslateTransform trans2 = new TranslateTransform();
                                 trans2.BeginAnimation(TranslateTransform.XProperty, animeX);
                                 trans2.BeginAnimation(TranslateTransform.YProperty, animeY2);
                                 block.RenderTransform = trans2;//
+                                 * */
 
 
                                 StpScr.Children.Add(circle);
@@ -252,8 +253,9 @@ namespace Maestro
                                         delegate()
                                         {
                                             StpScr.Children.Remove(circle);
-                                            StpScr.Children.Remove(block);//
+                                            //StpScr.Children.Remove(block);//
 
+                                            /*
                                             TextBox popper = new TextBox();
 
                                             popper.Background = null;
@@ -287,6 +289,7 @@ namespace Maestro
                                             );
                                             };
                                             timer2.Start();
+                                             * */
                                             //exit the thread
                                         }
                                     )
@@ -298,8 +301,47 @@ namespace Maestro
                                     //text box pops up
 
 
+                                    TextBox popper = new TextBox();
+
+                                    popper.Background = null;
+                                    popper.BorderBrush = null;
+                                    popper.TextAlignment = System.Windows.TextAlignment.Center;
+                                    popper.Width = columnSpace;
+
+                                    popper.FontSize = 40;
+                                    popper.FontFamily = new FontFamily("Jokerman");
+                                    popper.Foreground = new RadialGradientBrush(Colors.Red, Colors.DarkRed);
+
+                                    popper.RenderTransform = new TranslateTransform(col - 0.3 * columnSpace, row + 0.1 * rowSpace);
+                                    popper.Text = "Great!!";
+
+                                    //drawWithLabel(popper);
+                                    StpScr.Children.Add(popper);
+
+                                    //sleep
+                                    System.Timers.Timer timer2 = new System.Timers.Timer(1000);
+                                    timer2.Elapsed += delegate
+                                    {
+                                        circle.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal,
+                                            new Action(
+                                                delegate()
+                                                {
+                                                    StpScr.Children.Remove(popper);
+                                                }
+                                        )
+                                    );
+                                    };
+                                    timer2.Start();
+
+
                                 };
                                 timer.Start();
+
+
+                                theCurStp.stepDone += delegate
+                                {
+                                    timer.Dispose();
+                                };
 
                             }
                         ));

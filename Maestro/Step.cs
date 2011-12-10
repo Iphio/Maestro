@@ -5,8 +5,11 @@ using System.Text;
 
 namespace Maestro
 {
+    //Event state change
+    public delegate void StateChangedEventHandler(Object source);
+
     public class Step
-    {
+    {        
 
         //This is a test for Step.cs
         public int timing { get; set; }
@@ -14,6 +17,9 @@ namespace Maestro
         public int area { get; set; }
         public ActionType action { get; set; }
         public int holdTime { get; set; }
+
+        //Change the state of the step
+        public event StateChangedEventHandler stepDone; 
 
         public bool done { get; set; }
 
@@ -41,6 +47,18 @@ namespace Maestro
             this.action = action;
 
             scored = false;
+        }
+
+        public void step_Done(){
+
+            done = true;
+
+            if (stepDone != null)
+            {
+                stepDone(this);
+            }
+
+
         }
 
 

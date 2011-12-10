@@ -281,29 +281,29 @@ namespace Maestro
                 for (int c = 0; c < 4; c++)
                 {
                     texts[c].FontFamily = new FontFamily("MV Boli");
-                    texts[c].FontSize = 72;
+                    texts[c].FontSize = 60;
                 }
                 texts[0].FontFamily = new FontFamily("Jokerman");
                 texts[0].FontSize = 216;
 
                 texts[0].RenderTransform = new TranslateTransform(60, 180);
-                texts[1].RenderTransform = new TranslateTransform(columnSpace, 260);
-                texts[2].RenderTransform = new TranslateTransform(2 * columnSpace, 260);
+                texts[1].RenderTransform = new TranslateTransform(columnSpace, 240);
+                texts[2].RenderTransform = new TranslateTransform(2 * columnSpace, 240);
 
                 //int score = getTotalScore();
                 int score = currentScore;
 
-                if (score >= 300)
+                if (score >= 150)
                     texts[0].Text = "A";
-                else if (score >= 200)
-                    texts[0].Text = "B";
                 else if (score >= 100)
+                    texts[0].Text = "B";
+                else if (score >= 50)
                     texts[0].Text = "C";
                 else
                     texts[0].Text = "F";
 
                 //texts[1].Text = "Minho\nSong A";
-                texts[1].Text = profileList[0] + "\n" + songList[0];
+                texts[1].Text = profileList.ElementAt(0).name +"\n" + songList.ElementAt(0);
                 texts[2].Text = "Score\n" + score;
 
                 for (int c = 0; c < 4; c++)

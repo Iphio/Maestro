@@ -288,9 +288,12 @@ namespace Maestro
             _judge.updateSteps(selectedSong._listOfSteps);
             //Run the song
             displaySteps.prepareCanvas();
-            selectedSong.PlaySong(200);
-            
+            displaySteps.currentStep = 0;
+            _score = 0;
+            displaySteps.currentScore = 0;
 
+            selectedSong.PlaySong(200);
+        
         }
 
         //!Update display data
@@ -321,7 +324,9 @@ namespace Maestro
                 //If end of song
                 if (sec >= selectedSong.Length-500)
                 {
-                    GameScreen.Children.Clear();//
+                    //GameScreen.Children.Clear();//
+                    displaySteps.StpScr.Children.Clear();//
+
                     hudDisplay.endOfGameDisplay();
                     currentScreen = Screen.Score;
                     bgm.resume();
