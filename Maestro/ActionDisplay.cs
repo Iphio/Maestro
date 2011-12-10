@@ -126,6 +126,7 @@ namespace Maestro
             score.Text = "Score : " + currentScore;
             score.UpdateLayout();
 
+
             double col, row;
             if (currentTime >= curStep.timing - 2000 && currentTime < curStep.timing + 0)
             {
