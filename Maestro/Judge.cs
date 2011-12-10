@@ -59,15 +59,26 @@ namespace Maestro
                    // return score;
                 }
                 //Hold hand case
-                else if (!currentStep.done && currentStep.action == ActionType.HoldHand && currentStep.stepDifficulty == _selectedDifficulty && currentStep.timing + currentStep.holdTime < currentTime)
+                else if (!currentStep.done && currentStep.action == ActionType.HoldHand && currentStep.stepDifficulty == _selectedDifficulty && currentStep.timing + currentStep.holdTime <= currentTime)
                 {
+                    //If we reach the end of the hold
+                    if (currentTime == (currentStep.timing + currentStep.holdTime))
+                    {
+                        currentStep.step_Done();
+                    }
 
                     if (currentStep.area == lHand || currentStep.area == rHand)
                         score++;
                 }
                 //Hold foot case
-                else if (!currentStep.done && currentStep.action == ActionType.HoldHand && currentStep.stepDifficulty == _selectedDifficulty && currentStep.timing + currentStep.holdTime < currentTime)
+                else if (!currentStep.done && currentStep.action == ActionType.HoldFoot && currentStep.stepDifficulty == _selectedDifficulty && currentStep.timing + currentStep.holdTime <= currentTime)
                 {
+                    //If we reach the end of the hold
+                    if (currentTime == (currentStep.timing + currentStep.holdTime))
+                    {
+                        currentStep.step_Done();
+                    }
+
                     if (currentStep.area == lFoot || currentStep.area == rFoot)
                         score++;
                 }
@@ -75,7 +86,7 @@ namespace Maestro
                 else if (!currentStep.done && currentStep.action == ActionType.Clap && currentStep.stepDifficulty == _selectedDifficulty && currentTime - ERRORMARGIN < currentStep.timing && currentStep.timing < currentTime + ERRORMARGIN)
                 {
 
-                    //Check the    
+                    //Check the distance between the hands
                     if (Math.Sqrt(Math.Pow((lHandP.X - rHandP.X), 2) + Math.Pow((lHandP.Y - rHandP.Y), 2)) < 30)
                     {
                         score = evaluate(currentTime, currentStep, score, scoreTable);
