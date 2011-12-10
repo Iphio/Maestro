@@ -272,7 +272,7 @@ namespace Maestro
             //TO UNCOMMENT
             //_judge.selectedDifficulty = hudDisplay.selectedDifficulty;
             //displaySteps.selectedDifficulty = hudDisplay.selectedDifficulty;
-            _judge.selectedDifficulty = Difficulty.Easy;
+            _judge._selectedDifficulty = Difficulty.Easy;
             displaySteps.selectedDifficulty = Difficulty.Easy;
             selectedSong.Length = selectedSong.length();
 
