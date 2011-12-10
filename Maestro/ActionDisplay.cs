@@ -134,6 +134,9 @@ namespace Maestro
 
         public void displayStep(int currentTime)
         {
+            bool touched = false;
+
+
             Step curStep = stepList.ElementAt(currentStep);
             //score.UpdateLayout();
 
@@ -284,7 +287,6 @@ namespace Maestro
                                             );
                                             };
                                             timer2.Start();
-                                            
                                             //exit the thread
                                         }
                                     )
@@ -298,17 +300,38 @@ namespace Maestro
 
                                 };
                                 timer.Start();
-                                
-                                //timer2.Start();
-                                
-                                bool touched = false;
-                                
-                                if (theCurStp.done)
+
+                                switch (theCurStp.action)
                                 {
-                                    touched = true;
-                                    timer.Dispose();
+                                    case ActionType.TouchHandLeft:
+                                        if (leftHandPos == theCurStp.area)
+                                        {
+                                            touched = true;
+                                            timer.Dispose();
+                                        }
+                                        break;
+                                    case ActionType.TouchHandRight:
+                                        if (rightHandPos == theCurStp.area)
+                                        {
+                                            touched = true;
+                                            timer.Dispose();
+                                        }
+                                        break;
+                                    case ActionType.TouchFeetLeft:
+                                        if (leftFootPos == theCurStp.area)
+                                        {
+                                            touched = true;
+                                            timer.Dispose();
+                                        }
+                                        break;
+                                    case ActionType.TouchFeetRight:
+                                        if (rightFootPos == theCurStp.area)
+                                        {
+                                            touched = true;
+                                            timer.Dispose();
+                                        }
+                                        break;
                                 }
-                               
                             }
                         ));
                     }
