@@ -242,7 +242,7 @@ namespace Maestro
 
 
             _difficulty = Difficulty.Easy;
-            _judge = new Judge();
+            //_judge = new Judge();
 
             //Set up the bachground
             ImageBrush main = new ImageBrush();
@@ -268,6 +268,7 @@ namespace Maestro
         //!Play the song
         public void start_game()
         {
+            _judge = new Judge();
             _profiles = hudDisplay.profileList;
             selectedSong = parserUnit.loadSSong(hudDisplay.songList.ElementAt(0));
 
@@ -309,7 +310,7 @@ namespace Maestro
                 //Check the points and calculate the score TODO : CHECK THE CURRENT TIME
                 int currentScore = _judge.getScore(leftHandPosition, rightHandPosition, leftFootPosition, rightFootPosition, sec, leftHandPoint, rightHandPoint , scoreTable);
 
-                _score += currentScore;
+                
 
                 //Comment
                 hudDisplay.currentScore = _score;
@@ -318,20 +319,25 @@ namespace Maestro
                 displaySteps.displayStep(sec);
 
                 //Combo system
-                if (currentScore != 0)
-                    combos++;
+                combos = Judge.combo;
+
+                displaySteps.currentCombo = combos;
+
                 Console.WriteLine(_score);
+
+                _score += currentScore * combos;
+
                 //If end of song
                 if (sec >= selectedSong.Length-500)
                 {
                     //GameScreen.Children.Clear();//
                     displaySteps.StpScr.Children.Clear();//
 
-                    //hudDisplay.endOfGameDisplay();
                     hudDisplay.changeScreen(Screen.Score, 0);
+                    hudDisplay.updateScreen(0, 0, 0, 0);
+
                     currentScreen = Screen.Score;
                     bgm.resume();
-
                 }
 
 

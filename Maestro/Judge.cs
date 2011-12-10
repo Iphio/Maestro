@@ -18,17 +18,19 @@ namespace Maestro
         const int GOODMARGIN = 400;
         const int EXCELLENTMARGIN = 200;
 
-        const int BADMARK = 1;
-        const int GOODMARK = 2;
-        const int EXCELLENTMARK = 3;
+        const int BADMARK = 10;
+        const int GOODMARK = 20;
+        const int EXCELLENTMARK = 30;
         #endregion
 
         //Last judged note
         private int _lastIndex;
+        public static int combo;
 
         public Judge()
         {
             _lastIndex = 0;
+            combo = 0;
         }
 
         public void updateSteps(List<Step> listOfSteps)
@@ -54,9 +56,15 @@ namespace Maestro
             {
                 currentStep = _stepList.ElementAt(i);
 
-                if (currentTime > currentStep.timing + ERRORMARGIN)
+
+                
+
+                if (currentTime >= currentStep.timing + ERRORMARGIN)
                 {
                    // return score;
+                    if (!currentStep.done)
+                        combo = 1;
+
                 }
                 //Hold hand case
                 else if (!currentStep.done && currentStep.action == ActionType.HoldHand && currentStep.stepDifficulty == _selectedDifficulty && currentStep.timing + currentStep.holdTime <= currentTime)
@@ -144,7 +152,7 @@ namespace Maestro
                         frameScore += EXCELLENTMARK;
                         scoreTable[0]++;
                         currentStep.step_Done(Score.Excellent);
-
+                        combo++;
                     }
                     //GOOD MARK
                     else
@@ -152,6 +160,7 @@ namespace Maestro
                         frameScore += GOODMARK;
                         scoreTable[1]++;
                         currentStep.step_Done(Score.Good);
+                        combo++;
                     }
                 }
                 //BAD MARK
@@ -160,6 +169,7 @@ namespace Maestro
                     frameScore += BADMARK;
                     scoreTable[2]++;
                     currentStep.step_Done(Score.Bad);
+                    combo = 1;
                 }
             }
             return frameScore;

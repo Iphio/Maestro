@@ -24,8 +24,9 @@ namespace Maestro
 
 
         private ImageBrush lefthand, righthand, leftfoot, rightfoot;
-        private TextBox score;
+        private TextBox score, combo, comboBorder;
         public int currentScore { get; set; }
+        public int currentCombo { get; set; }
 
         public Difficulty selectedDifficulty { get; set; }
 
@@ -45,6 +46,7 @@ namespace Maestro
             //Step.gameScr = gameScreen;
 
             currentScore = 0;
+            currentCombo = 0;
 
             lefthand = new ImageBrush();
             righthand = new ImageBrush();
@@ -132,6 +134,29 @@ namespace Maestro
 
             StpScr.Children.Add(score);
             //drawWithLabel(score);
+
+
+            combo = new TextBox();
+
+            combo.Background = null;
+            combo.BorderBrush = null;
+            combo.TextAlignment = System.Windows.TextAlignment.Center;
+            combo.Width = columnSpace;
+
+            combo.FontSize = 60;
+            combo.FontFamily = new FontFamily("Jokerman");
+            //combo.Foreground = new RadialGradientBrush(Colors.Red, Colors.DarkRed);
+            ColorAnimation anime = new ColorAnimation(Colors.Red, Colors.Orange, TimeSpan.FromSeconds(3));
+            anime.AutoReverse = true;
+            SolidColorBrush myBrush = new SolidColorBrush();
+            myBrush.BeginAnimation(SolidColorBrush.ColorProperty, anime);
+            combo.Foreground = myBrush;
+
+            combo.RenderTransform = new TranslateTransform(columnSpace, rowSpace * 1.2);
+            combo.Text = "Combo " + currentCombo + "!!";
+
+            //StpScr.Children.Add(combo);
+            comboBorder = drawWithLabel(combo);
         }
 
         public void displayStep(int currentTime)
@@ -142,6 +167,21 @@ namespace Maestro
 
             score.Text = "Score : " + currentScore;
             score.UpdateLayout();
+
+            combo.Text = combo.Text = "Combo " + currentCombo + "!!";
+            comboBorder.Text = combo.Text = "Combo " + currentCombo + "!!";
+            if (currentCombo <= 4)
+            {
+                combo.Opacity = 0;
+                comboBorder.Opacity = 0;
+            }
+            else
+            {
+                combo.Opacity = 100;
+                comboBorder.Opacity = 100;
+            }
+            combo.UpdateLayout();
+            comboBorder.UpdateLayout();
 
             double col, row;
             if (currentTime >= curStep.timing - 3000 && currentTime < curStep.timing + 0)
@@ -245,7 +285,7 @@ namespace Maestro
                                 //StpScr.Children.Add(block);//
 
                                 //Console.WriteLine("circle appeared");
-                                System.Timers.Timer timer = new System.Timers.Timer(3200);
+                                System.Timers.Timer timer = new System.Timers.Timer(3500);
                                 timer.Elapsed += delegate
                                 {
                                     circle.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal,
@@ -253,43 +293,7 @@ namespace Maestro
                                         delegate()
                                         {
                                             StpScr.Children.Remove(circle);
-                                            //StpScr.Children.Remove(block);//
 
-                                            /*
-                                            TextBox popper = new TextBox();
-
-                                            popper.Background = null;
-                                            popper.BorderBrush = null;
-                                            popper.TextAlignment = System.Windows.TextAlignment.Center;
-                                            popper.Width = columnSpace;
-
-                                            popper.FontSize = 40;
-                                            popper.FontFamily = new FontFamily("Jokerman");
-                                            popper.Foreground = new RadialGradientBrush(Colors.Red, Colors.DarkRed);
-
-                                            popper.RenderTransform = new TranslateTransform(col - 0.3 * columnSpace, row + 0.1 * rowSpace);
-                                            popper.Text = "Great!!";
-
-                                            //drawWithLabel(popper);
-                                            StpScr.Children.Add(popper);
-
-
-
-                                            //sleep
-                                            System.Timers.Timer timer2 = new System.Timers.Timer(1000);
-                                            timer2.Elapsed += delegate
-                                            {
-                                                circle.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal,
-                                                    new Action(
-                                                        delegate()
-                                                        {
-                                                            StpScr.Children.Remove(popper);
-                                                        }
-                                                )
-                                            );
-                                            };
-                                            timer2.Start();
-                                             * */
                                             //exit the thread
                                         }
                                     )
@@ -349,8 +353,10 @@ namespace Maestro
                     }
                 ));
                 t.Start();
-                if (currentStep < stepList.Count()-1)
+                if (currentStep < stepList.Count() - 1)
                     currentStep++;
+                else
+                    currentStep = 0;
             }
         }
     }

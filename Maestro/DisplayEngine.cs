@@ -165,6 +165,12 @@ namespace Maestro
             return CurrentScreen;
         }
 
+        public int CompareProfileScore(Profile p1, Profile p2)
+        {
+            return p2.highScore.CompareTo(p1.highScore);
+        }
+
+
         public void changeScreen(Screen screen, int shift)
         {
 
@@ -296,19 +302,13 @@ namespace Maestro
                 texts[2].RenderTransform = new TranslateTransform(columnSpace * 2, 240);
 
                 //profileList.Sort();
-                profileList.Sort();
+                List<Profile> sortedList = profileList;
+                sortedList.Sort(CompareProfileScore);
 
-                texts[0].Text = "1 " + profileList.ElementAt(0) + "\n2 " + profileList.ElementAt(1) + "\n3 " + profileList.ElementAt(2);
+                texts[0].Text = "1 " + sortedList.ElementAt(0).name + "\n2 " + sortedList.ElementAt(1).name + "\n3 " + sortedList.ElementAt(2).name;
                 texts[1].Text = "U&I\nDanbalmuri\nNebakja";
-                texts[2].Text = profileList.ElementAt(0).highScore + "\n" + profileList.ElementAt(1).highScore + "\n" + profileList.ElementAt(2).highScore;
+                texts[2].Text = sortedList.ElementAt(0).highScore + "\n" + sortedList.ElementAt(1).highScore + "\n" + sortedList.ElementAt(2).highScore;
                 texts[3].Text = "";
-
-                /*
-                texts[0].Text = "1 Heri\n2 Kihwan\n3 Minho";
-                texts[1].Text = "Song A\nSong B\nSong C";
-                texts[2].Text = "298\n201\n195";
-                texts[3].Text = "";
-                 * */
 
                 for (int c = 0; c < 4; c++)
                     drawWithLabel(texts[c]);
@@ -330,11 +330,11 @@ namespace Maestro
                 //int score = getTotalScore();
                 int score = currentScore;
 
-                if (score >= 150)
+                if (score >= 1500)
                     texts[0].Text = "A";
-                else if (score >= 100)
+                else if (score >= 1000)
                     texts[0].Text = "B";
-                else if (score >= 50)
+                else if (score >= 500)
                     texts[0].Text = "C";
                 else
                     texts[0].Text = "F";
