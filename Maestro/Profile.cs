@@ -15,20 +15,13 @@ namespace Maestro
 
         public Profile()
         {
+
         }
 
         public Profile(String name)
         {
             this.name = name;
-        }
-        public Profile(String name, int score)
-        {
-            this.name = name;
-            highScore = score;
-        }
-        public void updateScore(int newScore)
-        {
-            highScore = newScore;
+
         }
 
 

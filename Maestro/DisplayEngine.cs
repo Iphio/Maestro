@@ -40,7 +40,7 @@ namespace Maestro
         //Song list
         public List<String> songList;
 
-       
+
 
         //Constructor
         public DisplayEngine(Canvas mainScreen)
@@ -61,9 +61,9 @@ namespace Maestro
             {
 
                 active = true;
-            
+
             };
-            
+
         }
 
         //!Calculate grid position
@@ -136,7 +136,7 @@ namespace Maestro
 
         private void changeScreen(Screen screen, int shift)
         {
-            
+
             GameScreen.Children.Clear();
             CurrentScreen = screen;
             active = false;
@@ -204,9 +204,7 @@ namespace Maestro
 
                 if (shift == 0 || shift == 3)
                 {
-                    //texts[0].Text = "Song A";
-                    //texts[1].Text = "Song B";
-                    //texts[2].Text = "Song C";
+
                 }
                 else if (shift == 1)
                 {
@@ -214,9 +212,7 @@ namespace Maestro
                     songList.Remove(s);
                     songList.Add(s);
 
-                    //texts[0].Text = "Song B";
-                    //texts[1].Text = "Song C";
-                    //texts[2].Text = "Song A";
+
                 }
                 else if (shift == 2)
                 {
@@ -224,9 +220,6 @@ namespace Maestro
                     songList.Remove(s);
                     songList.Insert(0, s);
 
-                    //texts[0].Text = "Song C";
-                    //texts[1].Text = "Song A";
-                    //texts[2].Text = "Song B";
                 }
 
                 if (shift == 3)

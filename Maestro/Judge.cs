@@ -42,7 +42,7 @@ namespace Maestro
         }
 
         //Returns the score of the current frame
-        public int getScore(int lHand, int rHand, int lFoot, int rFoot, int currentTime, int []scoreTable)
+        public int getScore(int lHand, int rHand, int lFoot, int rFoot, int currentTime, int[] scoreTable)
         {
             Step currentStep;
 
@@ -58,7 +58,7 @@ namespace Maestro
 
                 }
                 //Hold hand case
-                else if (!currentStep.done && currentStep.action == ActionType.HoldHand && currentStep.stepDifficulty ==selectedDifficulty && currentStep.timing + currentStep.holdTime < currentTime)
+                else if (!currentStep.done && currentStep.action == ActionType.HoldHand && currentStep.stepDifficulty == selectedDifficulty && currentStep.timing + currentStep.holdTime < currentTime)
                 {
 
                     if (currentStep.area == lHand || currentStep.area == rHand)
@@ -111,7 +111,7 @@ namespace Maestro
             return score;
         }
 
-        private static int evaluate(int currentTime, Step currentStep, int score,int[] scoreTable)
+        private static int evaluate(int currentTime, Step currentStep, int score, int[] scoreTable)
         {
             //Check the timing
             if (currentStep.timing - BADMARGIN < currentTime && currentTime < currentStep.timing + BADMARGIN)
@@ -122,12 +122,14 @@ namespace Maestro
                     {
                         score += EXCELLENTMARK;
                         scoreTable[0]++;
+                        currentStep.done = true;
                     }
                     //GOOD MARK
                     else
                     {
                         score += GOODMARK;
                         scoreTable[1]++;
+                        currentStep.done = true;
                     }
                 }
                 //BAD MARK
@@ -135,6 +137,7 @@ namespace Maestro
                 {
                     score += BADMARK;
                     scoreTable[2]++;
+                    currentStep.done = true;
                 }
             }
             return score;

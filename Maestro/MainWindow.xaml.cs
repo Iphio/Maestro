@@ -77,10 +77,12 @@ namespace Maestro
         //!Current difficulty
         public Difficulty _difficulty { get; set; }
 
-        
+        //!Display engine
+        private DisplayEngine hudDisplay;
 
         //!Current profile
-        [XmlArrayItem(typeof(Profile))]
+
+        [XmlArrayItem(typeof(Step))]
         public List<Profile> _profiles { get; set; }
         public int currentProfile { get; set; }
 
@@ -122,12 +124,8 @@ namespace Maestro
         #endregion
 
         #region Display Attributes
-
-        //!Display the stuff
+        private DisplayEngine displayHUD { get; set; }
         private ActionDisplay displaySteps { get; set; }
-
-        //!Display engine
-        private DisplayEngine hudDisplay;
         #endregion
 
         //music attribute
@@ -141,157 +139,127 @@ namespace Maestro
         {
             InitializeComponent();
             hudDisplay = new DisplayEngine(GameScreen);
-            displaySteps = new ActionDisplay(GameScreen);
+            displaySteps = new ActionDisplay(StpScr);
 
             currentProfile = 0;
             _profiles = new List<Profile>();
             _listOfSongs = new List<String>();
 
             scoreTable = new int[3];
-            
+
 
             parserUnit = new Parser();
 
-            bgm = new Song("..\\main_music.mp3","a");
+            bgm = new Song("..\\main_music.mp3", "a");
             menu = new Song("..\\Menu_selectS.wav", "b");
-            
+
 
             run();
-
         }
 
         //!Run the game engine
         public void run()
         {
-            // creating the XMLfile for profile
-            /*
-             * _profiles.Add(new Profile("Kihwan",1234));
-             * _profiles.Add(new Profile("Heri", 1234));
-             * _profiles.Add(new Profile("Minho", 1234));
-             * parserUnit.saveProfiles(_profiles);
-             */
 
-            //loading profile
-            
             _profiles = parserUnit.loadProfile();
             //CREATE A SONG HERE ! (don't forget to delete once it's done....)
-            selectedSong = new Song("1.mp3", "아이유");
-            String[] line = System.IO.File.ReadAllLines("songs\\UandMe.txt");
+            
+            selectedSong = new Song("U&I.mp3", "IU");
+            String[] line = System.IO.File.ReadAllLines("songs\\U&I.txt");
             for (int i = 0; i < line.Length; i++)
             {
-                if(i%4 == 0)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]),Difficulty.Easy, 0 ,ActionType.TouchHandLeft,0));
-                else if (i%4 == 1)
+                if (i % 4 == 0)
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 0, ActionType.TouchHandLeft, 0));
+                else if (i % 4 == 1)
                     selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 2, ActionType.TouchHandRight, 0));
-                else if (i%4 == 2)
+                else if (i % 4 == 2)
                     selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 3, ActionType.TouchHandLeft, 0));
                 else
                     selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 5, ActionType.TouchHandRight, 0));
                 //Console.WriteLine(line[i]);
             }
-            parserUnit.saveSong(selectedSong, "1");
+            parserUnit.saveSong(selectedSong, "U&I");
             /*
-            selectedSong = new Song("2.mp3", "송대관");
-            line = System.IO.File.ReadAllLines("songs\\2.txt");
+            selectedSong = new Song("Nebakja.mp3", "송대관");
+            line = System.IO.File.ReadAllLines("songs\\Nebakja.txt");
             for (int i = 0; i < line.Length; i++)
             {
                 if (i % 6 == 0)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 0, ActionType.TouchHandLeft));
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 0, ActionType.TouchHandLeft, 0));
                 else if (i % 6 == 1)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 2, ActionType.TouchHandRight));
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 2, ActionType.TouchHandRight, 0));
                 else if (i % 6 == 2)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 3, ActionType.TouchHandLeft));
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 3, ActionType.TouchHandLeft, 0));
                 else if (i % 6 == 3)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 5, ActionType.TouchHandRight));
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 5, ActionType.TouchHandRight, 0));
                 else if (i % 6 == 4)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 6, ActionType.TouchFeetLeft));
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 6, ActionType.TouchFeetLeft, 0));
                 else
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 8, ActionType.TouchFeetRight));
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 8, ActionType.TouchFeetRight, 0));
                 //Console.WriteLine(line[i]);
             }
-            parserUnit.saveSong(selectedSong, "2");
-            
-            selectedSong = new Song("3.mp3", "조용필");
-            line = System.IO.File.ReadAllLines("songs\\3.txt");
+            parserUnit.saveSong(selectedSong, "Nebakja");
+            /*
+            selectedSong = new Song("Danbalmuri.mp3", "조용필");
+            line = System.IO.File.ReadAllLines("songs\\Danbalmuri.txt");
             for (int i = 0; i < line.Length; i++)
             {
                 if (i % 6 == 0)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 0, ActionType.TouchHandLeft));
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 0, ActionType.TouchHandLeft, 0));
                 else if (i % 6 == 1)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 2, ActionType.TouchHandRight));
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 2, ActionType.TouchHandRight, 0));
                 else if (i % 6 == 2)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 3, ActionType.TouchHandLeft));
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 3, ActionType.TouchHandLeft, 0));
                 else if (i % 6 == 3)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 5, ActionType.TouchHandRight));
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 5, ActionType.TouchHandRight, 0));
                 else if (i % 6 == 4)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 6, ActionType.TouchFeetLeft));
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 6, ActionType.TouchFeetLeft, 0));
                 else
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 8, ActionType.TouchFeetRight));
+                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 8, ActionType.TouchFeetRight, 0));
                 //Console.WriteLine(line[i]);
             }
-            parserUnit.saveSong(selectedSong, "3");
+            parserUnit.saveSong(selectedSong, "Danbalmuri");
             */
-            //to retrieve list of songs
+
             String[] files = Directory.GetFiles("songs\\", "*.XML");
             for (int i = 0; i < files.Length; i++)
             {
-                _listOfSongs.Add(files[i].Substring(6));
+                _listOfSongs.Add(files[i].Substring(6, files[i].Length-10));
                 Console.WriteLine(files[i].Substring(6));
             }
             
-            //selectedSong.getList("songs\\UandMe.txt");
-            //selectedSong._listOfSteps.Add(new Step(5000, Difficulty.Easy, 0, ActionType.TouchHandLeft));
-            //selectedSong._listOfSteps.Add(new Step(10000, Difficulty.Easy, 2, ActionType.TouchHandRight));
-            //selectedSong._listOfSteps.Add(new Step(15000, Difficulty.Easy, 3, ActionType.TouchHandLeft));
-            //selectedSong._listOfSteps.Add(new Step(20000, Difficulty.Easy, 5, ActionType.TouchHandRight));
-
-            //CREATE A PROFILE LIST
-
             //start music
             bgm.PlaySong(150);
-            
+
             #region IO TESTS
             //parserUnit.saveSong(bgm, "song1.xml");
             //parserUnit.saveProfile(test);
             #endregion
 
+
             _difficulty = Difficulty.Easy;
             _judge = new Judge();
+
             //Set up the bachground
-            
             ImageBrush main = new ImageBrush();
             main.ImageSource = new BitmapImage(
-                new Uri("images\\screen_main.png", UriKind.Relative));
+                    new Uri("images\\screen_main.png", UriKind.Relative));
+
             combos = 0;
+
             GameScreen.Background = main;
+
             currentScreen = Screen.Main;
+
             hudDisplay.GenerateGrid();
 
-            //Load the profile list into the display
+
+            // Load for display
             hudDisplay.profileList = _profiles;
             hudDisplay.selectedDifficulty = _difficulty;
             hudDisplay.songList = _listOfSongs;
-
         }
 
-        //
-        public void drawWithLabel(TextBox t)
-        {
-            TextBox border = new TextBox();
-            border.Background = null;
-            border.BorderBrush = null;
-            border.TextAlignment = t.TextAlignment;
-            border.FontFamily = t.FontFamily;
-            border.Width = t.Width;
-            border.Text = t.Text;
-            border.RenderTransform = t.RenderTransform;
-
-            border.FontSize = t.FontSize * 1.02;
-            border.Foreground = new RadialGradientBrush(Colors.White, Colors.LightGray);
-            
-            GameScreen.Children.Add(border);
-            GameScreen.Children.Add(t);
-        }
 
         //!Play the song
         public void start_game()
@@ -311,10 +279,8 @@ namespace Maestro
             scoreTable[0] = scoreTable[1] = scoreTable[2] = 0;
 
             _judge.updateSteps(selectedSong._listOfSteps);
-
             //Run the song
             selectedSong.PlaySong(200);
-
             displaySteps.prepareCanvas();
 
         }
@@ -330,26 +296,30 @@ namespace Maestro
                 int sec = selectedSong.getCurrentMillisecond();
 
                 //Check the points and calculate the score TODO : CHECK THE CURRENT TIME
-                int currentScore = _judge.getScore(leftHandPosition, rightHandPosition, leftFootPosition, rightFootPosition, sec,scoreTable);
+                int currentScore = _judge.getScore(leftHandPosition, rightHandPosition, leftFootPosition, rightFootPosition, sec, scoreTable);
 
                 _score += currentScore;
 
                 //Comment
                 displaySteps.currentScore = _score;
-              //  displaySteps.displayStep(sec);
-                displaySteps.checkSteps(sec);
+                //  displaySteps.displayStep(sec);
+                displaySteps.displayStep(sec);
 
                 //Combo system
                 if (currentScore != 0)
                     combos++;
-
+                Console.WriteLine(_score);
                 //If end of song
-                if (sec >= selectedSong.Length)
+                if (sec >= selectedSong.Length-500)
                 {
                     hudDisplay.endOfGameDisplay();
                     currentScreen = Screen.Score;
                     bgm.resume();
+
+                    GameScreen.Children.Clear();//
                 }
+
+
             }
             else
             {
@@ -362,6 +332,8 @@ namespace Maestro
                     if (currentScreen == Screen.Game)
                         start_game();
                 }
+
+                //CHANGE JUDGE DIFFICULTY
             }
         }
 
@@ -371,16 +343,12 @@ namespace Maestro
 
         }
 
-
-        #region Skeletton detection
         //!Windows loading complete
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //Run the Kinect UI
             nui = new Runtime();
 
-
-            refresh();
             //Initialize the skeletton
             try
             {
@@ -623,7 +591,7 @@ namespace Maestro
 
             int test = (int)(leftHandPoint.X * leftHandPoint.Y);
 
-           // Console.WriteLine(GetDistance(convertedDepthFrame.ElementAt(test),convertedDepthFrame.ElementAt(test+1)));
+            Console.WriteLine(GetDistance(convertedDepthFrame.ElementAt(test),convertedDepthFrame.ElementAt(test+1)));
 
         }
 
@@ -686,26 +654,35 @@ namespace Maestro
             {
                 leftHandPosition = getElementPosition(p);
                 leftHandPoint = p;
+                displaySteps.leftHandPos = leftHandPosition;
 
             }
             else if (ids[0] == JointID.HandRight)
             {
                 rightHandPosition = getElementPosition(p);
                 rightHandPoint = p;
+                displaySteps.rightHandPos = rightHandPosition;
             }
             else if (ids[0] == JointID.FootLeft)
             {
                 leftFootPosition = getElementPosition(p);
                 leftFootPoint = p;
+                displaySteps.leftFootPos = leftFootPosition;
             }
             else
             {
                 rightFootPosition = getElementPosition(p);
                 rightFootPoint = p;
+                displaySteps.rightFootPos = rightFootPosition;
             }
             return point;
         }
         #endregion
-        #endregion
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
     }
 }
