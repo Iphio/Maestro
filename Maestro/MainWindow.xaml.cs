@@ -132,6 +132,8 @@ namespace Maestro
         private Song bgm;
         private Song menu;
         private Song selectedSong;
+        private Song combo;
+        private Song EndOfSong;
 
         private Parser dataParser { get; set; }
 
@@ -152,7 +154,8 @@ namespace Maestro
 
             bgm = new Song("..\\main_music.mp3", "a");
             menu = new Song("..\\Menu_selectS.wav", "b");
-
+            combo = new Song("..\\combo.wav", "b");
+            EndOfSong = new Song("..\\EndofSong.wav", "b");
 
             run();
         }
@@ -270,6 +273,17 @@ namespace Maestro
         {
             _judge = new Judge();
             _profiles = hudDisplay.profileList;
+            _difficulty = hudDisplay.selectedDifficulty;
+            displaySteps.selectedDifficulty = _difficulty;
+
+            if (_difficulty == Difficulty.Easy)
+                displaySteps.flytime = 3000;
+            else if (_difficulty == Difficulty.Medium)
+                displaySteps.flytime = 2000;
+            else
+                displaySteps.flytime = 1000;
+
+
             selectedSong = parserUnit.loadSSong(hudDisplay.songList.ElementAt(0));
 
             bgm.pause();
@@ -317,6 +331,9 @@ namespace Maestro
                 //Combo system
                 combos = Judge.combo;
 
+                if (combos % 5 == 0)
+                    combo.PlaySong(500);
+
                 displaySteps.currentCombo = combos;
 
                 _score += currentScore * combos;
@@ -340,7 +357,7 @@ namespace Maestro
                         _profiles.ElementAt(currentProfile).highScore = _score;
                         _profiles.ElementAt(currentProfile).title = selectedSong.Title.Substring(0, selectedSong.Title.Length - 4);
                     }
-
+                    EndOfSong.PlaySong(400);
                     currentScreen = Screen.Score;
                     bgm.resume();
 

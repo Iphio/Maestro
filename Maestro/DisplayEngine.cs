@@ -187,7 +187,7 @@ namespace Maestro
                     texts[c].FontFamily = new FontFamily("Jokerman");
                 }
 
-                texts[0].Width = columnSpace
+                texts[0].Width = columnSpace;
                 texts[0].FontSize = 90;
                 texts[1].FontSize = 60;
                 texts[2].FontSize = 60;
@@ -299,7 +299,7 @@ namespace Maestro
                     texts[c].FontSize = 54;
                 }
 
-                texts[0].Width = columnSpace
+                texts[0].Width = columnSpace;
                 texts[0].RenderTransform = new TranslateTransform(0, 240);
                 texts[1].RenderTransform = new TranslateTransform(columnSpace, 240);
                 texts[2].RenderTransform = new TranslateTransform(columnSpace * 2, 240);
@@ -323,7 +323,7 @@ namespace Maestro
                     texts[c].FontFamily = new FontFamily("MV Boli");
                     texts[c].FontSize = 60;
                 }
-                texts[0].Width = columnSpace
+                texts[0].Width = columnSpace;
                 texts[0].FontFamily = new FontFamily("Jokerman");
                 texts[0].FontSize = 216;
 

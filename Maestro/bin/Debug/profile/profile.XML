@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Profile>
-    <highScore>5530</highScore>
+    <highScore>6010</highScore>
+    <title>Danbal</title>
+    <name>Minho</name>
+  </Profile>
+  <Profile>
+    <highScore>4530</highScore>
     <title>Nebakja</title>
-    <name>KimJH</name>
+    <name>Kihwan</name>
   </Profile>
   <Profile>
-    <highScore>3420</highScore>
+    <highScore>2420</highScore>
     <title>Danbal</title>
-    <name>BaeDH</name>
-  </Profile>
-  <Profile>
-    <highScore>7010</highScore>
-    <title>Danbal</title>
-    <name>BaikJM</name>
+    <name>Heri</name>
   </Profile>
 </ArrayOfProfile>

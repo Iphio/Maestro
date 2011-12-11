@@ -29,6 +29,7 @@ namespace Maestro
         public int currentCombo { get; set; }
 
         public Difficulty selectedDifficulty { get; set; }
+        public int flytime { get; set; }
 
         public int leftHandPos, rightHandPos, leftFootPos, rightFootPos;
 
@@ -196,7 +197,7 @@ namespace Maestro
             comboBorder.UpdateLayout();
 
             double col, row;
-            if (currentTime >= curStep.timing - 3000 && currentTime < curStep.timing + 0)
+            if (currentTime >= curStep.timing - flytime && currentTime < curStep.timing + 0)
             {
                 double marginX = columnSpace * 0.33;
                 double marginY = rowSpace * 0.27;
@@ -262,8 +263,8 @@ namespace Maestro
                                 double midX = columnSpace + marginX;
                                 double midY = rowSpace + marginY;
 
-                                DoubleAnimation animeX = new DoubleAnimation(midX, col, TimeSpan.FromSeconds(3));
-                                DoubleAnimation animeY = new DoubleAnimation(midY, row, TimeSpan.FromSeconds(3));
+                                DoubleAnimation animeX = new DoubleAnimation(midX, col, TimeSpan.FromMilliseconds(flytime));
+                                DoubleAnimation animeY = new DoubleAnimation(midY, row, TimeSpan.FromMilliseconds(flytime));
 
                                 TranslateTransform trans = new TranslateTransform();
                                 trans.BeginAnimation(TranslateTransform.XProperty, animeX);
@@ -272,7 +273,7 @@ namespace Maestro
 
                                 StpScr.Children.Add(circle);
 
-                                System.Timers.Timer timer = new System.Timers.Timer(3500 + curStep.holdTime);
+                                System.Timers.Timer timer = new System.Timers.Timer(flytime + 500 + curStep.holdTime);
 
                                 timer.Elapsed += delegate
                                 {
