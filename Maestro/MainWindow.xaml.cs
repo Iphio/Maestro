@@ -293,7 +293,7 @@ namespace Maestro
             _score = 0;
             displaySteps.currentScore = 0;
 
-            selectedSong.PlaySong(200);
+            selectedSong.PlaySong(400);
         
         }
 
@@ -335,8 +335,16 @@ namespace Maestro
                     hudDisplay.changeScreen(Screen.Score, 0);
                     hudDisplay.updateScreen(0, 0, 0, 0);
 
+                    if (_score > _profiles.ElementAt(currentProfile).highScore)
+                    {
+                        _profiles.ElementAt(currentProfile).highScore = _score;
+                        _profiles.ElementAt(currentProfile).title = selectedSong.Title.Substring(0, selectedSong.Title.Length - 4);
+                    }
+
                     currentScreen = Screen.Score;
                     bgm.resume();
+
+                    parserUnit.saveProfiles(_profiles);
                 }
 
 

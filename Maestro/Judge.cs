@@ -60,20 +60,25 @@ namespace Maestro
                 if (currentStep.action == ActionType.HoldFoot || currentStep.action == ActionType.HoldHand)
                 {
                     //If timing is ok
-                    if (currentTime <= (currentStep.timing + currentStep.holdTime))
+                    if (currentTime <= (currentStep.timing + currentStep.holdTime) && currentTime>=currentStep.timing)
                     {
                         switch (currentStep.action)
                         {
                             case ActionType.HoldHand:
-                                
-                                if ((currentStep.area == rHand || currentStep.area == lHand))
-                                   score += 10;
 
+                                if ((currentStep.area == rHand || currentStep.area == lHand))
+                                {
+                                    Console.WriteLine("left hand");
+                                    score += 10;
+                                }
                                 break;
 
                             case ActionType.HoldFoot:
                                 if ((currentStep.area == lFoot || currentStep.area == rFoot))
+                                {
+                                    Console.WriteLine("left hand");
                                     score += 10;
+                                }
                                 break;
                             default:
                                 break;

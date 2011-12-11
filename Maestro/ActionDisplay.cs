@@ -114,7 +114,7 @@ namespace Maestro
                     circle.StrokeThickness = 10;
 
                     //circle.Stroke = new LinearGradientBrush(Colors.Snow, Colors.SkyBlue, 90);
-                    ColorAnimation animeStroke = new ColorAnimation(Colors.White, Colors.Violet, TimeSpan.FromSeconds(3));
+                    ColorAnimation animeStroke = new ColorAnimation(Colors.White, Colors.Orange, TimeSpan.FromSeconds(3));
                     animeStroke.AutoReverse = true;
                     animeStroke.RepeatBehavior = RepeatBehavior.Forever;
                     SolidColorBrush myBrushStroke = new SolidColorBrush();
