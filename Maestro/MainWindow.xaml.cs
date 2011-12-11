@@ -312,20 +312,19 @@ namespace Maestro
 
                 
 
-                //Comment
-                hudDisplay.currentScore = _score;
-                displaySteps.currentScore = _score;
-                //  displaySteps.displayStep(sec);
-                displaySteps.displayStep(sec);
+                
 
                 //Combo system
                 combos = Judge.combo;
 
                 displaySteps.currentCombo = combos;
 
-                Console.WriteLine(_score);
-
                 _score += currentScore * combos;
+
+                //Comment
+                hudDisplay.currentScore = _score;
+                displaySteps.currentScore = _score;
+                displaySteps.displayStep(sec);
 
                 //If end of song
                 if (sec >= selectedSong.Length-500)

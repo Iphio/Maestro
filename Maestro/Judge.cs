@@ -30,7 +30,7 @@ namespace Maestro
         public Judge()
         {
             _lastIndex = 0;
-            combo = 0;
+            combo = 1;
         }
 
         public void updateSteps(List<Step> listOfSteps)
@@ -56,46 +56,42 @@ namespace Maestro
             {
                 currentStep = _stepList.ElementAt(i);
 
+                //Check for the hold first
+                if (currentStep.action == ActionType.HoldFoot || currentStep.action == ActionType.HoldHand)
+                {
+                    //If timing is ok
+                    if (currentTime <= (currentStep.timing + currentStep.holdTime))
+                    {
+                        switch (currentStep.action)
+                        {
+                            case ActionType.HoldHand:
+                                
+                                if ((currentStep.area == rHand || currentStep.area == lHand))
+                                   score += 10;
 
-                
+                                break;
 
-                if (currentTime >= currentStep.timing + ERRORMARGIN)
+                            case ActionType.HoldFoot:
+                                if ((currentStep.area == lFoot || currentStep.area == rFoot))
+                                    score += 10;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }else if (currentTime > currentStep.timing + ERRORMARGIN)
                 {
                    // return score;
                     if (!currentStep.done)
                         combo = 1;
 
-                }
-                //Hold hand case
-                else if (!currentStep.done && currentStep.action == ActionType.HoldHand && currentStep.stepDifficulty == _selectedDifficulty && currentStep.timing + currentStep.holdTime <= currentTime)
-                {
-                    //If we reach the end of the hold
-                    if (currentTime == (currentStep.timing + currentStep.holdTime))
-                    {
-                        currentStep.step_Done(Score.Good);
-                    }
-
-                    if (currentStep.area == lHand || currentStep.area == rHand)
-                        score++;
-                }
-                //Hold foot case
-                else if (!currentStep.done && currentStep.action == ActionType.HoldFoot && currentStep.stepDifficulty == _selectedDifficulty && currentStep.timing + currentStep.holdTime <= currentTime)
-                {
-                    //If we reach the end of the hold
-                    if (currentTime == (currentStep.timing + currentStep.holdTime))
-                    {
-                        currentStep.step_Done(Score.Good);
-                    }
-
-                    if (currentStep.area == lFoot || currentStep.area == rFoot)
-                        score++;
-                }
+                }                
                 //Clap case
                 else if (!currentStep.done && currentStep.action == ActionType.Clap && currentStep.stepDifficulty == _selectedDifficulty && currentTime - ERRORMARGIN < currentStep.timing && currentStep.timing < currentTime + ERRORMARGIN)
                 {
 
                     //Check the distance between the hands
-                    if (Math.Sqrt(Math.Pow((lHandP.X - rHandP.X), 2) + Math.Pow((lHandP.Y - rHandP.Y), 2)) < 30)
+                    if (Math.Sqrt(Math.Pow((lHandP.X - rHandP.X), 2) + Math.Pow((lHandP.Y - rHandP.Y), 2)) < 60 && rHand == currentStep.area)
                     {
                         score = evaluate(currentTime, currentStep, score, scoreTable);
                         _lastIndex = i;

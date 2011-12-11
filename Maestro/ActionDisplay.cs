@@ -237,13 +237,13 @@ namespace Maestro
                 else if (curStep.action == ActionType.HoldHand)
                 {
                     circle.Stroke = new LinearGradientBrush(Colors.BlueViolet, Colors.Orange, 90);
-                    circle.Fill = clapIcon;
+                    circle.Fill = holdIcon;
                 }
                 else
                 {
                 }
 
-                Console.WriteLine("Correct condition");
+                //Console.WriteLine("Correct condition");
                 Thread t = new Thread(new ThreadStart(
                     delegate()
                     {
@@ -251,8 +251,8 @@ namespace Maestro
                             delegate()
                             {
                                 Step theCurStp = curStep;
-                                Console.WriteLine("circle is made");
-                                Console.WriteLine("circle is about to appear");
+                                //Console.WriteLine("circle is made");
+                                //Console.WriteLine("circle is about to appear");
 
                                 //ColorAnimation anime = new ColorAnimation(Colors.White, fill, TimeSpan.FromSeconds(3));
                                 //SolidColorBrush myBrush = new SolidColorBrush();
@@ -272,8 +272,8 @@ namespace Maestro
 
                                 StpScr.Children.Add(circle);
 
-                                //Console.WriteLine("circle appeared");
-                                System.Timers.Timer timer = new System.Timers.Timer(3500);
+                                System.Timers.Timer timer = new System.Timers.Timer(3500 + curStep.holdTime);
+
                                 timer.Elapsed += delegate
                                 {
                                     circle.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal,
@@ -287,6 +287,7 @@ namespace Maestro
                                     )
                                 );
                                 };
+
                                 timer.Disposed += delegate
                                 {
                                     StpScr.Children.Remove(circle);

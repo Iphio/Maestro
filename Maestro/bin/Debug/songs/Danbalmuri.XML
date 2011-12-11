@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Song xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Title>Danbalmuri.mp3</Title>
   <Length>87981</Length>
@@ -8,8 +8,8 @@
       <timing>3101</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>0</area>
-      <action>TouchHandLeft</action>
-      <holdTime>0</holdTime>
+      <action>HoldHand</action>
+      <holdTime>6000</holdTime>
       <done>false</done>
       <scored>false</scored>
     </Step>
@@ -17,8 +17,8 @@
       <timing>4076</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>2</area>
-      <action>TouchHandRight</action>
-      <holdTime>0</holdTime>
+      <action>HoldHand</action>
+      <holdTime>6000</holdTime>
       <done>false</done>
       <scored>false</scored>
     </Step>
@@ -26,8 +26,8 @@
       <timing>5107</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>3</area>
-      <action>TouchHandLeft</action>
-      <holdTime>0</holdTime>
+      <action>HoldHand</action>
+      <holdTime>2000</holdTime>
       <done>false</done>
       <scored>false</scored>
     </Step>
@@ -35,8 +35,8 @@
       <timing>6142</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>5</area>
-      <action>TouchHandRight</action>
-      <holdTime>0</holdTime>
+      <action>HoldHand</action>
+      <holdTime>5000</holdTime>
       <done>false</done>
       <scored>false</scored>
     </Step>
@@ -44,8 +44,8 @@
       <timing>7167</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>6</area>
-      <action>TouchFeetLeft</action>
-      <holdTime>0</holdTime>
+      <action>HoldFoot</action>
+      <holdTime>6000</holdTime>
       <done>false</done>
       <scored>false</scored>
     </Step>
@@ -53,8 +53,8 @@
       <timing>8206</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>8</area>
-      <action>TouchFeetRight</action>
-      <holdTime>0</holdTime>
+      <action>HoldFoot</action>
+      <holdTime>6000</holdTime>
       <done>false</done>
       <scored>false</scored>
     </Step>
@@ -62,8 +62,8 @@
       <timing>9300</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>1</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
+      <action>HoldHand</action>
+      <holdTime>3</holdTime>
       <done>false</done>
       <scored>false</scored>
     </Step>
