@@ -52,7 +52,7 @@ namespace Maestro
             int score = 0;
             
             //Foreach step
-            for (int i = _lastIndex; i < _stepList.Count; ++i)
+            for (int i = _lastIndex; i < _stepList.Count; i++)
             {
                 currentStep = _stepList.ElementAt(i);
 
