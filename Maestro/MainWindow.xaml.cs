@@ -165,21 +165,21 @@ namespace Maestro
             //CREATE A SONG HERE ! (don't forget to delete once it's done....)
             
             
-            selectedSong = new Song("U&I.mp3", "IU");
-            String[] line = System.IO.File.ReadAllLines("songs\\U&I.txt");
-            for (int i = 0; i < line.Length; i++)
-            {
-                if (i % 4 == 0)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 0, ActionType.TouchHandLeft, 0));
-                else if (i % 4 == 1)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 2, ActionType.TouchHandRight, 0));
-                else if (i % 4 == 2)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 3, ActionType.TouchHandLeft, 0));
-                else
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 5, ActionType.TouchHandRight, 0));
-                //Console.WriteLine(line[i]);
-            }
-            parserUnit.saveSong(selectedSong, "U&I");
+            //selectedSong = new Song("U&I.mp3", "IU");
+            //String[] line = System.IO.File.ReadAllLines("songs\\U&I.txt");
+            //for (int i = 0; i < line.Length; i++)
+            //{
+            //    if (i % 4 == 0)
+            //        selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 0, ActionType.TouchHandLeft, 0));
+            //    else if (i % 4 == 1)
+            //        selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 2, ActionType.TouchHandRight, 0));
+            //    else if (i % 4 == 2)
+            //        selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 3, ActionType.TouchHandLeft, 0));
+            //    else
+            //        selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 5, ActionType.TouchHandRight, 0));
+            //    //Console.WriteLine(line[i]);
+            //}
+            //parserUnit.saveSong(selectedSong, "U&I");
             
             /*
             selectedSong = new Song("Nebakja.mp3", "송대관");
@@ -202,25 +202,25 @@ namespace Maestro
             }
             parserUnit.saveSong(selectedSong, "Nebakja");
             */
-            selectedSong = new Song("Danbalmuri.mp3", "조용필");
-            line = System.IO.File.ReadAllLines("songs\\Danbalmuri.txt");
-            for (int i = 0; i < line.Length; i++)
-            {
-                if (i % 6 == 0)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 0, ActionType.Clap, 0));
-                else if (i % 6 == 1)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 2, ActionType.Clap, 0));
-                else if (i % 6 == 2)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 3, ActionType.Clap, 0));
-                else if (i % 6 == 3)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 5, ActionType.Clap, 0));
-                else if (i % 6 == 4)
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 6, ActionType.Clap, 0));
-                else
-                    selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 8, ActionType.TouchFeetRight, 0));
-                //Console.WriteLine(line[i]);
-            }
-            parserUnit.saveSong(selectedSong, "Danbalmuri");
+            //selectedSong = new Song("Danbalmuri.mp3", "조용필");
+            //line = System.IO.File.ReadAllLines("songs\\Danbalmuri.txt");
+            //for (int i = 0; i < line.Length; i++)
+            //{
+            //    if (i % 6 == 0)
+            //        selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 0, ActionType.Clap, 0));
+            //    else if (i % 6 == 1)
+            //        selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 2, ActionType.Clap, 0));
+            //    else if (i % 6 == 2)
+            //        selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 3, ActionType.Clap, 0));
+            //    else if (i % 6 == 3)
+            //        selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 5, ActionType.Clap, 0));
+            //    else if (i % 6 == 4)
+            //        selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 6, ActionType.Clap, 0));
+            //    else
+            //        selectedSong._listOfSteps.Add(new Step(Convert.ToInt32(line[i]), Difficulty.Easy, 8, ActionType.TouchFeetRight, 0));
+            //    //Console.WriteLine(line[i]);
+            //}
+            //parserUnit.saveSong(selectedSong, "Danbalmuri");
             
 
             //selectedSong = parserUnit.loadSSong("U&I");

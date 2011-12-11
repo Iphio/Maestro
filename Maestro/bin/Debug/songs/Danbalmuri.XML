@@ -1,786 +1,636 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Song xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Title>Danbalmuri.mp3</Title>
-  <Length>85943</Length>
+  <Length>87981</Length>
   <Artist>조용필</Artist>
   <_listOfSteps>
     <Step>
-      <timing>1960</timing>
+      <timing>3101</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>0</area>
-      <action>Clap</action>
+      <action>TouchHandLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>2950</timing>
+      <timing>4076</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>2</area>
-      <action>Clap</action>
+      <action>TouchHandRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>4020</timing>
+      <timing>5107</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>3</area>
-      <action>Clap</action>
+      <action>TouchHandLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>5030</timing>
+      <timing>6142</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>5</area>
-      <action>Clap</action>
+      <action>TouchHandRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>6030</timing>
+      <timing>7167</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>6</area>
-      <action>Clap</action>
+      <action>TouchFeetLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>7060</timing>
+      <timing>8206</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>8</area>
       <action>TouchFeetRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>8230</timing>
+      <timing>9300</timing>
       <stepDifficulty>Easy</stepDifficulty>
-      <area>0</area>
+      <area>1</area>
       <action>Clap</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>9210</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>2</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>10270</timing>
+      <timing>11348</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>3</area>
-      <action>Clap</action>
+      <action>TouchHandLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>11270</timing>
+      <timing>12390</timing>
       <stepDifficulty>Easy</stepDifficulty>
-      <area>5</area>
-      <action>Clap</action>
+      <area>2</area>
+      <action>TouchHandRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>12290</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>6</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
       <timing>13420</timing>
       <stepDifficulty>Easy</stepDifficulty>
-      <area>8</area>
-      <action>TouchFeetRight</action>
+      <area>1</area>
+      <action>TouchHandLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>14390</timing>
+      <timing>14455</timing>
       <stepDifficulty>Easy</stepDifficulty>
-      <area>0</area>
-      <action>Clap</action>
+      <area>7</area>
+      <action>TouchHandRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>15430</timing>
+      <timing>15531</timing>
       <stepDifficulty>Easy</stepDifficulty>
-      <area>2</area>
-      <action>Clap</action>
+      <area>3</area>
+      <action>TouchFeetLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
       <timing>16510</timing>
       <stepDifficulty>Easy</stepDifficulty>
-      <area>3</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>17530</timing>
-      <stepDifficulty>Easy</stepDifficulty>
       <area>5</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>18510</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>6</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>19510</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>8</area>
       <action>TouchFeetRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>20550</timing>
+      <timing>17552</timing>
       <stepDifficulty>Easy</stepDifficulty>
-      <area>0</area>
+      <area>7</area>
       <action>Clap</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>21610</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>2</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>22650</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>3</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>23680</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>5</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>24640</timing>
+      <timing>19700</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>6</area>
-      <action>Clap</action>
+      <action>TouchHandLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>25780</timing>
+      <timing>20667</timing>
       <stepDifficulty>Easy</stepDifficulty>
-      <area>8</area>
-      <action>TouchFeetRight</action>
+      <area>1</area>
+      <action>TouchHandRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>26790</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>0</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>27760</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>2</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>28830</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>3</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>29860</timing>
+      <timing>21694</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>5</area>
+      <action>TouchHandLeft</action>
+      <holdTime>0</holdTime>
+      <done>false</done>
+      <scored>false</scored>
+    </Step>
+    <Step>
+      <timing>22722</timing>
+      <stepDifficulty>Easy</stepDifficulty>
+      <area>0</area>
+      <action>TouchHandRight</action>
+      <holdTime>0</holdTime>
+      <done>false</done>
+      <scored>false</scored>
+    </Step>
+    <Step>
+      <timing>23752</timing>
+      <stepDifficulty>Easy</stepDifficulty>
+      <area>6</area>
+      <action>TouchFeetLeft</action>
+      <holdTime>0</holdTime>
+      <done>false</done>
+      <scored>false</scored>
+    </Step>
+    <Step>
+      <timing>24787</timing>
+      <stepDifficulty>Easy</stepDifficulty>
+      <area>6</area>
+      <action>TouchFeetRight</action>
+      <holdTime>0</holdTime>
+      <done>false</done>
+      <scored>false</scored>
+    </Step>
+    <Step>
+      <timing>25811</timing>
+      <stepDifficulty>Easy</stepDifficulty>
+      <area>1</area>
       <action>Clap</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
+      <done>false</done>
+      <scored>false</scored>
+    </Step>
+    <Step>
+      <timing>27915</timing>
+      <stepDifficulty>Easy</stepDifficulty>
+      <area>0</area>
+      <action>TouchHandLeft</action>
+      <holdTime>0</holdTime>
+      <done>false</done>
+      <scored>false</scored>
+    </Step>
+    <Step>
+      <timing>28889</timing>
+      <stepDifficulty>Easy</stepDifficulty>
+      <area>0</area>
+      <action>TouchHandRight</action>
+      <holdTime>0</holdTime>
+      <done>false</done>
+      <scored>false</scored>
+    </Step>
+    <Step>
+      <timing>29904</timing>
+      <stepDifficulty>Easy</stepDifficulty>
+      <area>5</area>
+      <action>TouchHandLeft</action>
+      <holdTime>0</holdTime>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
       <timing>30950</timing>
       <stepDifficulty>Easy</stepDifficulty>
-      <area>6</area>
-      <action>Clap</action>
+      <area>5</area>
+      <action>TouchHandRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>31920</timing>
+      <timing>32007</timing>
+      <stepDifficulty>Easy</stepDifficulty>
+      <area>8</area>
+      <action>TouchFeetLeft</action>
+      <holdTime>0</holdTime>
+      <done>false</done>
+      <scored>false</scored>
+    </Step>
+    <Step>
+      <timing>33121</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>8</area>
       <action>TouchFeetRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>32950</timing>
+      <timing>34104</timing>
       <stepDifficulty>Easy</stepDifficulty>
-      <area>0</area>
+      <area>7</area>
       <action>Clap</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>34030</timing>
+      <timing>36185</timing>
       <stepDifficulty>Easy</stepDifficulty>
-      <area>2</area>
-      <action>Clap</action>
+      <area>1</area>
+      <action>TouchHandLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>35150</timing>
+      <timing>37186</timing>
       <stepDifficulty>Easy</stepDifficulty>
-      <area>3</area>
-      <action>Clap</action>
+      <area>7</area>
+      <action>TouchHandRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>36060</timing>
+      <timing>38253</timing>
+      <stepDifficulty>Easy</stepDifficulty>
+      <area>7</area>
+      <action>TouchHandLeft</action>
+      <holdTime>0</holdTime>
+      <done>false</done>
+      <scored>false</scored>
+    </Step>
+    <Step>
+      <timing>39269</timing>
+      <stepDifficulty>Easy</stepDifficulty>
+      <area>1</area>
+      <action>TouchHandRight</action>
+      <holdTime>0</holdTime>
+      <done>false</done>
+      <scored>false</scored>
+    </Step>
+    <Step>
+      <timing>40327</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>5</area>
-      <action>Clap</action>
+      <action>TouchFeetLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>37190</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>6</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>38280</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>8</area>
-      <action>TouchFeetRight</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>39260</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>0</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>40210</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>2</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>41300</timing>
+      <timing>41383</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>3</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>42320</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>5</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>43410</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>6</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>44360</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>8</area>
       <action>TouchFeetRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>45430</timing>
+      <timing>42377</timing>
       <stepDifficulty>Easy</stepDifficulty>
-      <area>0</area>
+      <area>1</area>
       <action>Clap</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>46440</timing>
+      <timing>44503</timing>
       <stepDifficulty>Easy</stepDifficulty>
-      <area>2</area>
-      <action>Clap</action>
+      <area>5</area>
+      <action>TouchHandLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>47510</timing>
+      <timing>45523</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>3</area>
-      <action>Clap</action>
+      <action>TouchHandRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>48510</timing>
+      <timing>46507</timing>
       <stepDifficulty>Easy</stepDifficulty>
-      <area>5</area>
-      <action>Clap</action>
+      <area>1</area>
+      <action>TouchHandLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>49550</timing>
+      <timing>47544</timing>
       <stepDifficulty>Easy</stepDifficulty>
-      <area>6</area>
-      <action>Clap</action>
+      <area>7</area>
+      <action>TouchHandRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>50620</timing>
+      <timing>48599</timing>
+      <stepDifficulty>Easy</stepDifficulty>
+      <area>8</area>
+      <action>TouchFeetLeft</action>
+      <holdTime>0</holdTime>
+      <done>false</done>
+      <scored>false</scored>
+    </Step>
+    <Step>
+      <timing>49650</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>8</area>
       <action>TouchFeetRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>51700</timing>
+      <timing>50668</timing>
+      <stepDifficulty>Easy</stepDifficulty>
+      <area>7</area>
+      <action>Clap</action>
+      <holdTime>0</holdTime>
+      <done>false</done>
+      <scored>false</scored>
+    </Step>
+    <Step>
+      <timing>52730</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>0</area>
-      <action>Clap</action>
+      <action>TouchHandLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>52600</timing>
+      <timing>53766</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>2</area>
-      <action>Clap</action>
+      <action>TouchHandRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>53700</timing>
+      <timing>54793</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>3</area>
-      <action>Clap</action>
+      <action>TouchHandLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>54700</timing>
+      <timing>55857</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>5</area>
-      <action>Clap</action>
+      <action>TouchHandRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>55720</timing>
+      <timing>56844</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>6</area>
-      <action>Clap</action>
+      <action>TouchFeetLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>56810</timing>
+      <timing>57868</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>8</area>
       <action>TouchFeetRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>59890</timing>
+      <timing>58895</timing>
+      <stepDifficulty>Easy</stepDifficulty>
+      <area>1</area>
+      <action>Clap</action>
+      <holdTime>0</holdTime>
+      <done>false</done>
+      <scored>false</scored>
+    </Step>
+    <Step>
+      <timing>61018</timing>
+      <stepDifficulty>Easy</stepDifficulty>
+      <area>2</area>
+      <action>TouchHandLeft</action>
+      <holdTime>0</holdTime>
+      <done>false</done>
+      <scored>false</scored>
+    </Step>
+    <Step>
+      <timing>62007</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>0</area>
-      <action>Clap</action>
+      <action>TouchHandRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>60870</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>2</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>62010</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>3</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>63020</timing>
+      <timing>63016</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>5</area>
-      <action>Clap</action>
+      <action>TouchHandLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>64060</timing>
+      <timing>64047</timing>
+      <stepDifficulty>Easy</stepDifficulty>
+      <area>3</area>
+      <action>TouchHandRight</action>
+      <holdTime>0</holdTime>
+      <done>false</done>
+      <scored>false</scored>
+    </Step>
+    <Step>
+      <timing>65123</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>6</area>
-      <action>Clap</action>
+      <action>TouchFeetLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>65110</timing>
+      <timing>66162</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>8</area>
       <action>TouchFeetRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>66170</timing>
+      <timing>67160</timing>
+      <stepDifficulty>Easy</stepDifficulty>
+      <area>7</area>
+      <action>Clap</action>
+      <holdTime>0</holdTime>
+      <done>false</done>
+      <scored>false</scored>
+    </Step>
+    <Step>
+      <timing>69293</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>0</area>
-      <action>Clap</action>
+      <action>TouchHandLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>67170</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>2</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>68220</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>3</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>69230</timing>
+      <timing>70331</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>5</area>
-      <action>Clap</action>
+      <action>TouchHandRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>70320</timing>
+      <timing>71366</timing>
       <stepDifficulty>Easy</stepDifficulty>
-      <area>6</area>
-      <action>Clap</action>
+      <area>3</area>
+      <action>TouchHandLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>71340</timing>
+      <timing>72394</timing>
+      <stepDifficulty>Easy</stepDifficulty>
+      <area>2</area>
+      <action>TouchHandRight</action>
+      <holdTime>0</holdTime>
+      <done>false</done>
+      <scored>false</scored>
+    </Step>
+    <Step>
+      <timing>73433</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>8</area>
-      <action>TouchFeetRight</action>
+      <action>TouchFeetLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>73380</timing>
+      <timing>74500</timing>
+      <stepDifficulty>Easy</stepDifficulty>
+      <area>6</area>
+      <action>TouchFeetRight</action>
+      <holdTime>0</holdTime>
+      <done>false</done>
+      <scored>false</scored>
+    </Step>
+    <Step>
+      <timing>75506</timing>
+      <stepDifficulty>Easy</stepDifficulty>
+      <area>1</area>
+      <action>Clap</action>
+      <holdTime>0</holdTime>
+      <done>false</done>
+      <scored>false</scored>
+    </Step>
+    <Step>
+      <timing>77591</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>0</area>
-      <action>Clap</action>
+      <action>TouchHandLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>74420</timing>
+      <timing>78609</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>2</area>
-      <action>Clap</action>
+      <action>TouchHandRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>75450</timing>
+      <timing>79638</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>3</area>
-      <action>Clap</action>
+      <action>TouchHandLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>76490</timing>
+      <timing>80670</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>5</area>
-      <action>Clap</action>
+      <action>TouchHandRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>77470</timing>
+      <timing>81700</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>6</area>
-      <action>Clap</action>
+      <action>TouchFeetLeft</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>78510</timing>
+      <timing>82748</timing>
       <stepDifficulty>Easy</stepDifficulty>
       <area>8</area>
       <action>TouchFeetRight</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
     <Step>
-      <timing>79550</timing>
+      <timing>83759</timing>
       <stepDifficulty>Easy</stepDifficulty>
-      <area>0</area>
+      <area>1</area>
       <action>Clap</action>
       <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>80620</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>2</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>81610</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>3</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>82710</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>5</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>83770</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>6</area>
-      <action>Clap</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
-      <done>false</done>
-      <scored>false</scored>
-    </Step>
-    <Step>
-      <timing>84830</timing>
-      <stepDifficulty>Easy</stepDifficulty>
-      <area>8</area>
-      <action>TouchFeetRight</action>
-      <holdTime>0</holdTime>
-      <stepscore>None</stepscore>
       <done>false</done>
       <scored>false</scored>
     </Step>
