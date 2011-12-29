@@ -29,6 +29,7 @@ namespace Maestro
         public int currentCombo { get; set; }
 
         public Difficulty selectedDifficulty { get; set; }
+        public int flytime { get; set; }
 
         public int leftHandPos, rightHandPos, leftFootPos, rightFootPos;
 
@@ -114,7 +115,7 @@ namespace Maestro
                     circle.StrokeThickness = 10;
 
                     //circle.Stroke = new LinearGradientBrush(Colors.Snow, Colors.SkyBlue, 90);
-                    ColorAnimation animeStroke = new ColorAnimation(Colors.White, Colors.Violet, TimeSpan.FromSeconds(3));
+                    ColorAnimation animeStroke = new ColorAnimation(Colors.White, Colors.Orange, TimeSpan.FromSeconds(3));
                     animeStroke.AutoReverse = true;
                     animeStroke.RepeatBehavior = RepeatBehavior.Forever;
                     SolidColorBrush myBrushStroke = new SolidColorBrush();
@@ -196,7 +197,7 @@ namespace Maestro
             comboBorder.UpdateLayout();
 
             double col, row;
-            if (currentTime >= curStep.timing - 3000 && currentTime < curStep.timing + 0)
+            if (currentTime >= curStep.timing - flytime && currentTime < curStep.timing + 0)
             {
                 double marginX = columnSpace * 0.33;
                 double marginY = rowSpace * 0.27;
@@ -237,13 +238,13 @@ namespace Maestro
                 else if (curStep.action == ActionType.HoldHand)
                 {
                     circle.Stroke = new LinearGradientBrush(Colors.BlueViolet, Colors.Orange, 90);
-                    circle.Fill = clapIcon;
+                    circle.Fill = holdIcon;
                 }
                 else
                 {
                 }
 
-                Console.WriteLine("Correct condition");
+                //Console.WriteLine("Correct condition");
                 Thread t = new Thread(new ThreadStart(
                     delegate()
                     {
@@ -251,8 +252,8 @@ namespace Maestro
                             delegate()
                             {
                                 Step theCurStp = curStep;
-                                Console.WriteLine("circle is made");
-                                Console.WriteLine("circle is about to appear");
+                                //Console.WriteLine("circle is made");
+                                //Console.WriteLine("circle is about to appear");
 
                                 //ColorAnimation anime = new ColorAnimation(Colors.White, fill, TimeSpan.FromSeconds(3));
                                 //SolidColorBrush myBrush = new SolidColorBrush();
@@ -262,8 +263,8 @@ namespace Maestro
                                 double midX = columnSpace + marginX;
                                 double midY = rowSpace + marginY;
 
-                                DoubleAnimation animeX = new DoubleAnimation(midX, col, TimeSpan.FromSeconds(3));
-                                DoubleAnimation animeY = new DoubleAnimation(midY, row, TimeSpan.FromSeconds(3));
+                                DoubleAnimation animeX = new DoubleAnimation(midX, col, TimeSpan.FromMilliseconds(flytime));
+                                DoubleAnimation animeY = new DoubleAnimation(midY, row, TimeSpan.FromMilliseconds(flytime));
 
                                 TranslateTransform trans = new TranslateTransform();
                                 trans.BeginAnimation(TranslateTransform.XProperty, animeX);
@@ -272,8 +273,8 @@ namespace Maestro
 
                                 StpScr.Children.Add(circle);
 
-                                //Console.WriteLine("circle appeared");
-                                System.Timers.Timer timer = new System.Timers.Timer(3500);
+                                System.Timers.Timer timer = new System.Timers.Timer(flytime + 500 + curStep.holdTime);
+
                                 timer.Elapsed += delegate
                                 {
                                     circle.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal,
@@ -287,6 +288,7 @@ namespace Maestro
                                     )
                                 );
                                 };
+
                                 timer.Disposed += delegate
                                 {
                                     StpScr.Children.Remove(circle);

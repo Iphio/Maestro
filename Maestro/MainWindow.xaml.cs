@@ -132,6 +132,8 @@ namespace Maestro
         private Song bgm;
         private Song menu;
         private Song selectedSong;
+        private Song combo;
+        private Song EndOfSong;
 
         private Parser dataParser { get; set; }
 
@@ -152,7 +154,8 @@ namespace Maestro
 
             bgm = new Song("..\\main_music.mp3", "a");
             menu = new Song("..\\Menu_selectS.wav", "b");
-
+            combo = new Song("..\\combo.wav", "b");
+            EndOfSong = new Song("..\\EndofSong.wav", "b");
 
             run();
         }
@@ -270,6 +273,17 @@ namespace Maestro
         {
             _judge = new Judge();
             _profiles = hudDisplay.profileList;
+            _difficulty = hudDisplay.selectedDifficulty;
+            displaySteps.selectedDifficulty = _difficulty;
+
+            if (_difficulty == Difficulty.Easy)
+                displaySteps.flytime = 3000;
+            else if (_difficulty == Difficulty.Medium)
+                displaySteps.flytime = 2000;
+            else
+                displaySteps.flytime = 1000;
+
+
             selectedSong = parserUnit.loadSSong(hudDisplay.songList.ElementAt(0));
 
             bgm.pause();
@@ -293,7 +307,7 @@ namespace Maestro
             _score = 0;
             displaySteps.currentScore = 0;
 
-            selectedSong.PlaySong(200);
+            selectedSong.PlaySong(400);
         
         }
 
@@ -312,20 +326,22 @@ namespace Maestro
 
                 
 
-                //Comment
-                hudDisplay.currentScore = _score;
-                displaySteps.currentScore = _score;
-                //  displaySteps.displayStep(sec);
-                displaySteps.displayStep(sec);
+                
 
                 //Combo system
                 combos = Judge.combo;
 
+                if (combos % 5 == 0)
+                    combo.PlaySong(500);
+
                 displaySteps.currentCombo = combos;
 
-                Console.WriteLine(_score);
-
                 _score += currentScore * combos;
+
+                //Comment
+                hudDisplay.currentScore = _score;
+                displaySteps.currentScore = _score;
+                displaySteps.displayStep(sec);
 
                 //If end of song
                 if (sec >= selectedSong.Length-500)
@@ -336,8 +352,16 @@ namespace Maestro
                     hudDisplay.changeScreen(Screen.Score, 0);
                     hudDisplay.updateScreen(0, 0, 0, 0);
 
+                    if (_score > _profiles.ElementAt(currentProfile).highScore)
+                    {
+                        _profiles.ElementAt(currentProfile).highScore = _score;
+                        _profiles.ElementAt(currentProfile).title = selectedSong.Title.Substring(0, selectedSong.Title.Length - 4);
+                    }
+                    EndOfSong.PlaySong(400);
                     currentScreen = Screen.Score;
                     bgm.resume();
+
+                    parserUnit.saveProfiles(_profiles);
                 }
 
 

@@ -11,6 +11,7 @@ namespace Maestro
     {
         //Attributes
         public int highScore { get; set; }
+        public String title { get; set; }
         public String name { get; set; }
 
         public Profile()

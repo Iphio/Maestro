@@ -187,6 +187,7 @@ namespace Maestro
                     texts[c].FontFamily = new FontFamily("Jokerman");
                 }
 
+                texts[0].Width = columnSpace;
                 texts[0].FontSize = 90;
                 texts[1].FontSize = 60;
                 texts[2].FontSize = 60;
@@ -229,12 +230,13 @@ namespace Maestro
                     texts[c].FontFamily = new FontFamily("Jokerman");
                 }
 
+                texts[0].Width = columnSpace * 2;
                 texts[0].FontSize = 90;
                 texts[1].FontSize = 60;
                 texts[2].FontSize = 60;
                 texts[3].FontSize = 48;
 
-                texts[0].RenderTransform = new TranslateTransform(columnSpace, 150);
+                texts[0].RenderTransform = new TranslateTransform(columnSpace * 0.5, 150);
                 texts[1].RenderTransform = new TranslateTransform(0, 130);
                 texts[2].RenderTransform = new TranslateTransform(columnSpace * 2, 130);
                 texts[3].RenderTransform = new TranslateTransform(columnSpace, 110);
@@ -297,6 +299,7 @@ namespace Maestro
                     texts[c].FontSize = 54;
                 }
 
+                texts[0].Width = columnSpace;
                 texts[0].RenderTransform = new TranslateTransform(0, 240);
                 texts[1].RenderTransform = new TranslateTransform(columnSpace, 240);
                 texts[2].RenderTransform = new TranslateTransform(columnSpace * 2, 240);
@@ -306,7 +309,7 @@ namespace Maestro
                 sortedList.Sort(CompareProfileScore);
 
                 texts[0].Text = "1 " + sortedList.ElementAt(0).name + "\n2 " + sortedList.ElementAt(1).name + "\n3 " + sortedList.ElementAt(2).name;
-                texts[1].Text = "U&I\nDanbalmuri\nNebakja";
+                texts[1].Text = sortedList.ElementAt(0).title +"\n" + sortedList.ElementAt(1).title + "\n" + sortedList.ElementAt(2).title;
                 texts[2].Text = sortedList.ElementAt(0).highScore + "\n" + sortedList.ElementAt(1).highScore + "\n" + sortedList.ElementAt(2).highScore;
                 texts[3].Text = "";
 
@@ -320,6 +323,7 @@ namespace Maestro
                     texts[c].FontFamily = new FontFamily("MV Boli");
                     texts[c].FontSize = 60;
                 }
+                texts[0].Width = columnSpace;
                 texts[0].FontFamily = new FontFamily("Jokerman");
                 texts[0].FontSize = 216;
 
@@ -330,11 +334,11 @@ namespace Maestro
                 //int score = getTotalScore();
                 int score = currentScore;
 
-                if (score >= 1500)
+                if (score >= 4000)
                     texts[0].Text = "A";
-                else if (score >= 1000)
+                else if (score >= 2000)
                     texts[0].Text = "B";
-                else if (score >= 500)
+                else if (score >= 1000)
                     texts[0].Text = "C";
                 else
                     texts[0].Text = "F";
